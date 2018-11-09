@@ -71,9 +71,9 @@ class Ticket {
             $instance->setPriority($row['priority']);
             $instance->setCategory($row['category']);
             $instance->setStatus($row['status']);
-            $instance->setRequestedBy($row['requestedBy']);
-            $instance->setAssignedTo($row['assignedTo']);
-            $instance->completed($row['completed']);
+            $instance->setRequestedBy($row['requestedby']);
+            $instance->setAssignedTo($row['assignedto']);
+            $instance->setCompleted($row['completed']);
             
             return $instance;
 
