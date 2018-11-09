@@ -18,17 +18,28 @@ include("ticketsView.php");
 
 // *******************TESTING AREA*******************
 
+
 /*
+
+$id = 0;
+$subject = "OOP Test #3";
+$body = "This is a test of MVC second constructor";
+$userID = "mgillman";
+$requestedBy = 'Gretel';   
+$orderID = '1076369';
+$priority = 1;
+$assignedTo = 'Bryan';
+$completed = 'NO';        
 $date = date("Y-m-d H:i:s");
 $status = 'Awaiting Agent Reply';
 $c = "Need ETA";
+//$ticket1 = Ticket::create($id, $subject, $body, $userID,$requestedBy, $dateSubmitted, $dateResolved, $orderID, $priority, $category, $status, $assignedTo, $completed);
+$ticket1 = Ticket::create($id, $subject, $body, $userID,$requestedBy, $date, $date, $orderID, $priority, $c, $status, $assignedTo, $completed);
+$ticket1->add($dbc);
 
-$ticket1 = Ticket::create(0, "OOP Test #2", "This is a test of MVC second constructor", "thesilla", $date, $date, 5, 1, $c, $status);
-//$ticket1->add($dbc);
 
+//$ticket2 = Ticket::createFromID(40, $dbc);
+//print_r($ticket2);
 
-$ticket2 = Ticket::createFromID(40, $dbc);
-print_r($ticket2);
 */
-
 ?>

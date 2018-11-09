@@ -8,15 +8,19 @@ class Ticket {
     private $subject;
     private $body;
     private $userID;
+    private $requestedBy;
     private $dateSubmitted;
-    private $dateResolved;
     private $orderID;
     private $category;
     private $priority;
     private $status;
+    private $assignedTo;
+    private $completed;
+    private $dateResolved;
+    
 
-    
-    
+
+
 
 
 // Constructor: create new Ticket object (template)
@@ -27,7 +31,7 @@ class Ticket {
 // ************PHP does not allow for multiple constructors - Static Function Constructors below************
 
         // Constructor with arguments for every attribute - create object from scratch
-        public static function create($id, $subject, $body, $userID, $dateSubmitted, $dateResolved, $orderID, $priority, $category, $status) {
+        public static function create($id, $subject, $body, $userID,$requestedBy, $dateSubmitted, $dateResolved, $orderID, $priority, $category, $status, $assignedTo, $completed) {
         $instance = new self();
         $instance->id = $id;
         $instance->subject = $subject;
@@ -39,6 +43,10 @@ class Ticket {
         $instance->priority = $priority;
         $instance->category = $category;
         $instance->status = $status;
+        $instance->requestedBy = $requestedBy;
+        $instance->assignedTo = $assignedTo;
+        $instance->completed = $completed;
+        
         return $instance;
     }
     
@@ -63,6 +71,10 @@ class Ticket {
             $instance->setPriority($row['priority']);
             $instance->setCategory($row['category']);
             $instance->setStatus($row['status']);
+            $instance->setRequestedBy($row['requestedBy']);
+            $instance->setAssignedTo($row['assignedTo']);
+            $instance->completed($row['completed']);
+            
             return $instance;
 
         } else {
@@ -90,12 +102,12 @@ class Ticket {
 
             while ($row = $result->fetch()) {
 
-                $tickets[] = Ticket::create($row['ticketID'], $row['subject'], $row['body'], $row['userID'], $row['datesubmitted'], $row['dateresolved'], $row['orderID'], $row['priority'], $row['category'], $row['status']);
+                $tickets[] = Ticket::create($row['ticketID'], $row['subject'], $row['body'], $row['userID'], $row['requestedby'], $row['datesubmitted'], $row['dateresolved'], $row['orderID'], $row['priority'], $row['category'], $row['status'], $row['assignedto'],$row['completed']);
 
                 // TODO delete this, for testing only
                 //print_r($tickets);
             }
-
+            // return tickets array
             return $tickets;
         } else {
 
@@ -110,7 +122,7 @@ class Ticket {
         //include('sql.inc.php');
         
         // for now (or permanently) directly include SQL here
-        $sql_addTix = "INSERT INTO `tickets` (`ticketID`, `subject`, `body`, `userID`, `datesubmitted`, `dateresolved`, `orderID`, `priority`, `category`, `status`) VALUES (NULL,'$this->subject','$this->body', '$this->userID','$this->dateSubmitted',NULL,'$this->orderID', '$this->priority','$this->category','$this->status')";
+        $sql_addTix = "INSERT INTO `tickets` (`ticketID`, `subject`, `body`, `userID`,`requestedBy`, `datesubmitted`, `dateresolved`, `orderID`, `priority`, `category`, `status`,`assignedTo`,`completed`) VALUES (NULL,'$this->subject','$this->body', '$this->userID','$this->requestedBy','$this->dateSubmitted',NULL,'$this->orderID', '$this->priority','$this->category','$this->status','$this->assignedTo','$this->completed')";
         
         if ($dbc->query($sql_addTix)) {
 
@@ -224,6 +236,189 @@ class Ticket {
     function setStatus($status) {
         $this->status = $status;
     }
+    
+        function getRequestedBy() {
+        return $this->requestedBy;
+    }
+
+    function getAssignedTo() {
+        return $this->assignedTo;
+    }
+
+    function getCompleted() {
+        return $this->completed;
+    }
+
+    function setRequestedBy($requestedBy) {
+        $this->requestedBy = $requestedBy;
+    }
+
+    function setAssignedTo($assignedTo) {
+        $this->assignedTo = $assignedTo;
+    }
+
+    function setCompleted($completed) {
+        $this->completed = $completed;
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Disposition {
+    
+    private $dispoID;
+    private $userID;
+    private $body;
+    private $dateSubmitted;
+    
+    // Constructor: create new Disposition object (template)
+    public function __construct() {
+
+    }
+// ************PHP does not allow for multiple constructors - Static Function Constructors below************
+
+    // Constructor with arguments for every attribute - create object from scratch
+    public static function create($dispoID, $userID, $body, $dateSubmitted) {
+       
+        $instance = new self();
+        $instance->setDispoID($dispoID);
+        $instance->setUserID($userID);
+        $instance->setBody($body);     
+        $instance->setDateSubmitted($dateSubmitted);
+        return $instance;
+        
+    }
+    
+    
+    
+    // Constructor which will instantiate a new object pulled from database given a Ticket ID #
+        // - Takes Ticket ID # and a Database Connection object
+        public static function createFromID($dispoID,$dbc) {
+        
+        $sql_getDispoFromDB = "SELECT * FROM dispositions where dispoID = '$dispoID'";
+            
+        if ($result = $dbc->query($sql_getDispoFromDB)) {
+
+            $row = $result->fetch();
+            $instance = new self();
+
+            $instance->setDispoID($row['dispoID']);
+            $instance->setUserID($row['userID']);
+            $instance->setBody($row['body']);
+            $instance->setDateSubmitted($row['datesubmitted']);
+           
+            return $instance;
+
+        } else {
+
+            echo "<p> Could not run query </p>";
+        }
+  
+    }
+    
+    
+    
+    
+    
+    // static method pulling all tickets - DB/SQL object argument
+    // return an array of Disposition objects from the database, to keep all db logic in model side
+    public static function getDispositions($dbc) {
+        
+        
+        // for now (or permanently) directly include SQL here
+        $sql_showDispos = "SELECT * FROM dispositions";
+
+
+        if ($result = $dbc->query($sql_showDispos)) {
+
+            // Create tickets array
+            $dispos = [];
+
+            while ($row = $result->fetch()) {
+
+                $dispos[] = Disposition::create($row['dispoID'],$row['userID'],$row['body'],$row['datesubmitted']);
+
+                // TODO delete this, for testing only
+                //print_r($tickets);
+            }
+            // return tickets array
+            return $dispos;
+        } else {
+
+            echo "<p> Could not run query </p>";
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    function getDispoID() {
+        return $this->dispoID;
+    }
+
+    function getUserID() {
+        return $this->userID;
+    }
+
+    function getBody() {
+        return $this->body;
+    }
+
+    function getDateSubmitted() {
+        return $this->dateSubmitted;
+    }
+
+    function setDispoID($dispoID) {
+        $this->dispoID = $dispoID;
+    }
+
+    function setUserID($userID) {
+        $this->userID = $userID;
+    }
+
+    function setBody($body) {
+        $this->body = $body;
+    }
+
+    function setDateSubmitted($dateSubmitted) {
+        $this->dateSubmitted = $dateSubmitted;
+    }
+
+
+    
+    
+}
+
+
+
+
+
+class User {
+    
+    
+    
+    
+    
+    
+    
+    
     
 }
 

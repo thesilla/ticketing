@@ -1,6 +1,4 @@
 <?PHP
-require('db_connect.php');
-include('class.php');
 $ticket = Ticket::createFromID($_POST['ticketno'], $dbc);
 //print_r($ticket);
 ?>
