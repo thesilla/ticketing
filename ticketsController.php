@@ -4,7 +4,7 @@
 require('db_connect.php');
 
 // import class files into controller
-include('class.php');
+include('Ticket.php');
 
 
 
