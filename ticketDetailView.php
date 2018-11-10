@@ -1,9 +1,6 @@
 <?PHP
 $ticket = Ticket::createFromID($_POST['ticketno'], $dbc);
-//print_r($ticket);
 ?>
-
-
 
 
 
@@ -15,6 +12,11 @@ $ticket = Ticket::createFromID($_POST['ticketno'], $dbc);
 <div id = "dateSubmitted"> Date Submitted: <?php echo $ticket->getDateSubmitted(); ?> </div>
 <div id = "priority"> Priority: <?php echo $ticket->getPriority(); ?> </div>
 <div id = "dateResolved"> Date Resolved: <?php echo $ticket->getDateResolved(); ?> </div>
+<div id = "status"> Status: <?php echo $ticket->getStatus(); ?> </div>
+<div id = "requestedBy"> Originally Requested By: <?php echo $ticket->getRequestedBy(); ?> </div>
+<div id = "assignedto"> Assigned To: <?php echo $ticket->getAssignedTo(); ?> </div>
+<div id = "orderid"> Order ID: <?php echo $ticket->getOrderID(); ?> </div>
+<div id = "completed"> Complete? <?php echo $ticket->getCompleted(); ?> </div>
 
 <button id="editTicketButton"> Edit Ticket Details </button>
 
