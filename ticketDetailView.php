@@ -4,7 +4,6 @@ $ticket = Ticket::createFromID($_POST['ticketno'], $dbc);
 ?>
 
 
-<div> commit pooooppy  </div>
 
 
 
