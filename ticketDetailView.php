@@ -1,8 +1,8 @@
 <?PHP
-$ticket = Ticket::createFromID($_POST['ticketno'], $dbc);
+// must define $ticket variable with Ticket object for this to work
 ?>
 
-
+<h1> TICKET # <?php echo " " . $ticket->getId() . " "; ?> - DETAILS</h1>
 
 <div id="ticketNumber">Ticket Number: <?php echo $ticket->getId(); ?> </div>
 <div id="userID">Submitted By: <?php echo $ticket->getUserID(); ?> </div>

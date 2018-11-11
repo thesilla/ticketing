@@ -17,21 +17,15 @@ class Ticket {
     private $assignedTo;
     private $completed;
     private $dateResolved;
-    
-
-
-
-
 
 // Constructor: create new Ticket object (template)
     public function __construct() {
-
+        
     }
-    
-// ************PHP does not allow for multiple constructors - Static Function Constructors below************
 
-        // Constructor with arguments for every attribute - create object from scratch
-        public static function create($id, $subject, $body, $userID,$requestedBy, $dateSubmitted, $dateResolved, $orderID, $priority, $category, $status, $assignedTo, $completed) {
+// ************PHP does not allow for multiple constructors - Static Function Constructors below************
+    // Constructor with arguments for every attribute - create object from scratch
+    public static function create($id, $subject, $body, $userID, $requestedBy, $dateSubmitted, $dateResolved, $orderID, $priority, $category, $status, $assignedTo, $completed) {
         $instance = new self();
         $instance->id = $id;
         $instance->subject = $subject;
@@ -46,16 +40,16 @@ class Ticket {
         $instance->requestedBy = $requestedBy;
         $instance->assignedTo = $assignedTo;
         $instance->completed = $completed;
-        
+
         return $instance;
     }
-    
-        // Constructor which will instantiate a new object pulled from database given a Ticket ID #
-        // - Takes Ticket ID # and a Database Connection object
-        public static function createFromID($id,$dbc) {
-        
+
+    // Constructor which will instantiate a new object pulled from database given a Ticket ID #
+    // - Takes Ticket ID # and a Database Connection object
+    public static function createFromID($id, $dbc) {
+
         $sql_getTicketFromDB = "SELECT * FROM tickets where ticketID = '$id'";
-            
+
         if ($result = $dbc->query($sql_getTicketFromDB)) {
 
             $row = $result->fetch();
@@ -74,23 +68,20 @@ class Ticket {
             $instance->setRequestedBy($row['requestedby']);
             $instance->setAssignedTo($row['assignedto']);
             $instance->setCompleted($row['completed']);
-            
-            return $instance;
 
+            return $instance;
         } else {
 
             echo "<p> Could not run query </p>";
         }
-  
     }
 
 // static method pulling all tickets - DB/SQL object argument
 // return an array of Ticket objects from the database, to keep all db logic in model side
     public static function getTickets($dbc) {
-        
+
         // FIXME: Can't sql files, '$this' is outside scope? Look into thi
         //include('sql.inc.php');
-        
         // for now (or permanently) directly include SQL here
         $sql_showTix = "SELECT * FROM tickets";
 
@@ -102,7 +93,7 @@ class Ticket {
 
             while ($row = $result->fetch()) {
 
-                $tickets[] = Ticket::create($row['ticketID'], $row['subject'], $row['body'], $row['userID'], $row['requestedby'], $row['datesubmitted'], $row['dateresolved'], $row['orderID'], $row['priority'], $row['category'], $row['status'], $row['assignedto'],$row['completed']);
+                $tickets[] = Ticket::create($row['ticketID'], $row['subject'], $row['body'], $row['userID'], $row['requestedby'], $row['datesubmitted'], $row['dateresolved'], $row['orderID'], $row['priority'], $row['category'], $row['status'], $row['assignedto'], $row['completed']);
 
                 // TODO delete this, for testing only
                 //print_r($tickets);
@@ -120,21 +111,18 @@ class Ticket {
 
         // FIXME: Can't sql files, '$this' is outside scope? Look into this
         //include('sql.inc.php');
-        
         // for now (or permanently) directly include SQL here
         $sql_addTix = "INSERT INTO `tickets` (`ticketID`, `subject`, `body`, `userID`,`requestedBy`, `datesubmitted`, `dateresolved`, `orderID`, `priority`, `category`, `status`,`assignedTo`,`completed`) VALUES (NULL,'$this->subject','$this->body', '$this->userID','$this->requestedBy','$this->dateSubmitted',NULL,'$this->orderID', '$this->priority','$this->category','$this->status','$this->assignedTo','$this->completed')";
-        
+
         if ($dbc->query($sql_addTix)) {
 
-           //TODO - DO SOMETHING MORE ELABORATE THAT INDICATES SUCESSFUL SUBMISSION FOR NOW JUST PRINT SUCCESS
-           echo "<p> Ticket Successfully Submited </p>";
-           return true;
-
+            //TODO - DO SOMETHING MORE ELABORATE THAT INDICATES SUCESSFUL SUBMISSION FOR NOW JUST PRINT SUCCESS
+            echo "<p> Ticket Successfully Submited </p>";
+            return true;
         } else {
 
             echo "<p> Could not run query </p>";
-            return false; 
-           
+            return false;
         }
 
         // TODO: generate actual function
@@ -156,7 +144,7 @@ class Ticket {
     }
 
 // GETTERS AND SETTERS 
-    
+
     function getId() {
         return $this->id;
     }
@@ -236,8 +224,8 @@ class Ticket {
     function setStatus($status) {
         $this->status = $status;
     }
-    
-        function getRequestedBy() {
+
+    function getRequestedBy() {
         return $this->requestedBy;
     }
 
@@ -260,11 +248,8 @@ class Ticket {
     function setCompleted($completed) {
         $this->completed = $completed;
     }
-    
+
 }
-
-
-
 ?>
 
 
