@@ -66,8 +66,6 @@ class Disposition {
             while ($row = $result->fetch()) {
 
                 $dispos[] = Disposition::create($row['dispoID'], $row['userID'], $row['body'], $row['datesubmitted']);
-
-
             }
             // return tickets array
             return $dispos;
@@ -98,6 +96,41 @@ class Disposition {
         } else {
 
             echo "<p> Could not run query </p>";
+        }
+    }
+
+    //  method takes a DB object and DELETES the ticket to the database
+    public function delete($dbc) {
+
+        $sql_delete = "delete from dispositions where dispoID = '$this->dispoID'";
+        if ($dbc->query($sql_delete)) {
+
+            echo "<p> Disposition Successfully Deleted </p>";
+            return true;
+        } else {
+
+            echo "<p> Could not run query </p>";
+            return false;
+        }
+    }
+
+//  method takes a DB object and edits the disposition and updates the database (IF OBJECT -> DISPOSITION ID ACTUALLY EXISTS)
+    public function update($dbc) {
+
+        $t = time();
+        $timestamp = date("Y-m-d", $t);
+        $this->setDateSubmitted($timestamp);
+
+        $sql_update = "update dispositions SET body = '$this->body', datesubmitted = '$this->dateSubmitted' where dispoID = '$this->dispoID'";
+
+        if ($dbc->query($sql_update)) {
+
+            echo "<p> Disposition Successfully Updated </p>";
+            return true;
+        } else {
+
+            echo "<p> Could not run query </p>";
+            return false;
         }
     }
 

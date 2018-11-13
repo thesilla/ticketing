@@ -21,6 +21,8 @@
 <button id="editTicketButton"> Edit Ticket Details </button>
 
 
+
+<!-- Hidden HTML for editing ticket - displayed through JS -->
 <div id = "editTicket">
 
     <form action = "ticketDetailController.php" method = "post">

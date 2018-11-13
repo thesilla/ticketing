@@ -32,6 +32,8 @@ dispoID int(255) AUTO_INCREMENT NOT NULL,
 userID varchar(255) NOT NULL,
 body varchar(8000), 
 datesubmitted DATETIME NOT NULL,
+ticketID int(255) NOT NULL,
 PRIMARY KEY (dispoID),
-FOREIGN KEY (userID) REFERENCES users (userID)
+FOREIGN KEY (userID) REFERENCES users (userID),
+FOREIGN KEY (ticketID) REFERENCES tickets (ticketID)
     )

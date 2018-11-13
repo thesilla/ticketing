@@ -35,7 +35,7 @@
                     $currentController =  basename($_SERVER['PHP_SELF']);
                     // Stores Disposition ID# for persistence 
                     $id = $disposition->getDispoID();
-                    echo "<td> <form action = $currentController method = 'post'><input name = 'ticketno' id = 'editTicket' type = 'hidden' value = $id> <input type = 'submit' name = 'submit1' value = 'Edit'></form> </td>";
+                    echo "<td> <form action = $currentController method = 'post'><input name = 'ticketno' id = 'editTicket' type = 'hidden' value = $id> <input type = 'submit' name = 'submit1' value = 'Edit'></form>  <form action = $currentController method = 'post'><input name = 'ticketno' id = 'editTicket' type = 'hidden' value = $id> <input type = 'submit' name = 'submit1' value = 'Delete'></form></td>";;
 
                     echo "</tr>";
                 }

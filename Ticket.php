@@ -124,23 +124,36 @@ class Ticket {
             echo "<p> Could not run query </p>";
             return false;
         }
-
-        // TODO: generate actual function
-        //echo "<p> Ticket Successfully Added to Database </p>";
     }
 
 //  method takes a DB object and DELETES the ticket to the database
-    public function deleteTicket($dbc) {
+    public function delete($dbc) {
 
-        // TODO: generate actual function
-        echo "<p> Ticket Successfully deleted from the Database </p>";
+        $sql_delete = "delete from tickets where ticketID = '$this->id'";
+        if ($dbc->query($sql_delete)) {
+
+            echo "<p> Ticket Successfully Deleted </p>";
+            return true;
+        } else {
+
+            echo "<p> Could not run query </p>";
+            return false;
+        }
     }
 
-//  method takes a DB object and edits the ticket and updates the database
-    public function edit($dbc) {
+//  method takes a DB object and edits the ticket and updates the database (IF OBJECT -> TICKET ID# ACTUALLY EXISTS)
+    public function update($dbc) {
 
-        // TODO: generate actual function
-        echo "<p> Ticket Successfully deleted from the Database </p>";
+        $sql_update = "update tickets SET subject = '$this->subject', body = '$this->body', orderID = '$this->orderID', priority = '$this->priority', category = '$this->category', status = '$this->status', assignedto = '$this->assignedTo', completed = '$this->completed', dateresolved = '$this->dateResolved' where ticketID = '$this->id'";
+        if ($dbc->query($sql_update)) {
+
+            echo "<p> Ticket Successfully Updated </p>";
+            return true;
+        } else {
+
+            echo "<p> Could not run query </p>";
+            return false;
+        }
     }
 
 // GETTERS AND SETTERS 
