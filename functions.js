@@ -1,30 +1,31 @@
 
 
-
-function displayTicketSubmit(){
-
-
-	var newTicketContainer = document.getElementById('new-ticket');
+function editTicket(){
+    
+   	var newTicketContainer1 = document.getElementById('editTicket');
 	
-	newTicketContainer.style.display = "block";
-	//newTicketContainer.style.float = "center";
+	newTicketContainer1.style.display = "block"; 
+    
+    
+}
 
-
+function closeEditTicket(){
+    
+   	var newTicketContainer2 = document.getElementById('editTicket');
+	
+	newTicketContainer2.style.display = "none"; 
+    
+    
 }
 
 
-function closeTicketSubmit(){
+var closeEditTicketButton = document.getElementById('closeEditTicket');
+closeEditTicketButton.onclick = closeEditTicket;
+
+var editTicketButton = document.getElementById('editTicketButton');
+editTicketButton.onclick = editTicket;
 
 
-
-
-	var newTicketContainer2 = document.getElementById('new-ticket');
-	
-	newTicketContainer2.style.display = "none";
-	//newTicketContainer.style.float = "center";
-
-
-}
 
 
 function sortTable(n) {
@@ -81,13 +82,3 @@ function sortTable(n) {
     }
   }
 }
-
-
-
-
-
-var closeButton = document.getElementById('xxxxx');
-closeButton.onclick = closeTicketSubmit;
-
-var submitButton = document.getElementById('newticket');
-submitButton.onclick = displayTicketSubmit;

@@ -1,11 +1,4 @@
 
-<html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="styles.css">
-    </head>
-
-
-    <body>
         <div> 
             <!-- Table headers -->
             <table id="displayTickets">
@@ -43,10 +36,6 @@
 
             </table>
 
-            <script src="functions.js"></script>
+        
         </div>
 
-
-    </body>        
-
-</html>

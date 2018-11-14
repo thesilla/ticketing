@@ -47,7 +47,7 @@
                     echo "<td>" . $ticket->getCompleted() . "</td>";
                     echo "<td>" . $ticket->getDateResolved() . "</td>";
                     $id = $ticket->getid();
-                    echo "<td> <form action = 'ticketDetailController.php' method = 'post'><input name = 'ticketno' id = 'editTicket' type = 'hidden' value = $id> <input type = 'submit' name = 'submit1' value = 'Details'></form> </td>";
+                    echo "<td> <form action = 'ticketDetailController.php' method = 'get'><input name = 'ticketno' id = 'editTicket' type = 'hidden' value = $id> <input type = 'submit' name = 'submit1' value = 'Details'></form> </td>";
 
                     echo "</tr>";
                 }

@@ -99,6 +99,22 @@ class Disposition {
         }
     }
 
+    public function add($dbc) {
+
+        $sql_addDispo = "INSERT INTO `dispositions` (`dispoID`, `userID`, `body`, `datesubmitted`, `ticketID`) VALUES (NULL,'$this->userID', '$this->body','$this->dateSubmitted','$this->ticketID')";
+
+        if ($dbc->query($sql_addDispo)) {
+
+            //TODO - DO SOMETHING MORE ELABORATE THAT INDICATES SUCESSFUL SUBMISSION FOR NOW JUST PRINT SUCCESS
+            echo "<p> Disposition Successfully Added </p>";
+            return true;
+        } else {
+
+            echo "<p> Could not run query </p>";
+            return false;
+        }
+    }
+
     //  method takes a DB object and DELETES the ticket to the database
     public function delete($dbc) {
 
