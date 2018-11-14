@@ -99,3 +99,31 @@ h2 {
     float: right;
     
 }
+
+
+
+
+
+#new-disposition-container {
+    
+    border: 1pt solid black;
+    display: none;
+    position: fixed;
+    z-index: 1; /* Sit on top */
+    /*margin-top: 50px;  Location of the box */
+    left: 25%;
+    top: 0;
+    width: 50%;
+    background-color: #ebf8fa ; 
+    margin: auto;
+    
+    
+}
+
+#new-disposition {
+    
+    
+    
+    
+    
+}

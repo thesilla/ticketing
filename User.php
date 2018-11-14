@@ -8,7 +8,7 @@ class User {
     private $email;
     private $title;
     private $password;
-
+ 
 // Constructor: create new Disposition object (template)
     function __construct() {
         

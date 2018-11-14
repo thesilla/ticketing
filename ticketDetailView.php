@@ -4,7 +4,7 @@
 ?>
 
 
-
+<div><a href = "ticketsController.php">Return To Tickets</a></div>
 
 <div id="ticket-display">
     <h1> TICKET # <?php echo " " . $ticket->getId() . " "; ?> - DETAILS</h1>

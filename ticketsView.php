@@ -57,6 +57,12 @@
 
             <script src="functions.js"></script>
         </div>
+        
+        <?php
+        
+        include("ticketSubmitView.php");
+        
+        ?>
 
 
     </body>        
