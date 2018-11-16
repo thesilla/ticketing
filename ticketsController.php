@@ -124,6 +124,9 @@ $allTickets = Ticket::getTickets($dbc);
 $allusers = User::getUsers($dbc);
 
 include("ticketsView.php");
+include("ticketSubmitView.php");
 
 
+
+require('footer2.php');
 ?>

@@ -1,54 +1,30 @@
-
-
-function editTicket(){
+function displaySubmitTicket(){
     
-   	var newTicketContainer1 = document.getElementById('editTicket');
+   	var newTicketContainer1 = document.getElementById('submitTicket');
 	
 	newTicketContainer1.style.display = "block"; 
     
     
 }
 
-function closeEditTicket(){
+function closeSubmitTicket(){
     
-   	var newTicketContainer2 = document.getElementById('editTicket');
+   	var newTicketContainer2 = document.getElementById('submitTicket');
 	
 	newTicketContainer2.style.display = "none"; 
     
     
 }
 
-function addDisposition(){
-    
-       	var newDispoContainer1 = document.getElementById('new-disposition-container');
-	
-	newDispoContainer1.style.display = "block"; 
-    
-}
 
 
-function closeAddDisposition(){
-    
-        var newDispoContainer2 = document.getElementById('new-disposition-container');
-	
-	newDispoContainer2.style.display = "none"; 
-    
-    
-    
-}
 
-var addDispositionButton = document.getElementById('addDispositionButton');
-addDispositionButton.onclick = addDisposition;
+var showTicketSubmitButton = document.getElementById('showTicketSubmit');
+showTicketSubmitButton.onclick = displaySubmitTicket;
 
-var closeAddDispositionButton = document.getElementById('closeAddDispositionButton');
-closeAddDispositionButton.onclick = closeAddDisposition;
+var closeTicketSubmitButton = document.getElementById('closeSubmitTicketButton');
+closeTicketSubmitButton.onclick = closeSubmitTicket;
 
-
-var closeEditTicketButton = document.getElementById('closeEditTicket');
-closeEditTicketButton.onclick = closeEditTicket;
-
-var editTicketButton = document.getElementById('editTicketButton');
-editTicketButton.onclick = editTicket;
 
 
 

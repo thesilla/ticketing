@@ -1,5 +1,5 @@
 
-<script src="functions.js"></script>
+    <script src="ticketDetailFunctions.js"></script>
 
 </body>
 

@@ -127,3 +127,43 @@ h2 {
     
     
 }
+
+
+#closeAddDispositionButton{
+    
+    float: right;
+    background-color: #ebf8fa;
+    
+    
+}
+
+
+#submitTicket{
+    
+    border: 1pt solid black;
+    display: none;
+    position: fixed;
+    z-index: 1; /* Sit on top */
+    /*margin-top: 50px;  Location of the box */
+    left: 25%;
+    top: 0;
+    width: 50%;
+    background-color: #ebf8fa ; 
+    margin: auto;
+    
+    
+}
+
+
+
+#closeSubmitTicketButton{
+    
+    
+    
+    float: right;
+    background-color: #ebf8fa;
+    
+    
+    
+    
+}

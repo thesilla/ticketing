@@ -79,6 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
 // generate views
 //$ticket = Ticket::createFromID($_GET['ticketno'], $dbc);
 include("ticketDetailView.php");
+include("ticketEditView.php");
 
 $id = $ticket->getId();
 $allDispositions = Disposition::getDispositionsByTicket($id, $dbc);
