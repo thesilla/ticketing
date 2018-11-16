@@ -1,6 +1,6 @@
 
 <div id="submitTicket">
-    <form action ="ticketController.php" method ="post" id="submitTicketForm">
+    <form action ="ticketsController.php" method ="post" id="submitTicketForm">
         <div>Subject:</div>
         <div><input type ="text" name ="subject" placeholder ="please enter subject"></div>
         <div>Details:</div>

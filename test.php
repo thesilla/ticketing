@@ -43,7 +43,7 @@ include('Disposition.php');
 //$dispo1->delete($dbc);
 
 
-/*
+
 
 $id = 2;
 $subject = "UPDATE TEST";
@@ -59,13 +59,13 @@ $status = 'Awaiting Agent Reply';
 $c = "Need ETA";
 //$ticket1 = Ticket::create($id, $subject, $body, $userID,$requestedBy, $dateSubmitted, $dateResolved, $orderID, $priority, $category, $status, $assignedTo, $completed);
 $ticket1 = Ticket::create($id, $subject, $body, $userID,$requestedBy, $date, $date, $orderID, $priority, $c, $status, $assignedTo, $completed);
-//$ticket1->add($dbc);
+$ticket1->add($dbc);
 
 //test of ticket update - WORKS
-$ticket1->update($dbc);
+//$ticket1->update($dbc);
 
 
-*/
+
 
 
 

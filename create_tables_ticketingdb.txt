@@ -1,3 +1,14 @@
+create table users (
+userID varchar(255) NOT NULL,
+firstname varchar(255) NOT NULL,
+lastname varchar(255) NOT NULL,
+email varchar(255) NOT NULL,
+title varchar(255) NOT NULL,
+password varchar(255) NOT NULL,
+PRIMARY KEY (userID)
+);
+
+
 create table tickets (
 ticketID int(800) AUTO_INCREMENT NOT NULL,
 subject varchar(255) NOT NULL, 
@@ -14,17 +25,9 @@ completed varchar(255) NOT NULL,
 dateresolved DATETIME,
 PRIMARY KEY (ticketID),
 FOREIGN KEY (userID) REFERENCES users (userID)
-    )
+    );
 
-create table users (
-userID varchar(255) NOT NULL,
-firstname varchar(255) NOT NULL,
-lastname varchar(255) NOT NULL,
-email varchar(255) NOT NULL,
-title varchar(255) NOT NULL,
-password varchar(255) NOT NULL,
-PRIMARY KEY (userID)
-)
+
 
 
 create table dispositions (
@@ -36,4 +39,4 @@ ticketID int(255) NOT NULL,
 PRIMARY KEY (dispoID),
 FOREIGN KEY (userID) REFERENCES users (userID),
 FOREIGN KEY (ticketID) REFERENCES tickets (ticketID)
-    )
+    );
