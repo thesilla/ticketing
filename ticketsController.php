@@ -11,8 +11,9 @@ include('Disposition.php');
 //initialize error variable
 // TODO - create class that handles errors and generates appropriate messages
 // - OR create error functionality within Ticket class??? need to decide
-$problem;
-
+$problem = false;
+// Must initialize here to avoid error since this field is not mandatory
+$orderID = "";
 // if ticket form submitted
 if ($_SERVER['REQUEST_METHOD']==='POST'){
     
