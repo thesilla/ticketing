@@ -1,5 +1,5 @@
 
-<div><button id="showTicketSubmit">Submit New Ticket</button></div>
+
 <div id="submitTicket">
     <button id="closeSubmitTicketButton"> &times; </button>
     <form action ="ticketsController.php" method ="post" id="submitTicketForm">

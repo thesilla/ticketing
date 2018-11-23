@@ -98,6 +98,26 @@ class Disposition {
             echo "<p> Could not run query </p>";
         }
     }
+    
+        public static function deleteDispositionsByTicket($ticketID, $dbc) {
+
+
+        // for now (or permanently) directly include SQL here
+        $sql_deleteDispos = "DELETE FROM dispositions where ticketID = '$ticketID'";
+        
+        
+
+
+        if ($result = $dbc->query($sql_deleteDispos)) {
+            
+           echo "<p> Dispositions Successfully Deleted </p>";
+
+            } else {
+
+            echo "<p> Could not run query </p>";
+        }
+    }
+    
 
     public function add($dbc) {
 

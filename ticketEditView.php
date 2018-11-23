@@ -1,6 +1,6 @@
 <button id="editTicketButton"> Edit Ticket Details </button>
 <!-- Hidden HTML for editing ticket - displayed through JS -->
-<div id = "editTicket">
+<div id = "editTicket" class="modal">
     <button id="closeEditTicket"> &times; </button>
     <h2>Ticket #: <?php echo $ticket->getId(); ?></h2>
     <div>Submitted By: <?php echo $ticket->getUserID(); ?></div>

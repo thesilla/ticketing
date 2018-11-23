@@ -9877,8 +9877,171 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
 
 #tickets-container{
     
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1pt solid black;
+    overflow: auto;
+    text-align: center;
+    
+}
+
+#main-container {
+    
     width: 80%;
     margin: auto;
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+/* Imported from old CSS file */
+
+
+#ticket-display {
+    
+    display: flex;
+    justify-content: center;
+   /* align-items: center; 
+    width: 50%;*/
+    flex-direction: column;
+    margin: auto;
+    
+    
+}
+
+#editTicketForm {
+    
+    
+    width: 100%; 
+    display: block;
+}
+
+#editTicketForm input{
+    
+    display: block;
+    width: 98%;
+    margin: auto;
+}
+
+#editTicketForm div{
+    
+    display: block;
+    width: 98%;
+    margin: auto;
+}
+
+
+#editTicketForm textarea{
+    
+    display: block;
+    width: 98%;
+    margin: auto;
+    
+}
+
+#editTicket {
+    
+    border: 1pt solid black;
+    display: none;
+    position: fixed;
+    z-index: 1; /* Sit on top */
+    /*margin-top: 50px;  Location of the box */
+    left: 25%;
+    top: 0;
+    width: 50%;
+    background-color: #ebf8fa ; 
+    margin: auto;
+ 
+}
+
+
+#closeEditTicket {
+    
+    background-color:white;
+    
+    
+    
+}
+
+#closeEditTicket {
+    
+    float: right;
+    
+}
+
+
+
+
+
+#new-disposition-container {
+    
+    border: 1pt solid black;
+    display: none;
+    position: fixed;
+    z-index: 1; /* Sit on top */
+    /*margin-top: 50px;  Location of the box */
+    left: 25%;
+    top: 0;
+    width: 50%;
+    background-color: #ebf8fa ; 
+    margin: auto;
+    
+    
+}
+
+#new-disposition {
+    
+    
+    
+    
+    
+}
+
+
+#closeAddDispositionButton{
+    
+    float: right;
+    background-color: #ebf8fa;
+    
+    
+}
+
+
+#submitTicket{
+    
+    /* border: 1pt solid black; */
+    display: none;
+    position: fixed;
+    z-index: 1; /* Sit on top */
+    /*margin-top: 50px;  Location of the box */
+    left: 25%;
+    top: 0;
+    width: 50%;
+    /* background-color: #ebf8fa ; */
+    /* margin: auto; */
+    
+    
+}
+
+
+
+#closeSubmitTicketButton{
+    
+    
+    
+    float: right;
+    background-color: #ebf8fa;
+    
+    
     
     
 }

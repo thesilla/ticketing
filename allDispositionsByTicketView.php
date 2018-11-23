@@ -1,14 +1,16 @@
 
         <div> 
             <!-- Table headers -->
-            <table id="displayTickets">
+            <table class="table" id="displayTickets">
                 <tr>
+                <thead>
                     <th onclick='sortTable(0)'>Disposition ID#:</th>
                     <th onclick='sortTable(1)'>Submitted By:</th>
                     <th onclick='sortTable(2)'>Date Submitted</th>
                     <th onclick='sortTable(3)'>Details</th>
-
                     <th></th>
+                </thead>
+                    
                 </tr>
 
                 <?php
