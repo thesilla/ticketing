@@ -21,6 +21,7 @@
     <div id = "requestedBy"> Originally Requested By: <?php echo $ticket->getRequestedBy(); ?> </div>
     <div id = "assignedto"> Assigned To: <?php echo $ticket->getAssignedTo(); ?> </div>
     <div id = "orderid"> Order ID: <?php echo $ticket->getOrderID(); ?> </div>
+    <div id = "vendor"> Vendor: <?php echo $ticket->getVendor(); ?> </div>
     <div id = "completed"> Complete? <?php echo $ticket->getCompleted(); ?> </div>
     <button id="editTicketButton" class="btn btn-warning" > Edit Ticket Details </button>
 

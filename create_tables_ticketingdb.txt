@@ -23,6 +23,7 @@ status varchar(255) NOT NULL,
 assignedto varchar(255),
 completed varchar(255) NOT NULL,
 dateresolved DATETIME,
+vendor varchar(255),
 PRIMARY KEY (ticketID),
 FOREIGN KEY (userID) REFERENCES users (userID)
     );

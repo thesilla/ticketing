@@ -6,6 +6,9 @@
 
 <?php
 
+//TODO - FORM SHOULD HANDLE POSSIBLE SITUATIONS WHEN FIELDS CONTAIN NOTHING???
+
+
 // Connect to database
 
 require('header1.php');
@@ -68,9 +71,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
         $requestedby = $ticket_initialize->getRequestedBy();
         $datesubmitted = $ticket_initialize->getDateSubmitted();
         $dateresolved = NULL;
+        $vendor = $_POST['vendor'];
         
         // create NEW updated ticket object from user form.
-        $ticket = Ticket::create($ticketID, $subject, $details, $userID, $requestedby, $datesubmitted, $dateresolved, $orderid, $priority, $category, $status, $assignedto, $completed);
+        $ticket = Ticket::create($ticketID, $subject, $details, $userID, $requestedby, $datesubmitted, $dateresolved, $orderid, $priority, $category, $status, $assignedto, $completed, $vendor);
         $ticket->update($dbc);
     }
 }

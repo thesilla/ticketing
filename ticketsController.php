@@ -16,6 +16,7 @@ include('header1.php');
 $problem = false;
 // Must initialize here to avoid error since this field is not mandatory
 $orderID = "";
+$vendor = "";
 // if ticket form submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -66,6 +67,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $orderID = $_POST['orderid'];
         }
+        
+        if (!empty($_POST['vendor'])) {
+
+            $vendor = $_POST['vendor'];
+        }
+        
+        
 
         if (!empty($_POST['priority'])) {
 
@@ -108,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // TODO -use objects to verify errors etc?
         if (!$problem) {
 
-            $ticket1 = Ticket::create($id, $subject, $body, $userID, $requestedBy, $dateSubmitted, $dateResolved, $orderID, $priority, $category, $status, $assignedTo, $completed);
+            $ticket1 = Ticket::create($id, $subject, $body, $userID, $requestedBy, $dateSubmitted, $dateResolved, $orderID, $priority, $category, $status, $assignedTo, $completed, $vendor);
             $ticket1->add($dbc);
         }
     }

@@ -1,4 +1,10 @@
 <?php
+// TODO: Add Vendor field (option, NULL)
+// - edit all methods and static constructors - DONE
+// - alter database to include field - DONE
+// - edit views and controller calls
+// - get list of vendors to show in drop-down
+
 
 // Tickets Model
 class Ticket {
@@ -18,6 +24,10 @@ class Ticket {
     private $completed;
     private $dateResolved;
 
+    private $vendor;
+
+
+
 // Constructor: create new Ticket object (template)
     public function __construct() {
         
@@ -25,7 +35,7 @@ class Ticket {
 
 // ************PHP does not allow for multiple constructors - Static Function Constructors below************
     // Constructor with arguments for every attribute - create object from scratch
-    public static function create($id, $subject, $body, $userID, $requestedBy, $dateSubmitted, $dateResolved, $orderID, $priority, $category, $status, $assignedTo, $completed) {
+    public static function create($id, $subject, $body, $userID, $requestedBy, $dateSubmitted, $dateResolved, $orderID, $priority, $category, $status, $assignedTo, $completed, $vendor) {
         $instance = new self();
         $instance->id = $id;
         $instance->subject = $subject;
@@ -40,7 +50,7 @@ class Ticket {
         $instance->requestedBy = $requestedBy;
         $instance->assignedTo = $assignedTo;
         $instance->completed = $completed;
-
+        $instance->vendor = $vendor;
         return $instance;
     }
 
@@ -68,7 +78,7 @@ class Ticket {
             $instance->setRequestedBy($row['requestedby']);
             $instance->setAssignedTo($row['assignedto']);
             $instance->setCompleted($row['completed']);
-
+            $instance->setVendor($row['vendor']);
             return $instance;
         } else {
 
@@ -93,7 +103,7 @@ class Ticket {
 
             while ($row = $result->fetch()) {
 
-                $tickets[] = Ticket::create($row['ticketID'], $row['subject'], $row['body'], $row['userID'], $row['requestedby'], $row['datesubmitted'], $row['dateresolved'], $row['orderID'], $row['priority'], $row['category'], $row['status'], $row['assignedto'], $row['completed']);
+                $tickets[] = Ticket::create($row['ticketID'], $row['subject'], $row['body'], $row['userID'], $row['requestedby'], $row['datesubmitted'], $row['dateresolved'], $row['orderID'], $row['priority'], $row['category'], $row['status'], $row['assignedto'], $row['completed'],$row['vendor']);
 
                 // TODO delete this, for testing only
                 //print_r($tickets);
@@ -112,7 +122,7 @@ class Ticket {
         // FIXME: Can't sql files, '$this' is outside scope? Look into this
         //include('sql.inc.php');
         // for now (or permanently) directly include SQL here
-        $sql_addTix = "INSERT INTO `tickets` (`ticketID`, `subject`, `body`, `userID`,`requestedBy`, `datesubmitted`, `dateresolved`, `orderID`, `priority`, `category`, `status`,`assignedTo`,`completed`) VALUES (NULL,'$this->subject','$this->body', '$this->userID','$this->requestedBy','$this->dateSubmitted',NULL,'$this->orderID', '$this->priority','$this->category','$this->status','$this->assignedTo','$this->completed')";
+        $sql_addTix = "INSERT INTO `tickets` (`ticketID`, `subject`, `body`, `userID`,`requestedBy`, `datesubmitted`, `dateresolved`, `orderID`, `priority`, `category`, `status`,`assignedTo`,`completed`,`vendor`) VALUES (NULL,'$this->subject','$this->body', '$this->userID','$this->requestedBy','$this->dateSubmitted',NULL,'$this->orderID', '$this->priority','$this->category','$this->status','$this->assignedTo','$this->completed','$this->vendor')";
 
         if ($dbc->query($sql_addTix)) {
 
@@ -144,7 +154,7 @@ class Ticket {
 //  method takes a DB object and edits the ticket and updates the database (IF OBJECT -> TICKET ID# ACTUALLY EXISTS)
     public function update($dbc) {
 
-        $sql_update = "update tickets SET subject = '$this->subject', body = '$this->body', orderID = '$this->orderID', priority = '$this->priority', category = '$this->category', status = '$this->status', assignedto = '$this->assignedTo', completed = '$this->completed', dateresolved = '$this->dateResolved' where ticketID = '$this->id'";
+        $sql_update = "update tickets SET subject = '$this->subject', body = '$this->body', orderID = '$this->orderID', priority = '$this->priority', category = '$this->category', status = '$this->status', assignedto = '$this->assignedTo', completed = '$this->completed', dateresolved = '$this->dateResolved', vendor = '$this->vendor' where ticketID = '$this->id'";
         if ($dbc->query($sql_update)) {
 
             echo "<p> Ticket Successfully Updated </p>";
@@ -262,6 +272,14 @@ class Ticket {
         $this->completed = $completed;
     }
 
+    
+    function getVendor() {
+        return $this->vendor;
+    }
+
+    function setVendor($vendor) {
+        $this->vendor = $vendor;
+    }
 }
 ?>
 

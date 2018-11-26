@@ -27,15 +27,17 @@
         <table class="table table-hover" id="displayTickets">
             <tr><thead>
             <th onclick='sortTable(0)'>Ticket ID#</th>
-            <th onclick='sortTable(2)'>Requested By</th>
-            <th onclick='sortTable(3)'>Submitted By</th>
-            <th onclick='sortTable(4)'>Date Submitted</th>
-            <th onclick='sortTable(5)'>Category</th>
-            <th onclick='sortTable(6)'>Subject</th>
+            <th onclick='sortTable(1)'>Requested By</th>
+            <th onclick='sortTable(2)'>Submitted By</th>
+            <th onclick='sortTable(3)'>Date Submitted</th>
+            <th onclick='sortTable(4)'>Category</th>
+            <th onclick='sortTable(5)'>Subject</th>
              <!-- <th onclick='sortTable(7)'>Details</th> -->
-            <th onclick='sortTable(7)'>Priority</th>
-            <th onclick='sortTable(8)'>Assigned To</th>
-            <th onclick='sortTable(9)'>Order ID</th>
+            
+            <th onclick='sortTable(6)'>Priority</th>
+            <th onclick='sortTable(7)'>Assigned To</th>
+            <th onclick='sortTable(8)'>Order ID</th>
+            <th onclick='sortTable(9)'>Vendor</th>
             <th onclick='sortTable(10)'>Status</th>
             <th onclick='sortTable(11)'>Completed?</th>
             <th onclick='sortTable(12)'>Date Completed</th>
@@ -99,6 +101,7 @@
                 echo "<td>" . $ticket->getPriority() . "</td>";
                 echo "<td>" . $ticket->getAssignedTo() . "</td>";
                 echo "<td>" . $ticket->getOrderID() . "</td>";
+                echo "<td>" . $ticket->getVendor() . "</td>";
                 echo "<td>" . $ticket->getStatus() . "</td>";
                 echo "<td>" . $ticket->getCompleted() . "</td>";
                 echo "<td>" . $ticket->getDateResolved() . "</td>";

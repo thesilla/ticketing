@@ -21,6 +21,8 @@
         <input id ="changeAssignedTo" name ="assignedto" type ="text" value =<?php echo "\"" . $ticket->getAssignedTo() . "\""; ?>>
         <div> Order ID: </div>
         <input id ="changeOrderID" name ="orderid" type ="text" value =<?php echo "\"" . $ticket->getOrderID() . "\""; ?>>
+        <div> Vendor: </div>
+        <input id ="changeOrderID" name ="vendor" type ="text" value =<?php echo "\"" . $ticket->getVendor() . "\""; ?>>
         <div> Status: </div>
         <input id ="changeStatus" name ="status" type ="text" value =<?php echo "\"" . $ticket->getStatus() . "\""; ?>>
         

@@ -4,10 +4,10 @@
             <table class="table" id="displayTickets">
                 <tr>
                 <thead>
-                    <th onclick='sortTable(0)'>Disposition ID#:</th>
-                    <th onclick='sortTable(1)'>Submitted By:</th>
-                    <th onclick='sortTable(2)'>Date Submitted</th>
-                    <th onclick='sortTable(3)'>Details</th>
+                    
+                    <th onclick='sortTable(0)'>Submitted By:</th>
+                    <th onclick='sortTable(1)'>Date Submitted</th>
+                    <th onclick='sortTable(2)'>Details</th>
                     <th></th>
                 </thead>
                     
@@ -21,7 +21,7 @@
                     echo "<tr>";
 
                     // display data
-                    echo "<td>" . $disposition->getDispoID() . "</td>";
+                   
                     echo "<td>" . $disposition->getUserID() . "</td>";
                     echo "<td>" . $disposition->getDateSubmitted() . "</td>";
                     echo "<td>" . $disposition->getBody() . "</td>";

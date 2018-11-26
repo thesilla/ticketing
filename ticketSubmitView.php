@@ -20,6 +20,9 @@
         </div>
         <div>Order ID: </div>
         <div><input class="form-control" type ="text" name ="orderid" placeholder ="(If applicable)"></div>
+        
+        <div>Vendor: </div>
+        <div><input class="form-control" type ="text" name ="vendor" placeholder ="(If applicable)"></div>
 
         <!-- IN THE FUTURE, this should be picked from an editable dynamic list of all possible categories -->
         <div>Category:</div>
