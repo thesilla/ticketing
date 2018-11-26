@@ -75,20 +75,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
     }
 }
 
-
+$id = $ticket->getId();
+$allDispositions = Disposition::getDispositionsByTicket($id, $dbc);
 // generate views
 //$ticket = Ticket::createFromID($_GET['ticketno'], $dbc);
+echo "<br/>";
+echo '<div id="ticket-display" class="jumbotron">';
+
 include("ticketDetailView.php");
 include("ticketEditView.php");
 
-$id = $ticket->getId();
-$allDispositions = Disposition::getDispositionsByTicket($id, $dbc);
+
 include("allDispositionsByTicketView.php");
 
 
 include('dispositionSubmitView.php');
 
-
+echo "</div>";
 
 
 

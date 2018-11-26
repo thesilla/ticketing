@@ -75,6 +75,7 @@ body {
   line-height: 1.5;
   color: #222;
   text-align: left;
+  background-image: url('bg.png');
   background-color: #fff;
 }
 
@@ -9877,7 +9878,7 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
 
 #tickets-container{
     
-    width: 95%;
+    width: 99.999%;
     margin-left: auto;
     margin-right: auto;
     border: 1pt solid black;
@@ -9992,7 +9993,7 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
     left: 25%;
     top: 0;
     width: 50%;
-    background-color: #ebf8fa ; 
+
     margin: auto;
     
     
@@ -10017,31 +10018,56 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
 
 
 #submitTicket{
-    
-    /* border: 1pt solid black; */
     display: none;
+    /* border: 1pt solid black; 
+    
     position: fixed;
-    z-index: 1; /* Sit on top */
-    /*margin-top: 50px;  Location of the box */
+    z-index: 1;  Sit on top 
+    /*margin-top: 50px;  Location of the box 
     left: 25%;
     top: 0;
-    width: 50%;
-    /* background-color: #ebf8fa ; */
-    /* margin: auto; */
+    background-color: #ebf8fa ;
+    width: 80%;
+    
+    margin: auto; */
     
     
 }
 
-
+#submitTicketCancel{
+    
+    
+    display: flex;
+    justify-content: center;
+    
+    
+    
+}
 
 #closeSubmitTicketButton{
     
     
     
-    float: right;
+   /*
     background-color: #ebf8fa;
     
+    */
+}
+
+#submitTicketForm {
+    
+    
+}
+
+#submitTicketButton{
     
     
     
+}
+
+#newTicketButtonContainer {
+    
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }

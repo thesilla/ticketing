@@ -7,6 +7,8 @@ require('db_connect.php');
 include('Ticket.php');
 include('User.php');
 include('Disposition.php');
+include('header1.php');
+
 
 //initialize error variable
 // TODO - create class that handles errors and generates appropriate messages
@@ -127,8 +129,9 @@ $allTickets = Ticket::getTickets($dbc);
 
 $allusers = User::getUsers($dbc);
 
-include("ticketsView.php");
 include("ticketSubmitView.php");
+include("ticketsView.php");
+
 
 
 
