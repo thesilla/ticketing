@@ -10071,3 +10071,10 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
     justify-content: center;
     flex-direction: column;
 }
+
+ticketControls# {
+    
+    display: inline;
+    
+    
+}

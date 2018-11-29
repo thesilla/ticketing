@@ -8,7 +8,22 @@
 
 
     <h1 class="display-3"> TICKET # <?php echo " " . $ticket->getId() . " "; ?> - DETAILS</h1>
+        <div id="ticketControls">
+        
+        
+        <button id="editTicketButton" type="button" class="btn btn-primary">Edit Ticket Details</button>
+        <button type="button" class="btn btn-warning">Close Ticket</button>
+        <button type="button" class="btn btn-danger">Delete Ticket </button>
+        <button id="addDispositionButton" class="btn btn-success"> Add Disposition </button>
+
+    </div>
     <hr class="my-4">
+    
+
+    
+    
+    
+    
     <!-- <div id="ticketNumber">Ticket Number: <?php //echo $ticket->getId(); ?> </div> -->
     <div id="userID">Submitted By: <?php echo $ticket->getUserID(); ?> </div>
     <div id = "category"> Category: <?php echo $ticket->getCategory(); ?> </div>
@@ -23,20 +38,11 @@
     <div id = "orderid"> Order ID: <?php echo $ticket->getOrderID(); ?> </div>
     <div id = "vendor"> Vendor: <?php echo $ticket->getVendor(); ?> </div>
     <div id = "completed"> Complete? <?php echo $ticket->getCompleted(); ?> </div>
-    <button id="editTicketButton" class="btn btn-warning" > Edit Ticket Details </button>
-
-    
-    <?php //include("allDispositionsByTicketView.php"); ?>
     
     
-  
+    <!--<button id="editTicketButton" class="btn btn-warning" > Edit Ticket Details </button> -->
 
 
-
-
-
-
-<!-- TODO - make this into its own view? -->  
 
 
 
