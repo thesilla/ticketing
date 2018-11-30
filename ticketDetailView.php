@@ -1,12 +1,25 @@
 <?PHP
 // must define $ticket variable with Ticket object for this to work
+
+/*
+if($ticket->getCompleted()=="YES"){
+    
+    echo '<span class="badge badge-danger">CLOSED</span>';
+} else {
+    
+    echo '<span class="badge badge-success">OPEN</span>';
+    
+}
+
+*/
+
 ?>
 
 
 <div><a href = "ticketsController.php">Return To Tickets</a></div>
 
-<div id="ticketHeader">
-    <h3 id="title" class="display-4"> TICKET # <?php echo " " . $ticket->getId() . " "; ?> - DETAILS</h3>
+<div id="ticketHeader" style= <?php if($ticket->getCompleted()=="YES"){echo "\"" . "color: red;" . "\"";} else {echo "\"" . "color: green;" . "\"";}  ?>    >
+    <h3 id="title" class="display-4"> TICKET # <?php if($ticket->getCompleted()=="YES"){echo " " . $ticket->getId() . " - <strong>CLOSED<strong>";}else {echo " " . $ticket->getId() . " - <strong>OPEN<strong>";} ?>  </h3>
     <div id = "priorityAlert" class="<?php
     if ($ticket->getPriority() == 1) {
         echo "alert alert-dismissible alert-danger";
@@ -27,7 +40,7 @@
     </div>
 </div>
 <!-- Ticket controls -->
-<div id="ticketControls">
+<div class="ticketControls">
 
 
     <button id="editTicketButton" type="button" class="btn btn-primary">Edit Ticket Details</button>
@@ -41,15 +54,15 @@
 
 
 
-
+<h4>Subject</h4><div id = "subject">  <?php echo $ticket->getSubject(); ?> </div>
 
 <!-- <div id="ticketNumber">Ticket Number: <?php //echo $ticket->getId();        ?> </div> -->
 <h4>Submitted By</h4><div id="userID"><?php echo $ticket->getUserID(); ?> </div>
 <h4>Category</h4><div id = "category"> <?php echo $ticket->getCategory(); ?> </div>
-<h4>Subject</h4><div id = "subject">  <?php echo $ticket->getSubject(); ?> </div>
+
 <h4>Details</h4><div id = "body">  <?php echo $ticket->getBody(); ?> </div>
 <h4>Date Submitted</h4><div id = "dateSubmitted"> <?php echo $ticket->getDateSubmitted(); ?> </div>
-<h4>Priority</h4><div id = "priority"> <?php echo $ticket->getPriority(); ?> </div>
+<!--<h4>Priority</h4><div id = "priority"> <?php echo $ticket->getPriority(); ?> </div> -->
 <h4>Date Resolved</h4><div id = "dateResolved">  <?php echo $ticket->getDateResolved(); ?> </div>
 <h4>Status:</h4><div id = "status"> <?php echo $ticket->getStatus(); ?> </div>
 <h4> Originally Requested By</h4><div id = "requestedBy"> <?php echo $ticket->getRequestedBy(); ?> </div>

@@ -42,14 +42,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
 
         // if completed it checked, change to YES.
         // If not, submit as NO
-        if (!empty($_POST['completed'])) {
+        // remove completed from ticket edit view functionality
+        //if (!empty($_POST['completed'])) {
 
-            $completed = "YES";
-        } else {
+        //    $completed = "YES";
+        //} else {
 
 
-            $completed = "NO";
-        }
+        //    $completed = "NO";
+        //}
 
 
         // create initial ticket object that will pull current ticket from db as is
@@ -60,6 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
         // attributes changed by user will be pulled from post variable
         // TODO: - Add filtering to post items for security purposes
         $ticketID = $ticket_initialize->getId();
+        
         $subject = $_POST['subject'];
         $details = $_POST['details'];
         $orderid = $_POST['orderid'];
@@ -70,6 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
         $userID = $ticket_initialize->getUserID();
         $requestedby = $ticket_initialize->getRequestedBy();
         $datesubmitted = $ticket_initialize->getDateSubmitted();
+        $completed = $ticket_initialize->getCompleted();
         $dateresolved = NULL;
         $vendor = $_POST['vendor'];
         $reason = NULL;

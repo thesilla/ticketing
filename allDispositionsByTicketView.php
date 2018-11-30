@@ -30,7 +30,7 @@
                     $currentController =  basename($_SERVER['PHP_SELF']);
                     // Stores Disposition ID# for persistence 
                     $id = $disposition->getDispoID();
-                    echo "<td> <form action = $currentController method = 'post'><input name = 'ticketno' id = 'editTicket' type = 'hidden' value = $id> <input type = 'submit' name = 'submit1' value = 'Edit'></form>  <form action = $currentController method = 'post'><input name = 'ticketno' id = 'editTicket' type = 'hidden' value = $id> <input type = 'submit' name = 'submit1' value = 'Delete'></form></td>";;
+                    echo "<td><form action = $currentController method = 'post'><input name = 'dispono' id = 'editTicket' type = 'hidden' value = $id> <input id = 'editDispoButton' class='btn btn-outline-primary' type = 'button' name = 'editDispo' value = 'Edit'></form></td>";;
 
                     echo "</tr>";
                 }
@@ -41,3 +41,28 @@
         
         </div>
 
+
+<div  id="edit-disposition-container" class="alert alert-dismissible alert-secondary" >
+    
+    
+    EDIT DISPO
+    
+</div>
+
+
+<script>
+    
+    
+    //works on first instance of button only - FIXME
+    function showEditDisposition(){
+        
+        var editDispositionContainer = document.getElementById('edit-disposition-container');
+        editDispositionContainer.style.display = "block";
+        
+    }
+    
+    var editDispoButton = document.getElementById('editDispoButton');
+    editDispoButton.onclick = showEditDisposition;
+    
+    
+</script>
