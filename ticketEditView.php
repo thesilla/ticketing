@@ -38,3 +38,35 @@
 
 
 </div>
+
+
+<script>
+
+function editTicket(){
+    
+   	var ticketContainer1 = document.getElementById('editTicket');
+	
+	ticketContainer1.style.display = "block"; 
+    
+    
+}
+
+function closeEditTicket(){
+    
+   	var ticketContainer2 = document.getElementById('editTicket');
+	
+	ticketContainer2.style.display = "none"; 
+    
+    
+}
+
+
+var closeEditTicketButton = document.getElementById('closeEditTicket');
+closeEditTicketButton.onclick = closeEditTicket;
+
+var editTicketButton = document.getElementById('editTicketButton');
+editTicketButton.onclick = editTicket;
+
+
+    
+</script>

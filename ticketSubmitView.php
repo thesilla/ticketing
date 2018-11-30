@@ -33,19 +33,19 @@
             <div>Priority:</div>
             <div class="form-check">
                 <label class="form-check-label" for="priority">
-                    <input name="priority" class="form-check-input" id="optionsRadios1" type="radio" checked="" value="option1">
+                    <input name="priority" class="form-check-input" id="optionsRadios1" type="radio" checked="" value="3">
                     3 (Lowest) 
                 </label>
             </div>
             <div class="form-check">
                 <label class="form-check-label" for="priority">
-                    <input name="priority" class="form-check-input" id="optionsRadios2" type="radio" value="option2">
+                    <input name="priority" class="form-check-input" id="optionsRadios2" type="radio" value="2">
                     2
                 </label>
             </div>
             <div class="form-check">
                 <label class="form-check-label" for="priority">
-                    <input name="priority" class="form-check-input" id="optionsRadios3" type="radio" value="option3">
+                    <input name="priority" class="form-check-input" id="optionsRadios3" type="radio" value="1">
                     1 (Highest)
                 </label>
             </div>

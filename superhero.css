@@ -48,6 +48,7 @@
 *::after {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+           /* border: 0.5pt dotted black; */
 }
 
 html {
@@ -75,7 +76,7 @@ body {
   line-height: 1.5;
   color: #222;
   text-align: left;
-  background-image: url('bg.png');
+
   background-color: #fff;
 }
 
@@ -9893,9 +9894,45 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
     margin: auto;
     
     
+    
+}
+
+#body {
+    
+   /* this is for ticket details */ 
+   
+    word-wrap: break-word;
+    
+}
+
+#ticketHeader{
+    
+    display: flex;
+    flex-direction: row;
+   /* justify-content: center;*/
+   justify-content: space-between;
+    
+    
+    
 }
 
 
+#title{
+    
+    width: 50%;
+    
+}
+
+#priorityAlert{
+    
+    width: 200px;
+  
+    border-radius: 30px 30px;
+    box-shadow: 5px 5px grey;
+    
+    
+    
+}
 
 
 
@@ -9985,13 +10022,13 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
 
 #new-disposition-container {
     
-    border: 1pt solid black;
+  
     display: none;
     position: fixed;
     z-index: 1; /* Sit on top */
     /*margin-top: 50px;  Location of the box */
     left: 25%;
-    top: 0;
+    top: 25%;
     width: 50%;
 
     margin: auto;
@@ -10009,9 +10046,22 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
 
 
 #closeAddDispositionButton{
-    
+   
+    /*
     float: right;
-    background-color: #ebf8fa;
+    background-color: #ebf8fa; */
+    
+    
+}
+
+
+#closeAddDisposition{
+    
+   
+    display: flex;
+    flex-direction: row;
+    float: right;
+    
     
     
 }
@@ -10078,3 +10128,64 @@ ticketControls# {
     
     
 }
+
+#ticket-close-container{
+    
+    
+    display: none;
+    position: fixed;
+    z-index: 1; /* Sit on top */
+    /*margin-top: 50px;  Location of the box */
+    left: 25%;
+    top: 25%;
+    width: 50%;
+
+    margin: auto;
+ 
+    
+    
+    
+}
+
+# ticketCloseReasons {
+    
+    
+    
+    
+} 
+
+
+#closeDispositionControls {
+    
+    display: inline;
+    float: right;
+}
+
+
+
+#dispositionSubmitButtonContainer {
+    
+   
+    float: right;
+    
+}
+
+
+#ticket-delete-container{
+    
+    
+    display: none;
+    position: fixed;
+    z-index: 1; /* Sit on top */
+    /*margin-top: 50px;  Location of the box */
+    left: 25%;
+    top: 25%;
+    width: 50%;
+
+    margin: auto;
+ 
+    
+    
+    
+}
+

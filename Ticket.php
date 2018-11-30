@@ -25,6 +25,9 @@ class Ticket {
     private $dateResolved;
 
     private $vendor;
+    private $reason;
+
+  
 
 
 
@@ -35,7 +38,7 @@ class Ticket {
 
 // ************PHP does not allow for multiple constructors - Static Function Constructors below************
     // Constructor with arguments for every attribute - create object from scratch
-    public static function create($id, $subject, $body, $userID, $requestedBy, $dateSubmitted, $dateResolved, $orderID, $priority, $category, $status, $assignedTo, $completed, $vendor) {
+    public static function create($id, $subject, $body, $userID, $requestedBy, $dateSubmitted, $dateResolved, $orderID, $priority, $category, $status, $assignedTo, $completed, $vendor, $reason) {
         $instance = new self();
         $instance->id = $id;
         $instance->subject = $subject;
@@ -51,6 +54,7 @@ class Ticket {
         $instance->assignedTo = $assignedTo;
         $instance->completed = $completed;
         $instance->vendor = $vendor;
+        $instance->reason = $reason;
         return $instance;
     }
 
@@ -79,6 +83,7 @@ class Ticket {
             $instance->setAssignedTo($row['assignedto']);
             $instance->setCompleted($row['completed']);
             $instance->setVendor($row['vendor']);
+            $instance->setReason($row['reason']);
             return $instance;
         } else {
 
@@ -103,7 +108,7 @@ class Ticket {
 
             while ($row = $result->fetch()) {
 
-                $tickets[] = Ticket::create($row['ticketID'], $row['subject'], $row['body'], $row['userID'], $row['requestedby'], $row['datesubmitted'], $row['dateresolved'], $row['orderID'], $row['priority'], $row['category'], $row['status'], $row['assignedto'], $row['completed'],$row['vendor']);
+                $tickets[] = Ticket::create($row['ticketID'], $row['subject'], $row['body'], $row['userID'], $row['requestedby'], $row['datesubmitted'], $row['dateresolved'], $row['orderID'], $row['priority'], $row['category'], $row['status'], $row['assignedto'], $row['completed'],$row['vendor'],$row['reason']);
 
                 // TODO delete this, for testing only
                 //print_r($tickets);
@@ -122,7 +127,7 @@ class Ticket {
         // FIXME: Can't sql files, '$this' is outside scope? Look into this
         //include('sql.inc.php');
         // for now (or permanently) directly include SQL here
-        $sql_addTix = "INSERT INTO `tickets` (`ticketID`, `subject`, `body`, `userID`,`requestedBy`, `datesubmitted`, `dateresolved`, `orderID`, `priority`, `category`, `status`,`assignedTo`,`completed`,`vendor`) VALUES (NULL,'$this->subject','$this->body', '$this->userID','$this->requestedBy','$this->dateSubmitted',NULL,'$this->orderID', '$this->priority','$this->category','$this->status','$this->assignedTo','$this->completed','$this->vendor')";
+        $sql_addTix = "INSERT INTO `tickets` (`ticketID`, `subject`, `body`, `userID`,`requestedBy`, `datesubmitted`, `dateresolved`, `orderID`, `priority`, `category`, `status`,`assignedTo`,`completed`,`vendor`,`reason`) VALUES (NULL,'$this->subject','$this->body', '$this->userID','$this->requestedBy','$this->dateSubmitted',NULL,'$this->orderID', '$this->priority','$this->category','$this->status','$this->assignedTo','$this->completed','$this->vendor','$this->reason')";
 
         if ($dbc->query($sql_addTix)) {
 
@@ -154,7 +159,7 @@ class Ticket {
 //  method takes a DB object and edits the ticket and updates the database (IF OBJECT -> TICKET ID# ACTUALLY EXISTS)
     public function update($dbc) {
 
-        $sql_update = "update tickets SET subject = '$this->subject', body = '$this->body', orderID = '$this->orderID', priority = '$this->priority', category = '$this->category', status = '$this->status', assignedto = '$this->assignedTo', completed = '$this->completed', dateresolved = '$this->dateResolved', vendor = '$this->vendor' where ticketID = '$this->id'";
+        $sql_update = "update tickets SET subject = '$this->subject', body = '$this->body', orderID = '$this->orderID', priority = '$this->priority', category = '$this->category', status = '$this->status', assignedto = '$this->assignedTo', completed = '$this->completed', dateresolved = '$this->dateResolved', vendor = '$this->vendor', reason = '$this->reason' where ticketID = '$this->id'";
         if ($dbc->query($sql_update)) {
 
             echo "<p> Ticket Successfully Updated </p>";
@@ -164,6 +169,27 @@ class Ticket {
             echo "<p> Could not run query </p>";
             return false;
         }
+    }
+    
+   // method takes a DB object and reason for closing ticket, and closes the ticket 
+    public function close($dbc, $reason){
+        
+        $completed = "YES";
+        $this->setReason($reason);
+        $this->setCompleted($completed);
+        
+        $sql_close = "update tickets SET completed = '$this->completed', reason =  '$this->reason'";
+        
+        if ($dbc->query($sql_close)) {
+
+            echo "<p> Ticket Successfully Closed </p>";
+            return true;
+        } else {
+
+            echo "<p> Could not run query </p>";
+            return false;
+        }
+        
     }
 
 // GETTERS AND SETTERS 
@@ -279,6 +305,14 @@ class Ticket {
 
     function setVendor($vendor) {
         $this->vendor = $vendor;
+    }
+    
+    function getReason() {
+        return $this->reason;
+    }
+
+    function setReason($reason) {
+        $this->reason = $reason;
     }
 }
 ?>

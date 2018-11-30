@@ -107,7 +107,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $dateSubmitted = date('m/d/Y h:i:s a');
         $status = "Waiting on Agent";
         $completed = "NO";
-        $dateResolved = NULL;
+        $dateResolved = "N/A";
+        $reason = NULL;
 
         // TODO - pull user from current session, dont always use mgillman
         $userID = "mgillman";
@@ -116,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // TODO -use objects to verify errors etc?
         if (!$problem) {
 
-            $ticket1 = Ticket::create($id, $subject, $body, $userID, $requestedBy, $dateSubmitted, $dateResolved, $orderID, $priority, $category, $status, $assignedTo, $completed, $vendor);
+            $ticket1 = Ticket::create($id, $subject, $body, $userID, $requestedBy, $dateSubmitted, $dateResolved, $orderID, $priority, $category, $status, $assignedTo, $completed, $vendor, $reason);
             $ticket1->add($dbc);
         }
     }

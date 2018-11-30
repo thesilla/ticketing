@@ -72,11 +72,51 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
         $datesubmitted = $ticket_initialize->getDateSubmitted();
         $dateresolved = NULL;
         $vendor = $_POST['vendor'];
+        $reason = NULL;
         
         // create NEW updated ticket object from user form.
-        $ticket = Ticket::create($ticketID, $subject, $details, $userID, $requestedby, $datesubmitted, $dateresolved, $orderid, $priority, $category, $status, $assignedto, $completed, $vendor);
+        $ticket = Ticket::create($ticketID, $subject, $details, $userID, $requestedby, $datesubmitted, $dateresolved, $orderid, $priority, $category, $status, $assignedto, $completed, $vendor, $reason);
         $ticket->update($dbc);
+        
     }
+    
+    if (!empty($_POST['submitCloseTicket'])) {
+        
+        if(!empty($_POST['reason'])){
+        
+
+        $reason = $_POST['reason'];
+        $completed = "YES";
+        
+        $ticket = Ticket::createFromID($_POST['tickno2'], $dbc);
+        $ticket->close($dbc, $reason);
+        
+            
+        } else {
+            
+       
+            // SHOW ERROR MESSAGE - FIELD IS EMPTY
+            
+        }
+        
+        
+        
+        
+    }
+    
+    
+   if (!empty($_POST['submitDeleteTicket'])){
+       
+       $ticket = Ticket::createFromID($_POST['tickno3'], $dbc);
+       $ticket->delete($dbc);
+       
+       // redirect back to tickets page since ticket details are from object and no longer valid
+       header('Location: ticketsController.php');
+       
+       
+   }
+    
+    
 }
 
 $id = $ticket->getId();
@@ -94,6 +134,8 @@ include("allDispositionsByTicketView.php");
 
 
 include('dispositionSubmitView.php');
+require('closeTicketViewModal.php');
+include('deleteTicketViewModal.php');
 
 echo "</div>";
 

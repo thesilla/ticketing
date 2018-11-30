@@ -1,3 +1,12 @@
+/*
+
+
+
+FOR NOW, THESE ARE IN SCRIPTS DIRECTLY ON PAGES, as there were issues with JS connectivity;
+Review this at very end of project and possibly put JS into single document
+
+
+
 function editTicket(){
     
    	var ticketContainer1 = document.getElementById('editTicket');
@@ -36,7 +45,6 @@ function closeAddDisposition(){
 }
 
 
-
 var addDispositionButton = document.getElementById('addDispositionButton');
 addDispositionButton.onclick = addDisposition;
 
@@ -50,3 +58,4 @@ closeEditTicketButton.onclick = closeEditTicket;
 var editTicketButton = document.getElementById('editTicketButton');
 editTicketButton.onclick = editTicket;
 
+*/
