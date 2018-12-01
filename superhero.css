@@ -10232,3 +10232,35 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
     
     
 }
+
+
+.hiddenDispoEdit{
+    
+    display: none;
+    position: fixed;
+    z-index: 1; /* Sit on top */
+    /*margin-top: 50px;  Location of the box */
+    left: 25%;
+    top: 25%;
+    width: 50%;
+
+    margin: auto;
+ 
+    
+    
+}
+
+.hiddenDispoEdit textarea{
+    
+ width: 100%;
+    
+}
+
+
+#editDispositionModalControls {
+    
+    float: right;
+    
+    
+    
+}

@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             $dispoID = 0;
             $userID = "mgillman"; // FIXME - MAKE THIS DYNAMIC IN THE FUTURE - PULL FROM SESSION
             $body = $_POST['disposition'];
-            $dateSubmitted = date('m/d/Y h:i:s a', time());
+            $dateSubmitted = date('m/d/Y h:i:s');
             $ticketID = $ticketno;
             $disposition = Disposition::create($dispoID, $userID, $body, $dateSubmitted, $ticketID);
             $disposition->add($dbc);
@@ -41,14 +41,45 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     if (!empty($_POST['editDispo'])) {
 
+
+
         if (!empty($_POST['dispono'])) {
 
             // store ticket number in variable for later
             $dispoID = $_POST['dispono'];
-            
-            $dispo = Disposition::createFromDispoID($dispoID, $dbc);
-            
         }
+
+        if (!empty($_POST['newDispoBody'])) {
+
+
+            $body = $_POST['newDispoBody'];
+        }
+
+        $dispo = Disposition::createFromDispoID($dispoID, $dbc);
+        $dispo->setBody($body);
+        $dispo->update($dbc);
+
+        // get ticket number to pass into header and re-direct back to ticket detail controller
+        $ticketno = $dispo->getTicketID();
+    }
+
+    // Delete disposition
+
+    if (!empty($_POST['deleteDispo'])) {
+
+
+        if (!empty($_POST['dispono'])) {
+
+            // store ticket number in variable for later
+            $dispoID = $_POST['dispono'];
+        }
+
+        $dispo = Disposition::createFromDispoID($dispoID, $dbc);
+        $dispo->delete($dbc);
+
+
+        // get ticket number to pass into header and re-direct back to ticket detail controller
+        $ticketno = $dispo->getTicketID();
     }
 }
 

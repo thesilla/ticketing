@@ -2,24 +2,31 @@
 // must define $ticket variable with Ticket object for this to work
 
 /*
-if($ticket->getCompleted()=="YES"){
-    
-    echo '<span class="badge badge-danger">CLOSED</span>';
-} else {
-    
-    echo '<span class="badge badge-success">OPEN</span>';
-    
-}
+  if($ticket->getCompleted()=="YES"){
 
-*/
+  echo '<span class="badge badge-danger">CLOSED</span>';
+  } else {
 
+  echo '<span class="badge badge-success">OPEN</span>';
+
+  }
+
+ */
 ?>
 
 
 <div><a href = "ticketsController.php">Return To Tickets</a></div>
 
-<div id="ticketHeader" style= <?php if($ticket->getCompleted()=="YES"){echo "\"" . "color: red;" . "\"";} else {echo "\"" . "color: green;" . "\"";}  ?>    >
-    <h3 id="title" class="display-4"> TICKET # <?php if($ticket->getCompleted()=="YES"){echo " " . $ticket->getId() . " - <strong>CLOSED<strong>";}else {echo " " . $ticket->getId() . " - <strong>OPEN<strong>";} ?>  </h3>
+<div id="ticketHeader" style= <?php if ($ticket->getCompleted() == "YES") {
+    echo "\"" . "color: red;" . "\"";
+} else {
+    echo "\"" . "color: green;" . "\"";
+} ?>    >
+    <h3 id="title" class="display-4"> TICKET # <?php if ($ticket->getCompleted() == "YES") {
+        echo " " . $ticket->getId() . " - <strong>CLOSED<strong>";
+    } else {
+        echo " " . $ticket->getId() . " - <strong>OPEN<strong>";
+    } ?>  </h3>
     <div id = "priorityAlert" class="<?php
     if ($ticket->getPriority() == 1) {
         echo "alert alert-dismissible alert-danger";
@@ -34,7 +41,20 @@ if($ticket->getCompleted()=="YES"){
 
 
 
-<?php echo "Priority " . $ticket->getPriority(); ?>
+        <?php
+        if ($ticket->getPriority() == 1) {
+            echo "Priority " . $ticket->getPriority();
+            echo " HIGH";
+        } else {
+            if ($ticket->getPriority() == 2) {
+                echo "Priority " . $ticket->getPriority();
+                echo " MEDIUM";
+            } else {
+                echo "Priority " . $ticket->getPriority();
+                echo " LOW";
+            }
+        }
+        ?>
 
 
     </div>
@@ -44,7 +64,23 @@ if($ticket->getCompleted()=="YES"){
 
 
     <button id="editTicketButton" type="button" class="btn btn-primary">Edit Ticket Details</button>
-    <button id ="closeTicketButton" type="button" class="btn btn-warning">Close Ticket</button>
+
+    <?php
+    if ($ticket->getCompleted() == "YES") {
+
+        echo '<button id ="reopenTicketButton" type="button" class="btn btn-warning">Re-Open Ticket</button>';
+    } else {
+
+        echo '<button id ="closeTicketButton" type="button" class="btn btn-warning">Close Ticket</button>';
+    }
+    ?>
+
+
+
+
+
+
+
     <button id="deleteTicketDisplayButton" type="button" class="btn btn-danger">Delete Ticket </button>
     <button id="addDispositionButton" class="btn btn-success"> Add Disposition </button>
 
@@ -56,7 +92,7 @@ if($ticket->getCompleted()=="YES"){
 
 <h4>Subject</h4><div id = "subject">  <?php echo $ticket->getSubject(); ?> </div>
 
-<!-- <div id="ticketNumber">Ticket Number: <?php //echo $ticket->getId();        ?> </div> -->
+<!-- <div id="ticketNumber">Ticket Number: <?php //echo $ticket->getId();         ?> </div> -->
 <h4>Submitted By</h4><div id="userID"><?php echo $ticket->getUserID(); ?> </div>
 <h4>Category</h4><div id = "category"> <?php echo $ticket->getCategory(); ?> </div>
 
