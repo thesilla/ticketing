@@ -144,8 +144,13 @@ class Ticket {
 //  method takes a DB object and DELETES the ticket to the database
     public function delete($dbc) {
 
+        //first delete all corresponding dispositions to satisfy SQL foreign key requirement
+        $sql_delete_dispos = "delete from dispositions where ticketID = '$this->id'";
+        
+        //delete ticket
         $sql_delete = "delete from tickets where ticketID = '$this->id'";
-        if ($dbc->query($sql_delete)) {
+        
+        if ($dbc->query($sql_delete_dispos) && $dbc->query($sql_delete)) {
 
             echo "<p> Ticket Successfully Deleted </p>";
             return true;
@@ -192,6 +197,30 @@ class Ticket {
         
     }
 
+    
+        public function open($dbc){
+        
+        $completed = "NO";
+        $reason ="";
+        $this->setReason($reason);
+        $this->setCompleted($completed);
+        
+        $sql_open = "update tickets SET completed = '$this->completed', reason =  '$this->reason', dateresolved = '' where ticketID = '$this->id'";
+        
+        if ($dbc->query($sql_open)) {
+
+            echo "<p> Ticket Successfully Re-opened </p>";
+            return true;
+        } else {
+
+            echo "<p> Could not run query </p>";
+            return false;
+        }
+        
+    }
+    
+    
+    
 // GETTERS AND SETTERS 
 
     public function getId() {

@@ -68,10 +68,11 @@
     <?php
     if ($ticket->getCompleted() == "YES") {
 
-        echo '<button id ="reopenTicketButton" type="button" class="btn btn-warning">Re-Open Ticket</button>';
+        echo '<button id ="closeTicketButton" type="button" class="btn btn-warning">Re-Open Ticket</button>';
     } else {
 
         echo '<button id ="closeTicketButton" type="button" class="btn btn-warning">Close Ticket</button>';
+        //reopenTicketButton
     }
     ?>
 

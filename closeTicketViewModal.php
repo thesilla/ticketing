@@ -23,6 +23,7 @@ $reasons = array("No Response From Customer", "No Response From Vendor", "Issue 
     <div>
         <form method ="post" action ="ticketDetailController.php">
             <div class="form-group">
+                
                 <h4>Please select reason for closing your ticket: </h4>
                 <br/>
                 <select class="form-control" id="ticketCloseReasons" name="reason">
@@ -39,6 +40,7 @@ $reasons = array("No Response From Customer", "No Response From Vendor", "Issue 
                 <input type="hidden" name ="tickno2" value =<?php echo "\"" . $ticket->getId() . "\""; ?>>
                 <br/>
                 <div id="closeDispositionControls">
+
                     <input type ="submit" value ="Close Ticket" class ="btn btn-warning" name ="submitCloseTicket">
                     <button type="button" id="cancelCloseTicket" class="btn btn-secondary"> Cancel </button>
                 </div>

@@ -7,7 +7,7 @@
 <?php
 
 //TODO - FORM SHOULD HANDLE POSSIBLE SITUATIONS WHEN FIELDS CONTAIN NOTHING???
-
+ob_start();
 
 // Connect to database
 
@@ -85,17 +85,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
     
     if (!empty($_POST['submitCloseTicket'])) {
         
-        if(!empty($_POST['reason'])){
+        $ticket = Ticket::createFromID($_POST['tickno2'], $dbc);
+        
+        
+        if(!empty($_POST['reason']) && $ticket->getCompleted()=="NO"){
         
 
         $reason = $_POST['reason'];
         $completed = "YES";
         
-        $ticket = Ticket::createFromID($_POST['tickno2'], $dbc);
+        
         $ticket->close($dbc, $reason);
         
             
         } else {
+            
+            
+            
+
+            $ticket = Ticket::createFromID($_POST['tickno2'], $dbc);
+            $ticket->open($dbc);
+            
+            
             
        
             // SHOW ERROR MESSAGE - FIELD IS EMPTY
