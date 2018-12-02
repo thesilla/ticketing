@@ -127,7 +127,7 @@ class Ticket {
         // FIXME: Can't sql files, '$this' is outside scope? Look into this
         //include('sql.inc.php');
         // for now (or permanently) directly include SQL here
-        $sql_addTix = "INSERT INTO `tickets` (`ticketID`, `subject`, `body`, `userID`,`requestedBy`, `datesubmitted`, `dateresolved`, `orderID`, `priority`, `category`, `status`,`assignedTo`,`completed`,`vendor`,`reason`) VALUES (NULL,'$this->subject','$this->body', '$this->userID','$this->requestedBy','$this->dateSubmitted',NULL,'$this->orderID', '$this->priority','$this->category','$this->status','$this->assignedTo','$this->completed','$this->vendor','$this->reason')";
+        $sql_addTix = "INSERT INTO `tickets` (`ticketID`, `subject`, `body`, `userID`,`requestedBy`, `datesubmitted`, `dateresolved`, `orderID`, `priority`, `category`, `status`,`assignedTo`,`completed`,`vendor`,`reason`) VALUES (NULL,'$this->subject','$this->body', '$this->userID','$this->requestedBy', NOW(),NULL,'$this->orderID', '$this->priority','$this->category','$this->status','$this->assignedTo','$this->completed','$this->vendor','$this->reason')";
 
         if ($dbc->query($sql_addTix)) {
 
@@ -178,7 +178,7 @@ class Ticket {
         $this->setReason($reason);
         $this->setCompleted($completed);
         
-        $sql_close = "update tickets SET completed = '$this->completed', reason =  '$this->reason'";
+        $sql_close = "update tickets SET completed = '$this->completed', reason =  '$this->reason', dateresolved = NOW() where ticketID = '$this->id'";
         
         if ($dbc->query($sql_close)) {
 
@@ -194,124 +194,124 @@ class Ticket {
 
 // GETTERS AND SETTERS 
 
-    function getId() {
+    public function getId() {
         return $this->id;
     }
 
-    function getSubject() {
+    public function getSubject() {
         return $this->subject;
     }
 
-    function getBody() {
+    public function getBody() {
         return $this->body;
     }
 
-    function getUserID() {
+    public function getUserID() {
         return $this->userID;
     }
 
-    function getDateSubmitted() {
+    public function getDateSubmitted() {
         return $this->dateSubmitted;
     }
 
-    function getDateResolved() {
+    public function getDateResolved() {
         return $this->dateResolved;
     }
 
-    function getOrderID() {
+    public function getOrderID() {
         return $this->orderID;
     }
 
-    function getCategory() {
+    public function getCategory() {
         return $this->category;
     }
 
-    function getPriority() {
+    public function getPriority() {
         return $this->priority;
     }
 
-    function getStatus() {
+    public function getStatus() {
         return $this->status;
     }
 
-    function setId($id) {
+    public function setId($id) {
         $this->id = $id;
     }
 
-    function setSubject($subject) {
+    public function setSubject($subject) {
         $this->subject = $subject;
     }
 
-    function setBody($body) {
+    public function setBody($body) {
         $this->body = $body;
     }
 
-    function setUserID($userID) {
+    public function setUserID($userID) {
         $this->userID = $userID;
     }
 
-    function setDateSubmitted($dateSubmitted) {
+    public function setDateSubmitted($dateSubmitted) {
         $this->dateSubmitted = $dateSubmitted;
     }
 
-    function setDateResolved($dateResolved) {
+    public function setDateResolved($dateResolved) {
         $this->dateResolved = $dateResolved;
     }
 
-    function setOrderID($orderID) {
+    public function setOrderID($orderID) {
         $this->orderID = $orderID;
     }
 
-    function setCategory($category) {
+    public function setCategory($category) {
         $this->category = $category;
     }
 
-    function setPriority($priority) {
+    public function setPriority($priority) {
         $this->priority = $priority;
     }
 
-    function setStatus($status) {
+    public function setStatus($status) {
         $this->status = $status;
     }
 
-    function getRequestedBy() {
+    public function getRequestedBy() {
         return $this->requestedBy;
     }
 
-    function getAssignedTo() {
+    public function getAssignedTo() {
         return $this->assignedTo;
     }
 
-    function getCompleted() {
+    public function getCompleted() {
         return $this->completed;
     }
 
-    function setRequestedBy($requestedBy) {
+    public function setRequestedBy($requestedBy) {
         $this->requestedBy = $requestedBy;
     }
 
-    function setAssignedTo($assignedTo) {
+    public function setAssignedTo($assignedTo) {
         $this->assignedTo = $assignedTo;
     }
 
-    function setCompleted($completed) {
+    public function setCompleted($completed) {
         $this->completed = $completed;
     }
 
     
-    function getVendor() {
+    public function getVendor() {
         return $this->vendor;
     }
 
-    function setVendor($vendor) {
+    public function setVendor($vendor) {
         $this->vendor = $vendor;
     }
     
-    function getReason() {
+    public function getReason() {
         return $this->reason;
     }
 
-    function setReason($reason) {
+    public function setReason($reason) {
         $this->reason = $reason;
     }
 }

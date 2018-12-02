@@ -121,7 +121,9 @@ class Disposition {
 
     public function add($dbc) {
 
-        $sql_addDispo = "INSERT INTO `dispositions` (`dispoID`, `userID`, `body`, `datesubmitted`, `ticketID`) VALUES (NULL,'$this->userID', '$this->body','$this->dateSubmitted','$this->ticketID')";
+   
+        
+        $sql_addDispo = "INSERT INTO `dispositions` (`dispoID`, `userID`, `body`, `datesubmitted`, `ticketID`) VALUES (NULL,'$this->userID', '$this->body', NOW(),'$this->ticketID')";
 
         if ($dbc->query($sql_addDispo)) {
 
@@ -153,11 +155,12 @@ class Disposition {
 //  method takes a DB object and edits the disposition and updates the database (IF OBJECT -> DISPOSITION ID ACTUALLY EXISTS)
     public function update($dbc) {
 
-        $t = time();
-        $timestamp = date("Y-m-d", $t);
-        $this->setDateSubmitted($timestamp);
+        // --Use SQL NOW() function instead
+        //$t = time();
+        //$timestamp = date("Y-m-d", $t);
+        //$this->setDateSubmitted($timestamp);
 
-        $sql_update = "update dispositions SET body = '$this->body', datesubmitted = '$this->dateSubmitted' where dispoID = '$this->dispoID'";
+        $sql_update = "update dispositions SET body = '$this->body', datesubmitted = NOW() where dispoID = '$this->dispoID'";
 
         if ($dbc->query($sql_update)) {
 

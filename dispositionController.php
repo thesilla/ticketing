@@ -32,7 +32,13 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             $dispoID = 0;
             $userID = "mgillman"; // FIXME - MAKE THIS DYNAMIC IN THE FUTURE - PULL FROM SESSION
             $body = $_POST['disposition'];
-            $dateSubmitted = date('m/d/Y h:i:s');
+            
+            // --Technically time doesn't matter, submitted on SQL/server side
+            //$dateSubmitted = date('m-d-Y h:i:s');
+            //$t = time();
+            //$dateSubmitted = date("Y-m-d", $t);
+            $dateSubmitted ="";
+            
             $ticketID = $ticketno;
             $disposition = Disposition::create($dispoID, $userID, $body, $dateSubmitted, $ticketID);
             $disposition->add($dbc);

@@ -104,7 +104,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $id = 0;
         //date_default_timezone_set('Australia/Melbourne');
-        $dateSubmitted = date('m/d/Y h:i:s a');
+        
+        // Time doesn't really matter, timestamp added on SQL/server side
+        //$t = time();
+        //$dateSubmitted = date("Y-m-d", $t);
+        $dateSubmitted = "";
         $status = "Waiting on Agent";
         $completed = "NO";
         $dateResolved = "N/A";
