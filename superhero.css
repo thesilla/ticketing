@@ -10167,6 +10167,15 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
     
 }
 
+.details-row{
+    display: flex;
+    //border: 1pt solid black;
+    flex-direction: row;
+    justify content: space-between;
+    
+    
+}
+
 # ticketCloseReasons {
     
     

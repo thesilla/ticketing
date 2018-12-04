@@ -4,5 +4,30 @@
 Will use for user authentication, logins, etc.
  */
 class UserManager {
-    //put your code here
+
+    
+   // Constructor: create new UserManager object 
+    function __construct() {
+        
+    } 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
