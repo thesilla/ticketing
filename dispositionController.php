@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             
             $ticketID = $ticketno;
             $disposition = Disposition::create($dispoID, $userID, $body, $dateSubmitted, $ticketID);
-            $disposition->add($dbc);
+            $disposition->add();
         }
     }
 
@@ -61,9 +61,9 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             $body = $_POST['newDispoBody'];
         }
 
-        $dispo = Disposition::createFromDispoID($dispoID, $dbc);
+        $dispo = Disposition::createFromDispoID($dispoID);
         $dispo->setBody($body);
-        $dispo->update($dbc);
+        $dispo->update();
 
         // get ticket number to pass into header and re-direct back to ticket detail controller
         $ticketno = $dispo->getTicketID();
@@ -80,8 +80,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             $dispoID = $_POST['dispono'];
         }
 
-        $dispo = Disposition::createFromDispoID($dispoID, $dbc);
-        $dispo->delete($dbc);
+        $dispo = Disposition::createFromDispoID($dispoID);
+        $dispo->delete();
 
 
         // get ticket number to pass into header and re-direct back to ticket detail controller

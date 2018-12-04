@@ -17,7 +17,7 @@ require('header1.php');
 // PROBABLY DO THIS --> 2. Make views into functions that include the HTML view files and take input and convert inputs to correct variables, etc AKA make another layer <--
 
 
-require('db_connect.php');
+//require('db_connect.php');
 
 // import class files into controller
 include('Ticket.php');
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
     // when accessing page from all tickets view, GET is used
     if (!empty($_GET['ticketno'])) {
 
-        $ticket = Ticket::createFromID($_GET['ticketno'], $dbc);
+        $ticket = Ticket::createFromID($_GET['ticketno']);
     }
     // when submitting edit ticket form, post is used
     if (!empty($_POST['ticketno'])) {
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
 
 
         // create initial ticket object that will pull current ticket from db as is
-        $ticket_initialize = Ticket::createFromID($_POST['ticketno'], $dbc);
+        $ticket_initialize = Ticket::createFromID($_POST['ticketno']);
         
         // define variables for updated ticket
         // non-editable fields will be pulled from $ticket_initialize
@@ -79,13 +79,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
         
         // create NEW updated ticket object from user form.
         $ticket = Ticket::create($ticketID, $subject, $details, $userID, $requestedby, $datesubmitted, $dateresolved, $orderid, $priority, $category, $status, $assignedto, $completed, $vendor, $reason);
-        $ticket->update($dbc);
+        $ticket->update();
         
     }
     
     if (!empty($_POST['submitCloseTicket'])) {
         
-        $ticket = Ticket::createFromID($_POST['tickno2'], $dbc);
+        $ticket = Ticket::createFromID($_POST['tickno2']);
         
         
         if(!empty($_POST['reason']) && $ticket->getCompleted()=="NO"){
@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
         $completed = "YES";
         
         
-        $ticket->close($dbc, $reason);
+        $ticket->close($reason);
         
             
         } else {
@@ -103,8 +103,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
             
             
 
-            $ticket = Ticket::createFromID($_POST['tickno2'], $dbc);
-            $ticket->open($dbc);
+            $ticket = Ticket::createFromID($_POST['tickno2']);
+            $ticket->open();
             
             
             
@@ -121,8 +121,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
     
    if (!empty($_POST['submitDeleteTicket'])){
        
-       $ticket = Ticket::createFromID($_POST['tickno3'], $dbc);
-       $ticket->delete($dbc);
+       $ticket = Ticket::createFromID($_POST['tickno3']);
+       $ticket->delete();
        
        // redirect back to tickets page since ticket details are from object and no longer valid
        header('Location: ticketsController.php');
@@ -134,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
 }
 
 $id = $ticket->getId();
-$allDispositions = Disposition::getDispositionsByTicket($id, $dbc);
+$allDispositions = Disposition::getDispositionsByTicket($id);
 // generate views
 //$ticket = Ticket::createFromID($_GET['ticketno'], $dbc);
 echo "<br/>";

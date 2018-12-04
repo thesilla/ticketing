@@ -1,11 +1,10 @@
 <?php
+
 // TODO: Add Vendor field (option, NULL)
 // - edit all methods and static constructors - DONE
 // - alter database to include field - DONE
 // - edit views and controller calls
 // - get list of vendors to show in drop-down
-
-
 // Tickets Model
 class Ticket {
 
@@ -23,13 +22,9 @@ class Ticket {
     private $assignedTo;
     private $completed;
     private $dateResolved;
-
     private $vendor;
     private $reason;
-
-  
-
-
+    private $dbc;
 
 // Constructor: create new Ticket object (template)
     public function __construct() {
@@ -60,8 +55,12 @@ class Ticket {
 
     // Constructor which will instantiate a new object pulled from database given a Ticket ID #
     // - Takes Ticket ID # and a Database Connection object
-    public static function createFromID($id, $dbc) {
+    public static function createFromID($id) {
 
+        // set static database connection
+        $dbc = Disposition::getStaticConnection();
+        
+        
         $sql_getTicketFromDB = "SELECT * FROM tickets where ticketID = '$id'";
 
         if ($result = $dbc->query($sql_getTicketFromDB)) {
@@ -91,13 +90,64 @@ class Ticket {
         }
     }
 
+    // get database connection
+    public function getConnection() {
+
+        try {
+
+
+            $this->dbc = new PDO("mysql:host=localhost;dbname=ticketing", "root", "");
+
+            $this->dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            //echo "<div> Sucessfully connected to Database </div>";
+        } catch (PDOException $e) {
+            $output = 'Unable to connect to the database server.';
+
+            echo "<div style='color:red;'>" . $e->getMessage() . "</div>";
+
+            //include 'output.html.php';
+            exit();
+        }
+    }
+    
+    
+        public static function getStaticConnection(){
+        
+                // set database connection
+        try {
+
+
+            $dbc = new PDO("mysql:host=localhost;dbname=ticketing", "root", "");
+
+            $dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            
+            return $dbc;
+
+            //echo "<div> Sucessfully connected to Database </div>";
+        } catch (PDOException $e) {
+            $output = 'Unable to connect to the database server.';
+
+            echo "<div style='color:red;'>" . $e->getMessage() . "</div>";
+
+            //include 'output.html.php';
+            exit();
+        }
+        
+    }
+    
+    
+
 // static method pulling all tickets - DB/SQL object argument
 // return an array of Ticket objects from the database, to keep all db logic in model side
-    public static function getTickets($dbc) {
+    public static function getTickets() {
 
-        // FIXME: Can't sql files, '$this' is outside scope? Look into thi
-        //include('sql.inc.php');
-        // for now (or permanently) directly include SQL here
+        
+        
+        // set static database connection
+        $dbc = Disposition::getStaticConnection();
+        
+
         $sql_showTix = "SELECT * FROM tickets";
 
 
@@ -108,7 +158,7 @@ class Ticket {
 
             while ($row = $result->fetch()) {
 
-                $tickets[] = Ticket::create($row['ticketID'], $row['subject'], $row['body'], $row['userID'], $row['requestedby'], $row['datesubmitted'], $row['dateresolved'], $row['orderID'], $row['priority'], $row['category'], $row['status'], $row['assignedto'], $row['completed'],$row['vendor'],$row['reason']);
+                $tickets[] = Ticket::create($row['ticketID'], $row['subject'], $row['body'], $row['userID'], $row['requestedby'], $row['datesubmitted'], $row['dateresolved'], $row['orderID'], $row['priority'], $row['category'], $row['status'], $row['assignedto'], $row['completed'], $row['vendor'], $row['reason']);
 
                 // TODO delete this, for testing only
                 //print_r($tickets);
@@ -122,14 +172,14 @@ class Ticket {
     }
 
 //  method takes a DB object and ADDS the ticket to the database
-    public function add($dbc) {
+    public function add() {
 
-        // FIXME: Can't sql files, '$this' is outside scope? Look into this
-        //include('sql.inc.php');
-        // for now (or permanently) directly include SQL here
+        // get database connection
+        $this->getConnection();
+
         $sql_addTix = "INSERT INTO `tickets` (`ticketID`, `subject`, `body`, `userID`,`requestedBy`, `datesubmitted`, `dateresolved`, `orderID`, `priority`, `category`, `status`,`assignedTo`,`completed`,`vendor`,`reason`) VALUES (NULL,'$this->subject','$this->body', '$this->userID','$this->requestedBy', NOW(),NULL,'$this->orderID', '$this->priority','$this->category','$this->status','$this->assignedTo','$this->completed','$this->vendor','$this->reason')";
 
-        if ($dbc->query($sql_addTix)) {
+        if ($this->dbc->query($sql_addTix)) {
 
             //TODO - DO SOMETHING MORE ELABORATE THAT INDICATES SUCESSFUL SUBMISSION FOR NOW JUST PRINT SUCCESS
             echo "<p> Ticket Successfully Submited </p>";
@@ -142,15 +192,17 @@ class Ticket {
     }
 
 //  method takes a DB object and DELETES the ticket to the database
-    public function delete($dbc) {
-
+    public function delete() {
+        
+        // get database connection
+        $this->getConnection();
         //first delete all corresponding dispositions to satisfy SQL foreign key requirement
         $sql_delete_dispos = "delete from dispositions where ticketID = '$this->id'";
-        
+
         //delete ticket
         $sql_delete = "delete from tickets where ticketID = '$this->id'";
-        
-        if ($dbc->query($sql_delete_dispos) && $dbc->query($sql_delete)) {
+
+        if ($this->dbc->query($sql_delete_dispos) && $dbc->query($sql_delete)) {
 
             echo "<p> Ticket Successfully Deleted </p>";
             return true;
@@ -161,11 +213,14 @@ class Ticket {
         }
     }
 
-//  method takes a DB object and edits the ticket and updates the database (IF OBJECT -> TICKET ID# ACTUALLY EXISTS)
-    public function update($dbc) {
+//  method edits the ticket and updates the database (IF OBJECT -> TICKET ID# ACTUALLY EXISTS)
+    public function update() {
 
+        // get database connection
+        $this->getConnection();
+        
         $sql_update = "update tickets SET subject = '$this->subject', body = '$this->body', orderID = '$this->orderID', priority = '$this->priority', category = '$this->category', status = '$this->status', assignedto = '$this->assignedTo', completed = '$this->completed', dateresolved = '$this->dateResolved', vendor = '$this->vendor', reason = '$this->reason' where ticketID = '$this->id'";
-        if ($dbc->query($sql_update)) {
+        if ($this->dbc->query($sql_update)) {
 
             echo "<p> Ticket Successfully Updated </p>";
             return true;
@@ -175,17 +230,20 @@ class Ticket {
             return false;
         }
     }
-    
-   // method takes a DB object and reason for closing ticket, and closes the ticket 
-    public function close($dbc, $reason){
+
+    // method takes reason for closing ticket, and closes the ticket 
+    public function close($reason) {
+
+        // get database connection
+        $this->getConnection();
         
         $completed = "YES";
         $this->setReason($reason);
         $this->setCompleted($completed);
-        
+
         $sql_close = "update tickets SET completed = '$this->completed', reason =  '$this->reason', dateresolved = NOW() where ticketID = '$this->id'";
-        
-        if ($dbc->query($sql_close)) {
+
+        if ($this->dbc->query($sql_close)) {
 
             echo "<p> Ticket Successfully Closed </p>";
             return true;
@@ -194,20 +252,22 @@ class Ticket {
             echo "<p> Could not run query </p>";
             return false;
         }
-        
     }
 
-    
-        public function open($dbc){
+    //re-open closed ticket
+    public function open() {
+
+        // get database connection
+        $this->getConnection();
         
         $completed = "NO";
-        $reason ="";
+        $reason = "";
         $this->setReason($reason);
         $this->setCompleted($completed);
-        
+
         $sql_open = "update tickets SET completed = '$this->completed', reason =  '$this->reason', dateresolved = '' where ticketID = '$this->id'";
-        
-        if ($dbc->query($sql_open)) {
+
+        if ($this->dbc->query($sql_open)) {
 
             echo "<p> Ticket Successfully Re-opened </p>";
             return true;
@@ -216,11 +276,8 @@ class Ticket {
             echo "<p> Could not run query </p>";
             return false;
         }
-        
     }
-    
-    
-    
+
 // GETTERS AND SETTERS 
 
     public function getId() {
@@ -327,7 +384,6 @@ class Ticket {
         $this->completed = $completed;
     }
 
-    
     public function getVendor() {
         return $this->vendor;
     }
@@ -335,7 +391,7 @@ class Ticket {
     public function setVendor($vendor) {
         $this->vendor = $vendor;
     }
-    
+
     public function getReason() {
         return $this->reason;
     }
@@ -343,6 +399,7 @@ class Ticket {
     public function setReason($reason) {
         $this->reason = $reason;
     }
+
 }
 ?>
 

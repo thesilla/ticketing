@@ -11,6 +11,8 @@ class User {
     private $title;
     private $password;
     
+    // database connection
+    private $dbc;
  
 // Constructor: create new Disposition object (template)
     function __construct() {
@@ -33,8 +35,12 @@ class User {
 
     // Constructor which will instantiate a new object pulled from database given a User ID #
     // - Takes User ID # and a Database Connection object
-    public static function createFromID($userID, $dbc) {
+    public static function createFromID($userID) {
 
+        // set static database connection
+        $dbc = Disposition::getStaticConnection();
+        
+        
         $sql_getUserFromDB = "SELECT * FROM users where userID = '$userID'";
 
         if ($result = $dbc->query($sql_getUserFromDB)) {
@@ -53,11 +59,62 @@ class User {
             echo "<p> Could not run query </p>";
         }
     }
+    
+    
+        public function getConnection() {
+
+        try {
+
+
+            $this->dbc = new PDO("mysql:host=localhost;dbname=ticketing", "root", "");
+
+            $this->dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            //echo "<div> Sucessfully connected to Database </div>";
+        } catch (PDOException $e) {
+            $output = 'Unable to connect to the database server.';
+
+            echo "<div style='color:red;'>" . $e->getMessage() . "</div>";
+
+            //include 'output.html.php';
+            exit();
+        }
+    }
+    
+    
+    
+        public static function getStaticConnection(){
+        
+                // set database connection
+        try {
+
+
+            $dbc = new PDO("mysql:host=localhost;dbname=ticketing", "root", "");
+
+            $dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            
+            return $dbc;
+
+            //echo "<div> Sucessfully connected to Database </div>";
+        } catch (PDOException $e) {
+            $output = 'Unable to connect to the database server.';
+
+            echo "<div style='color:red;'>" . $e->getMessage() . "</div>";
+
+            //include 'output.html.php';
+            exit();
+        }
+        
+    }
+    
 
     // static method pulling all tickets - DB/SQL object argument
     // return an array of USER objects from the database, to keep all db logic in model side
-    public static function getUsers($dbc) {
+    public static function getUsers() {
 
+        
+        // set static database connection
+        $dbc = Disposition::getStaticConnection();
 
         // for now (or permanently) directly include SQL here
         $sql_showUsers = "SELECT * FROM users";
@@ -79,11 +136,16 @@ class User {
         }
     }
 
-    public function add($dbc) {
+    public function add() {
 
+        
+        // get database connection
+        $this->getConnection();
+        
+        
         $sql_addUser = "INSERT INTO `users` (`userID`, `firstname`, `lastname`, `email`,`title`, `password`) VALUES ('$this->userID','$this->firstName', '$this->lastName','$this->email','$this->title','$this->password')";
 
-        if ($dbc->query($sql_addUser)) {
+        if ($this->dbc->query($sql_addUser)) {
 
             //TODO - DO SOMETHING MORE ELABORATE THAT INDICATES SUCESSFUL SUBMISSION FOR NOW JUST PRINT SUCCESS
             echo "<p> User Successfully Added </p>";
@@ -96,11 +158,13 @@ class User {
     }
 
     //  method takes a DB object and DELETES the user from the database
-    public function delete($dbc) {
+    public function delete() {
 
-
+        // get database connection
+        $this->getConnection();
+        
         $sql_delete = "delete from users where userID = '$this->userID'";
-        if ($dbc->query($sql_delete)) {
+        if ($this->dbc->query($sql_delete)) {
 
             //TODO - DO SOMETHING MORE ELABORATE THAT INDICATES SUCESSFUL SUBMISSION FOR NOW JUST PRINT SUCCESS
             echo "<p> User Successfully Deleted </p>";
@@ -113,10 +177,14 @@ class User {
     }
 
 //  method takes a DB object and edits the user and updates the database (IF OBJECT -> USER ID ACTUALLY EXISTS)
-    public function update($dbc) {
+    public function update() {
 
+        // get database connection
+        $this->getConnection();
+        
+        
         $sql_update = "update users SET firstname = '$this->firstName', lastname = '$this->lastName', email = '$this->email', title = '$this->title', password = '$this->password' where userID = '$this->userID'";
-        if ($dbc->query($sql_update)) {
+        if ($this->dbc->query($sql_update)) {
 
             echo "<p> User Successfully Updated </p>";
             return true;

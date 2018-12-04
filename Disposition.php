@@ -7,6 +7,8 @@ class Disposition {
     private $body;
     private $dateSubmitted;
     private $ticketID;
+    
+    private $dbc;
 
     // Constructor: create new Disposition object (template)
     public function __construct() {
@@ -27,8 +29,28 @@ class Disposition {
     }
 
     // Constructor which will instantiate a new object pulled from database given a Ticket ID #
-    // - Takes Ticket ID # and a Database Connection object
-    public static function createFromDispoID($dispoID, $dbc) {
+    // - Takes Dispo ID # object
+    public static function createFromDispoID($dispoID) {
+
+        
+        // set database connection
+        try {
+
+
+            $dbc = new PDO("mysql:host=localhost;dbname=ticketing", "root", "");
+
+            $dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            //echo "<div> Sucessfully connected to Database </div>";
+        } catch (PDOException $e) {
+            $output = 'Unable to connect to the database server.';
+
+            echo "<div style='color:red;'>" . $e->getMessage() . "</div>";
+
+            //include 'output.html.php';
+            exit();
+        }
+        
 
         $sql_getDispoFromDB = "SELECT * FROM dispositions where dispoID = '$dispoID'";
 
@@ -50,11 +72,61 @@ class Disposition {
         }
     }
 
+    // get database connection
+    public function getConnection() {
+
+        try {
+
+
+            $this->dbc = new PDO("mysql:host=localhost;dbname=ticketing", "root", "");
+
+            $this->dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            //echo "<div> Sucessfully connected to Database </div>";
+        } catch (PDOException $e) {
+            $output = 'Unable to connect to the database server.';
+
+            echo "<div style='color:red;'>" . $e->getMessage() . "</div>";
+
+            //include 'output.html.php';
+            exit();
+        }
+    }
+    
+    
+    public static function getStaticConnection(){
+        
+                // set database connection
+        try {
+
+
+            $dbc = new PDO("mysql:host=localhost;dbname=ticketing", "root", "");
+
+            $dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            
+            return $dbc;
+
+            //echo "<div> Sucessfully connected to Database </div>";
+        } catch (PDOException $e) {
+            $output = 'Unable to connect to the database server.';
+
+            echo "<div style='color:red;'>" . $e->getMessage() . "</div>";
+
+            //include 'output.html.php';
+            exit();
+        }
+        
+    }
+
     // static method pulling all tickets - DB/SQL object argument
     // return an array of Disposition objects from the database, to keep all db logic in model side
-    public static function getDispositions($dbc) {
+    public static function getDispositions() {
 
+        // set static database connection
+        $dbc = Disposition::getStaticConnection();
+        
 
+        
         // for now (or permanently) directly include SQL here
         $sql_showDispos = "SELECT * FROM dispositions";
 
@@ -75,10 +147,14 @@ class Disposition {
         }
     }
 
-    public static function getDispositionsByTicket($ticketID, $dbc) {
+    public static function getDispositionsByTicket($ticketID) {
+
+        
+
+        // set static database connection
+        $dbc = Disposition::getStaticConnection();
 
 
-        // for now (or permanently) directly include SQL here
         $sql_showDispos = "SELECT * FROM dispositions where ticketID = '$ticketID'";
 
 
@@ -98,34 +174,35 @@ class Disposition {
             echo "<p> Could not run query </p>";
         }
     }
-    
-        public static function deleteDispositionsByTicket($ticketID, $dbc) {
 
+    public static function deleteDispositionsByTicket($ticketID) {
 
-        // for now (or permanently) directly include SQL here
+        
+        // set static database connection
+        $dbc = Disposition::getStaticConnection();
+        
+
+ 
         $sql_deleteDispos = "DELETE FROM dispositions where ticketID = '$ticketID'";
-        
-        
 
 
         if ($result = $dbc->query($sql_deleteDispos)) {
-            
-           echo "<p> Dispositions Successfully Deleted </p>";
 
-            } else {
+            echo "<p> Dispositions Successfully Deleted </p>";
+        } else {
 
             echo "<p> Could not run query </p>";
         }
     }
-    
 
-    public function add($dbc) {
+    public function add() {
 
-   
-        
+        // get database connection
+        $this->getConnection();
+
         $sql_addDispo = "INSERT INTO `dispositions` (`dispoID`, `userID`, `body`, `datesubmitted`, `ticketID`) VALUES (NULL,'$this->userID', '$this->body', NOW(),'$this->ticketID')";
 
-        if ($dbc->query($sql_addDispo)) {
+        if ($this->dbc->query($sql_addDispo)) {
 
             //TODO - DO SOMETHING MORE ELABORATE THAT INDICATES SUCESSFUL SUBMISSION FOR NOW JUST PRINT SUCCESS
             echo "<p> Disposition Successfully Added </p>";
@@ -138,10 +215,15 @@ class Disposition {
     }
 
     //  method takes a DB object and DELETES the ticket to the database
-    public function delete($dbc) {
+    public function delete() {
 
+        // get database connection
+        $this->getConnection();
+        
+        
+        
         $sql_delete = "delete from dispositions where dispoID = '$this->dispoID'";
-        if ($dbc->query($sql_delete)) {
+        if ($this->dbc->query($sql_delete)) {
 
             echo "<p> Disposition Successfully Deleted </p>";
             return true;
@@ -153,16 +235,15 @@ class Disposition {
     }
 
 //  method takes a DB object and edits the disposition and updates the database (IF OBJECT -> DISPOSITION ID ACTUALLY EXISTS)
-    public function update($dbc) {
+    public function update() {
 
-        // --Use SQL NOW() function instead
-        //$t = time();
-        //$timestamp = date("Y-m-d", $t);
-        //$this->setDateSubmitted($timestamp);
-
+        // get database connection
+        $this->getConnection();
+        
+        
         $sql_update = "update dispositions SET body = '$this->body', datesubmitted = NOW() where dispoID = '$this->dispoID'";
 
-        if ($dbc->query($sql_update)) {
+        if ($this->dbc->query($sql_update)) {
 
             echo "<p> Disposition Successfully Updated </p>";
             return true;

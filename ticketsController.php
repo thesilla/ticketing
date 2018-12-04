@@ -1,7 +1,7 @@
 <?php
 
 // Connect to database
-require('db_connect.php');
+//require('db_connect.php');
 
 // import class files into controller
 include('Ticket.php');
@@ -25,9 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $tempid = $_POST['ticketno'];
 
-        Disposition::deleteDispositionsByTicket($tempid, $dbc);
-        $tempTicket = Ticket::createFromID($tempid, $dbc);
-        $tempTicket->delete($dbc);
+        Disposition::deleteDispositionsByTicket($tempid);
+        $tempTicket = Ticket::createFromID($tempid);
+        $tempTicket->delete();
         echo "<div> Ticket " . $tempid . " deleted </div>";
     }
 
@@ -122,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!$problem) {
 
             $ticket1 = Ticket::create($id, $subject, $body, $userID, $requestedBy, $dateSubmitted, $dateResolved, $orderID, $priority, $category, $status, $assignedTo, $completed, $vendor, $reason);
-            $ticket1->add($dbc);
+            $ticket1->add();
         }
     }
 }
@@ -138,9 +138,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // show all tickets
 // return array of all ticket objects from database
-$allTickets = Ticket::getTickets($dbc);
+$allTickets = Ticket::getTickets();
 
-$allusers = User::getUsers($dbc);
+$allusers = User::getUsers();
 
 include("ticketSubmitView.php");
 include("ticketsView.php");
