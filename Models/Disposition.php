@@ -47,7 +47,7 @@ class Disposition {
 
             echo "<div style='color:red;'>" . $e->getMessage() . "</div>";
 
-            //include 'output.html.php';
+            
             exit();
         }
         
@@ -88,7 +88,7 @@ class Disposition {
 
             echo "<div style='color:red;'>" . $e->getMessage() . "</div>";
 
-            //include 'output.html.php';
+            
             exit();
         }
     }
@@ -112,7 +112,7 @@ class Disposition {
 
             echo "<div style='color:red;'>" . $e->getMessage() . "</div>";
 
-            //include 'output.html.php';
+           
             exit();
         }
         

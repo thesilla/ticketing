@@ -1,7 +1,7 @@
 
 
 <div id="submitTicket" class="jumbotron">
-    
+
     <form action ="ticketsController.php" method ="post" id="submitTicketForm" class = "form">
         <legend>Create New Ticket</legend>
         <hr class="my-4">
@@ -14,19 +14,69 @@
             <textarea class="form-control"rows="5" name ="details" id="submitTicketDetails" form="submitTicketForm"></textarea>
         </div>
 
+
+
+
+
+
         <div class="form-group">
             <label for="requestedby">Requested By:</label>
-            <input class="form-control" type ="text" name ="requestedby" placeholder ="Who originally requested this inquiry?">
+
+            <select class="custom-select" name="requestedby">
+
+                <?php
+                // pull all employees and display
+                // $allusers is in ticketsController.php
+
+                //$allEmployees = Employee::getEmployees();
+
+                foreach ($employees as $employee) {
+
+                    echo '<option value=' . $employee->getEmail() . '>' . $employee->getFirstName() . " " .   $employee->getLastName() . " (" .  $employee->getEmail() . ")" . '</option>';
+                }
+                ?>
+            </select>
+
+
         </div>
+
+
+
+
+
+
         <div>Order ID: </div>
         <div><input class="form-control" type ="text" name ="orderid" placeholder ="(If applicable)"></div>
-        
+
         <div>Vendor: </div>
         <div><input class="form-control" type ="text" name ="vendor" placeholder ="(If applicable)"></div>
 
         <!-- IN THE FUTURE, this should be picked from an editable dynamic list of all possible categories -->
         <div>Category:</div>
-        <div><input class="form-control" type ="text" name ="category" placeholder ="What category does this issue fall under?"></div>
+
+        <select class="custom-select" name="category">
+
+            <?php
+            $categories = [
+                "Need ETA",
+                "Pricing Issue",
+                "Build Items",
+                "Expedite Needed",
+                "Labels Needed",
+                "Shipping Issue",
+                "Product Broken",
+                "Research Required",
+                "Other Misc",
+            ];
+            foreach ($categories as $category) {
+
+                echo '<option value=' . $category . '>' . $category . '</option>';
+            }
+            ?>
+        </select>
+
+
+
 
 
         <fieldset class="form-group">
@@ -68,12 +118,12 @@
                 ?>
             </select>
         </div>
-      
+
         <br/>
         <!-- submit button -->
         <input  id  ="submitTicketButton" class="btn btn-primary btn-lg btn-block" type ="submit" value ="Submit Ticket" name ="submitticketbutton">
         <br/>
         <div id ="submitTicketCancel"><button class="btn btn-secondary" id="closeSubmitTicketButton"> CANCEL </button></div>
-        
+
     </form>
 </div>

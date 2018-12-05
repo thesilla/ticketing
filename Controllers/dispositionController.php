@@ -1,12 +1,12 @@
 <?php
 
 //require('header1');
-require('db_connect.php');
+
 
 // import class files into controller
-include('Ticket.php');
-include('Disposition.php');
-include('User.php');
+include('../Models/Ticket.php');
+include('../Models/Disposition.php');
+include('../Models/User.php');
 //require('footer1');
 // TODO - Disposition submit logic here
 //  - Then re route back to Ticket Detail View

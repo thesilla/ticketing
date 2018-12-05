@@ -38,7 +38,7 @@ class User {
     public static function createFromID($userID) {
 
         // set static database connection
-        $dbc = Disposition::getStaticConnection();
+        $dbc = User::getStaticConnection();
         
         
         $sql_getUserFromDB = "SELECT * FROM users where userID = '$userID'";
@@ -76,7 +76,7 @@ class User {
 
             echo "<div style='color:red;'>" . $e->getMessage() . "</div>";
 
-            //include 'output.html.php';
+ 
             exit();
         }
     }
@@ -101,7 +101,7 @@ class User {
 
             echo "<div style='color:red;'>" . $e->getMessage() . "</div>";
 
-            //include 'output.html.php';
+
             exit();
         }
         
@@ -114,7 +114,7 @@ class User {
 
         
         // set static database connection
-        $dbc = Disposition::getStaticConnection();
+        $dbc = User::getStaticConnection();
 
         // for now (or permanently) directly include SQL here
         $sql_showUsers = "SELECT * FROM users";

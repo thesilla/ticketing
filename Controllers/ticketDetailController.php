@@ -11,7 +11,7 @@ ob_start();
 
 // Connect to database
 
-require('header1.php');
+require '../Content/header1.php';
 // TODO: - do one of the following:
 // 1. Create functions thats translate view input variables OR
 // PROBABLY DO THIS --> 2. Make views into functions that include the HTML view files and take input and convert inputs to correct variables, etc AKA make another layer <--
@@ -20,9 +20,9 @@ require('header1.php');
 //require('db_connect.php');
 
 // import class files into controller
-include('Ticket.php');
-include('Disposition.php');
-include('User.php');
+include('../Models/Ticket.php');
+include('../Models/Disposition.php');
+include('../Models/User.php');
 
 // generate Ticket object
 // if any form submitted at all:
@@ -140,17 +140,18 @@ $allDispositions = Disposition::getDispositionsByTicket($id);
 echo "<br/>";
 echo '<div id="ticket-display" class="jumbotron">';
 
-include("ticketDetailView.php");
-include("ticketEditView.php");
+include("../Views/ticketDetailView.php");
+include("../Views/ticketEditView.php");
 
 
-include("allDispositionsByTicketView.php");
+include("../Views/allDispositionsByTicketView.php");
 
 
-include('dispositionSubmitView.php');
-require('closeTicketViewModal.php');
-include('deleteTicketViewModal.php');
+include('../Views/dispositionSubmitView.php');
+require('../Views/closeTicketViewModal.php');
+include('../Views/deleteTicketViewModal.php');
 
+// close master container div
 echo "</div>";
 
 
@@ -160,5 +161,5 @@ echo "</div>";
 
 
 
-require('footer1.php');
+require('../Content/footer1.php');
 ?>

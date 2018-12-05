@@ -1,8 +1,7 @@
 <?php
 
 // TODO: Add Vendor field (option, NULL)
-// - edit all methods and static constructors - DONE
-// - alter database to include field - DONE
+
 // - edit views and controller calls
 // - get list of vendors to show in drop-down
 // Tickets Model
@@ -106,7 +105,7 @@ class Ticket {
 
             echo "<div style='color:red;'>" . $e->getMessage() . "</div>";
 
-            //include 'output.html.php';
+            
             exit();
         }
     }
@@ -130,7 +129,7 @@ class Ticket {
 
             echo "<div style='color:red;'>" . $e->getMessage() . "</div>";
 
-            //include 'output.html.php';
+            
             exit();
         }
         
