@@ -1,7 +1,7 @@
 <?php
 
 
-
+require_once('Database.php');
 class User {
 
     private $userID;
@@ -15,15 +15,15 @@ class User {
     private $dbc;
  
 // Constructor: create new Disposition object (template)
-    function __construct() {
-        
+    function __construct($conn) {
+        $this->dbc = $conn->getDbc();
     }
 
 // ************PHP does not allow for multiple constructors - Static Function Constructors below************
     // Constructor with arguments for every attribute - create object from scratch
-    public static function create($userID, $firstName, $lastName, $email, $title, $password) {
+    public static function create($conn, $userID, $firstName, $lastName, $email, $title, $password) {
 
-        $instance = new self();
+        $instance = new self($conn);
         $instance->setUserID($userID);
         $instance->setFirstName($firstName);
         $instance->setLastName($lastName);
@@ -35,10 +35,10 @@ class User {
 
     // Constructor which will instantiate a new object pulled from database given a User ID #
     // - Takes User ID # and a Database Connection object
-    public static function createFromID($userID) {
+    public static function createFromID($conn, $userID) {
 
         // set static database connection
-        $dbc = User::getStaticConnection();
+        $dbc = $conn->getDbc();
         
         
         $sql_getUserFromDB = "SELECT * FROM users where userID = '$userID'";
@@ -46,7 +46,7 @@ class User {
         if ($result = $dbc->query($sql_getUserFromDB)) {
 
             $row = $result->fetch();
-            $instance = new self();
+            $instance = new self($conn);
             $instance->setUserID($row['userID']);
             $instance->setFirstName($row['firstname']);
             $instance->setLastName($row['lastname']);
@@ -60,7 +60,7 @@ class User {
         }
     }
     
-    
+    /*
         public function getConnection() {
 
         try {
@@ -106,15 +106,17 @@ class User {
         }
         
     }
+     * 
+     */
     
 
     // static method pulling all tickets - DB/SQL object argument
     // return an array of USER objects from the database, to keep all db logic in model side
-    public static function getUsers() {
+    public static function getUsers($conn) {
 
         
         // set static database connection
-        $dbc = User::getStaticConnection();
+        $dbc = $conn->getDbc();
 
         // for now (or permanently) directly include SQL here
         $sql_showUsers = "SELECT * FROM users";
@@ -126,7 +128,7 @@ class User {
 
             while ($row = $result->fetch()) {
 
-                $users[] = User::create($row['userID'], $row['firstname'], $row['lastname'], $row['email'], $row['title'], $row['password']);
+                $users[] = User::create($conn, $row['userID'], $row['firstname'], $row['lastname'], $row['email'], $row['title'], $row['password']);
             }
             // return users array
             return $users;
@@ -140,7 +142,7 @@ class User {
 
         
         // get database connection
-        $this->getConnection();
+    
         
         
         $sql_addUser = "INSERT INTO `users` (`userID`, `firstname`, `lastname`, `email`,`title`, `password`) VALUES ('$this->userID','$this->firstName', '$this->lastName','$this->email','$this->title','$this->password')";
@@ -161,7 +163,7 @@ class User {
     public function delete() {
 
         // get database connection
-        $this->getConnection();
+        
         
         $sql_delete = "delete from users where userID = '$this->userID'";
         if ($this->dbc->query($sql_delete)) {
@@ -180,7 +182,7 @@ class User {
     public function update() {
 
         // get database connection
-        $this->getConnection();
+        
         
         
         $sql_update = "update users SET firstname = '$this->firstName', lastname = '$this->lastName', email = '$this->email', title = '$this->title', password = '$this->password' where userID = '$this->userID'";

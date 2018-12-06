@@ -1,5 +1,5 @@
 <?php
-
+require_once('Database.php');
 class Disposition {
 
     private $dispoID;
@@ -10,16 +10,18 @@ class Disposition {
     
     private $dbc;
 
-    // Constructor: create new Disposition object (template)
-    public function __construct() {
+
+        // Constructor: create new Disposition object (template)
+    public function __construct(Database $conn) {
         
+        $this->dbc = $conn->getDbc();
     }
 
 // ************PHP does not allow for multiple constructors - Static Function Constructors below************
     // Constructor with arguments for every attribute - create object from scratch
-    public static function create($dispoID, $userID, $body, $dateSubmitted, $ticketID) {
+    public static function create($conn, $dispoID, $userID, $body, $dateSubmitted, $ticketID) {
 
-        $instance = new self();
+        $instance = new self($conn);
         $instance->setDispoID($dispoID);
         $instance->setUserID($userID);
         $instance->setBody($body);
@@ -29,35 +31,19 @@ class Disposition {
     }
 
     // Constructor which will instantiate a new object pulled from database given a Ticket ID #
-    // - Takes Dispo ID # object
-    public static function createFromDispoID($dispoID) {
+    // - Takes Dispo ID # object, and db object
+    public static function createFromDispoID($conn, $dispoID) {
 
         
         // set database connection
-        try {
-
-
-            $dbc = new PDO("mysql:host=localhost;dbname=ticketing", "root", "");
-
-            $dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            //echo "<div> Sucessfully connected to Database </div>";
-        } catch (PDOException $e) {
-            $output = 'Unable to connect to the database server.';
-
-            echo "<div style='color:red;'>" . $e->getMessage() . "</div>";
-
-            
-            exit();
-        }
-        
+        $dbc = $conn->getDbc();
 
         $sql_getDispoFromDB = "SELECT * FROM dispositions where dispoID = '$dispoID'";
 
         if ($result = $dbc->query($sql_getDispoFromDB)) {
 
             $row = $result->fetch();
-            $instance = new self();
+            $instance = new self($conn);
 
             $instance->setDispoID($row['dispoID']);
             $instance->setUserID($row['userID']);
@@ -71,7 +57,7 @@ class Disposition {
             echo "<p> Could not run query </p>";
         }
     }
-
+/*
     // get database connection
     public function getConnection() {
 
@@ -117,13 +103,13 @@ class Disposition {
         }
         
     }
-
+*/
     // static method pulling all tickets - DB/SQL object argument
     // return an array of Disposition objects from the database, to keep all db logic in model side
-    public static function getDispositions() {
+    public static function getDispositions($conn) {
 
         // set static database connection
-        $dbc = Disposition::getStaticConnection();
+        $dbc = $conn->getDbc();
         
 
         
@@ -137,7 +123,7 @@ class Disposition {
 
             while ($row = $result->fetch()) {
 
-                $dispos[] = Disposition::create($row['dispoID'], $row['userID'], $row['body'], $row['datesubmitted']);
+                $dispos[] = Disposition::create($conn, $row['dispoID'], $row['userID'], $row['body'], $row['datesubmitted']);
             }
             // return tickets array
             return $dispos;
@@ -147,12 +133,12 @@ class Disposition {
         }
     }
 
-    public static function getDispositionsByTicket($ticketID) {
+    public static function getDispositionsByTicket($conn,$ticketID) {
 
         
 
         // set static database connection
-        $dbc = Disposition::getStaticConnection();
+        $dbc = $dbc = $conn->getDbc();
 
 
         $sql_showDispos = "SELECT * FROM dispositions where ticketID = '$ticketID'";
@@ -165,7 +151,7 @@ class Disposition {
 
             while ($row = $result->fetch()) {
 
-                $dispos[] = Disposition::create($row['dispoID'], $row['userID'], $row['body'], $row['datesubmitted'], $row['ticketID']);
+                $dispos[] = Disposition::create($conn, $row['dispoID'], $row['userID'], $row['body'], $row['datesubmitted'], $row['ticketID']);
             }
             // return tickets array
             return $dispos;
@@ -175,11 +161,11 @@ class Disposition {
         }
     }
 
-    public static function deleteDispositionsByTicket($ticketID) {
+    public static function deleteDispositionsByTicket($conn, $ticketID) {
 
         
         // set static database connection
-        $dbc = Disposition::getStaticConnection();
+        $dbc = $conn->getDbc();
         
 
  
@@ -198,7 +184,7 @@ class Disposition {
     public function add() {
 
         // get database connection
-        $this->getConnection();
+        //$this->getConnection();
 
         $sql_addDispo = "INSERT INTO `dispositions` (`dispoID`, `userID`, `body`, `datesubmitted`, `ticketID`) VALUES (NULL,'$this->userID', '$this->body', NOW(),'$this->ticketID')";
 
@@ -218,7 +204,7 @@ class Disposition {
     public function delete() {
 
         // get database connection
-        $this->getConnection();
+        //$this->getConnection();
         
         
         
@@ -238,7 +224,7 @@ class Disposition {
     public function update() {
 
         // get database connection
-        $this->getConnection();
+        //$this->getConnection();
         
         
         $sql_update = "update dispositions SET body = '$this->body', datesubmitted = NOW() where dispoID = '$this->dispoID'";
@@ -292,6 +278,15 @@ class Disposition {
 
     function setTicketID($ticketID) {
         $this->ticketID = $ticketID;
+    }
+    
+    
+    function getDbc() {
+        return $this->dbc;
+    }
+
+    function setDbc($dbc) {
+        $this->dbc = $dbc;
     }
 
 }

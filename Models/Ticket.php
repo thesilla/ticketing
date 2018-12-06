@@ -5,6 +5,7 @@
 // - edit views and controller calls
 // - get list of vendors to show in drop-down
 // Tickets Model
+require_once('Database.php');
 class Ticket {
 
 // Ticket attributes
@@ -26,14 +27,17 @@ class Ticket {
     private $dbc;
 
 // Constructor: create new Ticket object (template)
-    public function __construct() {
+// takes and sets db connection object
+    public function __construct(Database $conn) {
+        
+        $this->dbc = $conn->getDbc();
         
     }
 
 // ************PHP does not allow for multiple constructors - Static Function Constructors below************
-    // Constructor with arguments for every attribute - create object from scratch
-    public static function create($id, $subject, $body, $userID, $requestedBy, $dateSubmitted, $dateResolved, $orderID, $priority, $category, $status, $assignedTo, $completed, $vendor, $reason) {
-        $instance = new self();
+    // Constructor with arguments for every attribute - create object from scratch, and takes a Database Connection object
+    public static function create($conn, $id, $subject, $body, $userID, $requestedBy, $dateSubmitted, $dateResolved, $orderID, $priority, $category, $status, $assignedTo, $completed, $vendor, $reason) {
+        $instance = new self($conn);
         $instance->id = $id;
         $instance->subject = $subject;
         $instance->body = $body;
@@ -49,15 +53,16 @@ class Ticket {
         $instance->completed = $completed;
         $instance->vendor = $vendor;
         $instance->reason = $reason;
+        //$instance->dbc = $conn->getDbc();
         return $instance;
     }
 
     // Constructor which will instantiate a new object pulled from database given a Ticket ID #
     // - Takes Ticket ID # and a Database Connection object
-    public static function createFromID($id) {
+    public static function createFromID($conn, $id) {
 
         // set static database connection
-        $dbc = Disposition::getStaticConnection();
+        $dbc = $conn->getDbc();
         
         
         $sql_getTicketFromDB = "SELECT * FROM tickets where ticketID = '$id'";
@@ -65,7 +70,7 @@ class Ticket {
         if ($result = $dbc->query($sql_getTicketFromDB)) {
 
             $row = $result->fetch();
-            $instance = new self();
+            $instance = new self($conn);
 
             $instance->setID($row['ticketID']);
             $instance->setSubject($row['subject']);
@@ -89,6 +94,7 @@ class Ticket {
         }
     }
 
+    /*
     // get database connection
     public function getConnection() {
 
@@ -134,17 +140,17 @@ class Ticket {
         }
         
     }
-    
+    */
     
 
 // static method pulling all tickets - DB/SQL object argument
-// return an array of Ticket objects from the database, to keep all db logic in model side
-    public static function getTickets() {
+// takes db object, return an array of Ticket objects from the database
+    public static function getTickets($conn) {
 
         
         
-        // set static database connection
-        $dbc = Disposition::getStaticConnection();
+        // set static database connection (not datbase object)
+        $dbc = $conn->getDbc();
         
 
         $sql_showTix = "SELECT * FROM tickets";
@@ -152,12 +158,13 @@ class Ticket {
 
         if ($result = $dbc->query($sql_showTix)) {
 
+            
             // Create tickets array
             $tickets = [];
 
             while ($row = $result->fetch()) {
 
-                $tickets[] = Ticket::create($row['ticketID'], $row['subject'], $row['body'], $row['userID'], $row['requestedby'], $row['datesubmitted'], $row['dateresolved'], $row['orderID'], $row['priority'], $row['category'], $row['status'], $row['assignedto'], $row['completed'], $row['vendor'], $row['reason']);
+                $tickets[] = Ticket::create($conn, $row['ticketID'], $row['subject'], $row['body'], $row['userID'], $row['requestedby'], $row['datesubmitted'], $row['dateresolved'], $row['orderID'], $row['priority'], $row['category'], $row['status'], $row['assignedto'], $row['completed'], $row['vendor'], $row['reason']);
 
                 // TODO delete this, for testing only
                 //print_r($tickets);
@@ -174,7 +181,8 @@ class Ticket {
     public function add() {
 
         // get database connection
-        $this->getConnection();
+        // (already established when object created)
+        //$this->getConnection();
 
         $sql_addTix = "INSERT INTO `tickets` (`ticketID`, `subject`, `body`, `userID`,`requestedBy`, `datesubmitted`, `dateresolved`, `orderID`, `priority`, `category`, `status`,`assignedTo`,`completed`,`vendor`,`reason`) VALUES (NULL,'$this->subject','$this->body', '$this->userID','$this->requestedBy', NOW(),NULL,'$this->orderID', '$this->priority','$this->category','$this->status','$this->assignedTo','$this->completed','$this->vendor','$this->reason')";
 
@@ -194,7 +202,8 @@ class Ticket {
     public function delete() {
         
         // get database connection
-        $this->getConnection();
+        // (already established when object created)
+        //$this->getConnection();
         //first delete all corresponding dispositions to satisfy SQL foreign key requirement
         $sql_delete_dispos = "delete from dispositions where ticketID = '$this->id'";
 
@@ -216,7 +225,8 @@ class Ticket {
     public function update() {
 
         // get database connection
-        $this->getConnection();
+        // (already established when object created)
+        //$this->getConnection();
         
         $sql_update = "update tickets SET subject = '$this->subject', body = '$this->body', orderID = '$this->orderID', priority = '$this->priority', category = '$this->category', status = '$this->status', assignedto = '$this->assignedTo', completed = '$this->completed', dateresolved = '$this->dateResolved', vendor = '$this->vendor', reason = '$this->reason' where ticketID = '$this->id'";
         if ($this->dbc->query($sql_update)) {
@@ -234,7 +244,8 @@ class Ticket {
     public function close($reason) {
 
         // get database connection
-        $this->getConnection();
+        // (already established when object created)
+        //$this->getConnection();
         
         $completed = "YES";
         $this->setReason($reason);
@@ -257,7 +268,8 @@ class Ticket {
     public function open() {
 
         // get database connection
-        $this->getConnection();
+        // (already established when object created)
+        //$this->getConnection();
         
         $completed = "NO";
         $reason = "";

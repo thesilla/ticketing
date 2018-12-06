@@ -4,9 +4,11 @@
 
 
 // import class files into controller
-include('../Models/Ticket.php');
-include('../Models/Disposition.php');
-include('../Models/User.php');
+require_once '../Models/Ticket.php'; 
+require_once'../Models/User.php';
+require_once'../Models/Disposition.php';
+require_once '../Models/Employee.php';
+require_once '../Models/UserManager.php';
 //require('footer1');
 // TODO - Disposition submit logic here
 //  - Then re route back to Ticket Detail View

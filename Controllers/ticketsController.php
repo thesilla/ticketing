@@ -4,10 +4,12 @@
 //require('db_connect.php');
 
 // import class files into controller
-include '../Models/Ticket.php'; 
-include'../Models/User.php';
-include'../Models/Disposition.php';
-include '../Models/Employee.php';
+require_once '../Models/Ticket.php'; 
+require_once'../Models/User.php';
+require_once'../Models/Disposition.php';
+require_once '../Models/Employee.php';
+require_once '../Models/UserManager.php';
+require_once '../Models/Database.php';
 include'../Content/header1.php';
 
 
@@ -19,6 +21,7 @@ $problem = false;
 // Must initialize here to avoid error since this field is not mandatory
 $orderID = "";
 $vendor = "";
+$dbc = new Database();
 // if ticket form submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -123,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // TODO -use objects to verify errors etc?
         if (!$problem) {
 
-            $ticket1 = Ticket::create($id, $subject, $body, $userID, $requestedBy, $dateSubmitted, $dateResolved, $orderID, $priority, $category, $status, $assignedTo, $completed, $vendor, $reason);
+            $ticket1 = Ticket::create($dbc, $id, $subject, $body, $userID, $requestedBy, $dateSubmitted, $dateResolved, $orderID, $priority, $category, $status, $assignedTo, $completed, $vendor, $reason);
             $ticket1->add();
         }
     }
@@ -140,9 +143,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // show all tickets
 // return array of all ticket objects from database
-$allTickets = Ticket::getTickets();
-$employees = Employee::getEmployees();
-$allusers = User::getUsers();
+$allTickets = Ticket::getTickets($dbc);
+$employees = Employee::getEmployees($dbc);
+$allusers = User::getUsers($dbc);
 
 include("../Views/ticketSubmitView.php");
 include("../Views/ticketsView.php");

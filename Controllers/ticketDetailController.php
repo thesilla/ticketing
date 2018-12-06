@@ -20,10 +20,14 @@ require '../Content/header1.php';
 //require('db_connect.php');
 
 // import class files into controller
-include('../Models/Ticket.php');
-include('../Models/Disposition.php');
-include('../Models/User.php');
+require_once '../Models/Ticket.php'; 
+require_once'../Models/User.php';
+require_once'../Models/Disposition.php';
+require_once '../Models/Employee.php';
+require_once '../Models/UserManager.php';
+require_once '../Models/Database.php';
 
+$dbc = new Database();
 // generate Ticket object
 // if any form submitted at all:
 // when page is first loaded it will GET. After that with CRUD commands it will POST
@@ -35,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
     // when accessing page from all tickets view, GET is used
     if (!empty($_GET['ticketno'])) {
 
-        $ticket = Ticket::createFromID($_GET['ticketno']);
+        $ticket = Ticket::createFromID($dbc, $_GET['ticketno']);
     }
     // when submitting edit ticket form, post is used
     if (!empty($_POST['ticketno'])) {
@@ -54,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
 
 
         // create initial ticket object that will pull current ticket from db as is
-        $ticket_initialize = Ticket::createFromID($_POST['ticketno']);
+        $ticket_initialize = Ticket::createFromID($dbc, $_POST['ticketno']);
         
         // define variables for updated ticket
         // non-editable fields will be pulled from $ticket_initialize
@@ -78,14 +82,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
         $reason = NULL;
         
         // create NEW updated ticket object from user form.
-        $ticket = Ticket::create($ticketID, $subject, $details, $userID, $requestedby, $datesubmitted, $dateresolved, $orderid, $priority, $category, $status, $assignedto, $completed, $vendor, $reason);
+        $ticket = Ticket::create($dbc, $ticketID, $subject, $details, $userID, $requestedby, $datesubmitted, $dateresolved, $orderid, $priority, $category, $status, $assignedto, $completed, $vendor, $reason);
         $ticket->update();
         
     }
     
     if (!empty($_POST['submitCloseTicket'])) {
         
-        $ticket = Ticket::createFromID($_POST['tickno2']);
+        $ticket = Ticket::createFromID($dbc, $_POST['tickno2']);
         
         
         if(!empty($_POST['reason']) && $ticket->getCompleted()=="NO"){
@@ -103,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
             
             
 
-            $ticket = Ticket::createFromID($_POST['tickno2']);
+            $ticket = Ticket::createFromID($dbc, $_POST['tickno2']);
             $ticket->open();
             
             
@@ -121,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
     
    if (!empty($_POST['submitDeleteTicket'])){
        
-       $ticket = Ticket::createFromID($_POST['tickno3']);
+       $ticket = Ticket::createFromID($dbc, $_POST['tickno3']);
        $ticket->delete();
        
        // redirect back to tickets page since ticket details are from object and no longer valid
@@ -134,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
 }
 
 $id = $ticket->getId();
-$allDispositions = Disposition::getDispositionsByTicket($id);
+$allDispositions = Disposition::getDispositionsByTicket($dbc, $id);
 // generate views
 //$ticket = Ticket::createFromID($_GET['ticketno'], $dbc);
 echo "<br/>";

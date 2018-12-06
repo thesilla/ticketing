@@ -3,29 +3,27 @@
 <?php
 
 
-
+require_once('Database.php');
 class Employee {
 
     private $id;
     private $firstName;
     private $lastName;
     private $email;
-
-
         
     // database connection
     private $dbc;
  
 // Constructor: create new Disposition object (template)
-    function __construct() {
-        
+    function __construct($conn) {
+        $this->dbc = $conn->getDbc();
     }
 
 // ************PHP does not allow for multiple constructors - Static Function Constructors below************
     // Constructor with arguments for every attribute - create object from scratch
-    public static function create($id, $firstName, $lastName, $email) {
+    public static function create($conn, $id, $firstName, $lastName, $email) {
 
-        $instance = new self();
+        $instance = new self($conn);
         $instance->setId($id);
         $instance->setFirstName($firstName);
         $instance->setLastName($lastName);
@@ -35,10 +33,10 @@ class Employee {
 
     // Constructor which will instantiate a new object pulled from database given a User ID #
     // - Takes User ID # and a Database Connection object
-    public static function createFromID($id) {
+    public static function createFromID($conn, $id) {
 
         // set static database connection
-        $dbc = Employee::getStaticConnection();
+        $dbc = $conn->getDbc();
         
         
         $sql_getEmployeeFromDB = "SELECT * FROM employees where id = '$id'";
@@ -46,7 +44,7 @@ class Employee {
         if ($result = $dbc->query($sql_getEmployeeFromDB)) {
 
             $row = $result->fetch();
-            $instance = new self();
+            $instance = new self($conn);
             $instance->setId($row['id']);
             $instance->setFirstName($row['fname']);
             $instance->setLastName($row['lname']);
@@ -59,7 +57,7 @@ class Employee {
         }
     }
     
-    
+    /*
         public function getConnection() {
 
         try {
@@ -105,15 +103,15 @@ class Employee {
         }
         
     }
-    
+    */
 
     // static method pulling all tickets - DB/SQL object argument
     // return an array of USER objects from the database, to keep all db logic in model side
-    public static function getEmployees() {
+    public static function getEmployees($conn) {
 
         
         // set static database connection
-        $dbc = Employee::getStaticConnection();
+        $dbc = $conn->getDbc();
 
         // for now (or permanently) directly include SQL here
         $sql_showEmployees = "SELECT * FROM employees";
@@ -125,7 +123,7 @@ class Employee {
 
             while ($row = $result->fetch()) {
 
-                $employees[] = Employee::create($row['id'], $row['fname'], $row['lname'], $row['email']);
+                $employees[] = Employee::create($conn, $row['id'], $row['fname'], $row['lname'], $row['email']);
             }
             // return users array
             return $employees;
@@ -139,7 +137,7 @@ class Employee {
 
         
         // get database connection
-        $this->getConnection();
+
         
         
         $sql_addEmployee = "INSERT INTO `employees` (`id`, `fname`, `lname`, `email`) VALUES ('$this->id','$this->firstName', '$this->lastName','$this->email')";
@@ -160,7 +158,7 @@ class Employee {
     public function delete() {
 
         // get database connection
-        $this->getConnection();
+
         
         $sql_delete = "delete from employees where id = '$this->id'";
         if ($this->dbc->query($sql_delete)) {
@@ -179,7 +177,7 @@ class Employee {
     public function update() {
 
         // get database connection
-        $this->getConnection();
+
         
         
         $sql_update = "update employees SET fname = '$this->firstName', lname = '$this->lastName', email = '$this->email' where id = '$this->id'";
