@@ -13,6 +13,10 @@ class User {
     
     // database connection
     private $dbc;
+    
+
+
+
  
 // Constructor: create new Disposition object (template)
     function __construct($conn) {
@@ -23,7 +27,7 @@ class User {
     // Constructor with arguments for every attribute - create object from scratch
     public static function create($conn, $userID, $firstName, $lastName, $email, $title, $password) {
 
-        $instance = new self($conn);
+        $instance = new self($conn); // dbc is set in this step (see base constructor above)
         $instance->setUserID($userID);
         $instance->setFirstName($firstName);
         $instance->setLastName($lastName);
@@ -243,6 +247,14 @@ class User {
 
     function setPassword($password) {
         $this->password = $password;
+    }
+    
+    function getDbc() {
+        return $this->dbc;
+    }
+
+    function setDbc($dbc) {
+        $this->dbc = $dbc;
     }
 
 }

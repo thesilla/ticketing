@@ -10275,3 +10275,30 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
     
     
 }
+
+#loginContainer {
+    
+    
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
+    
+    
+    
+}
+
+#loginTitle{
+    
+    
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+
+#loginLogo{
+    
+    border: 1pt solid black;
+    margin: 10px;
+    
+}

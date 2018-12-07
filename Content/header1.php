@@ -1,4 +1,27 @@
 
+<?php
+ob_start();
+session_start();
+
+require_once '../Models/UserManager.php';
+
+if (UserManager::isLoggedIn()) {
+
+    echo "<div> Welcome, " . $_SESSION['username'] . "</div>";
+} else {
+
+
+    $path = "Location: ..\Views\loginView.php";
+    //$path = "Location: Views/loginView.php";
+    //$path = $web_root = "http://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."/";
+
+    echo $path;
+
+    header($path);
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 
 <html lang = "en">
@@ -15,8 +38,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" >
         <link rel="stylesheet"  href="../Content/superhero.css">
-        
-        
+
+
         <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -26,8 +49,9 @@
     </head>
     <body>
 
-<div id ="main-container">
-<?php 
-include('navbar.php'); 
-?>
+        <div id ="main-container">
 
+
+<?php
+include('navbar.php');
+?>
