@@ -50,14 +50,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = User::createFromID($conn, $userID);
 
         $userManager = new UserManager($user);
-        if($userManager->login()){
-            
+        if ($userManager->login()) {
+
             header('Location: homeController.php');
             exit();
+        } else {
             
+            //TODO - instead of bringing up blank screen with link back to login, register non-match error and show the form again
+            echo "<div> The submitted username/password combination does not exist </div>";
+            echo "<div> <a href = 'homeController.php'> Return to Login </a> </div>";
         }
         
-        
+    // if there are errors, show login form with errors specified
+    // TODO - Make login form error dynamic
+    } else {
+
+        require_once('../Views/loginView.php');
     }
+    
+// if login form NOT submitted, show the form.
+} else {
+
+    require_once('../Views/loginView.php');
 }
 ?>

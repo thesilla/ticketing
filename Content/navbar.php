@@ -92,6 +92,7 @@
     </div>
     <div>
             <button id="adminButton" type="button" class="btn btn-outline-primary dropdown1">ADMIN</button>
+            <div> <a href ="logoutController.php"> Log Out </a></div>
             <div class="dropdown-content1"> hello </div>
             <div>
 </nav>

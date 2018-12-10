@@ -4,11 +4,6 @@
 ob_start();
 session_start();
 
-require_once '../Models/UserManager.php';
-
-UserManager::isLoggedIn();
-
-echo "<div> Welcome, " . $_SESSION['username'] . "</div>";
 ?>
 <html lang = "en">
 

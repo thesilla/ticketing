@@ -10,6 +10,10 @@ class UserManager {
 
     private $userID;
     private $password;
+    private $fname;
+    private $lname;
+    
+    
     private $dbc;
 
     // Constructor: create new UserManager object 
@@ -19,6 +23,9 @@ class UserManager {
         // set username and password properities for use in analysis
         $this->userID = $user->getUserID();
         $this->password = $user->getPassword();
+        $this->fname = $user->getFirstName();
+        $this->lname = $user->getLastName();
+        
 
         // set db connection for running checks - inject with User.
         $this->dbc = $user->getDbc();
@@ -37,9 +44,12 @@ class UserManager {
             if($number_of_rows == 1){
                 
                 return true;
-                //
+               
                 
                 
+            } else {
+                
+                return false;
             }
             
         }
@@ -67,11 +77,24 @@ class UserManager {
                 
             }
             
+            if(empty($_SESSION['fname']) && !isset($_SESSION['fname'])){
+                
+                $_SESSION['fname'] = $this->fname;
+                
+            }
+            
+            
+            if(empty($_SESSION['lname']) && !isset($_SESSION['lname'])){
+                
+                $_SESSION['lname'] = $this->lname;
+                
+            }
+            
+            
             return true;
             
         } else {
             
-            session_destroy();
             return false;
             
         }
@@ -84,16 +107,21 @@ class UserManager {
     // returns false and redirects to login
     public static function isLoggedIn(){
         
+        
+        //echo "<div> Test of isLoggedIn() layer 0 </div>";
         if(!empty($_SESSION['username']) && !empty($_SESSION['loggedin']) && isset($_SESSION['loggedin']) && isset($_SESSION['username'])){
             
+            //echo "<div> Test of isLoggedIn() layer 1 </div>";
             
             
             if($_SESSION['loggedin']==1 ){
                 
+                //echo "<div> Test of isLoggedIn() layer 2 - TRUE </div>";
                 return true;
                 
             } else {
                 
+                //echo "<div> Test of isLoggedIn() layer 2 - FALSE </div>";
                 return false;
             }
             
@@ -104,6 +132,26 @@ class UserManager {
 
             
         }
+        
+        
+        
+    }
+    
+    // this is static as lo
+    public static function logout(){
+        
+        if(UserManager::isLoggedIn()){
+            
+            $_SESSION = array();
+            session_destroy();
+            return true;
+            
+        } else {
+            
+            
+            return false;
+        }
+          
         
         
         

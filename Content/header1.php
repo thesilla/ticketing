@@ -3,19 +3,16 @@
 ob_start();
 session_start();
 
+
+// If not logged in, redirect to login
 require_once '../Models/UserManager.php';
+if (!UserManager::isLoggedIn()) {
 
-if (UserManager::isLoggedIn()) {
-
-    echo "<div> Welcome, " . $_SESSION['username'] . "</div>";
-} else {
-
-
-    $path = "Location: ..\Views\loginView.php";
+    //$path = "Location: ..\Views\loginView.php";
     //$path = "Location: Views/loginView.php";
     //$path = $web_root = "http://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."/";
 
-    echo $path;
+    $path = "Location: userController.php";
 
     header($path);
     exit();
@@ -54,4 +51,11 @@ if (UserManager::isLoggedIn()) {
 
 <?php
 include('navbar.php');
+
+if (UserManager::isLoggedIn()) {
+
+    echo "<div> Welcome, " . $_SESSION['fname'] . "!</div>";
+}
+
+
 ?>
