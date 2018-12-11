@@ -77,7 +77,12 @@ body {
   color: #222;
   text-align: left;
 
-  background-color: #fff;
+  /*background-color: #fff; */
+  
+  background-image: url('../Images/bg1.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  
 }
 
 [tabindex="-1"]:focus {
@@ -10218,31 +10223,7 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
     
 }
 
-.dropdown1 {
-    position: relative;
-    display: inline-block;
-}
 
-.dropdown-content1 {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    padding: 12px 16px;
-    z-index: 1;
-}
-
-.dropdown1:hover .dropdown-content1 {
-    display: block;
-}
-
-#adminButton{
-    
-    float: right;
-    
-    
-}
 
 
 .hiddenDispoEdit{
@@ -10301,4 +10282,66 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
     border: 1pt solid black;
     margin: 10px;
     
+}
+
+
+
+
+
+
+
+.dropdown1 {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content1 {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+}
+
+.dropdown1:hover .dropdown-content1 {
+    display: block;
+}
+
+#adminButton{
+    
+    
+    position: relative;
+    display: inline-block;
+    
+    
+    
+    //float: right;
+    
+    
+}
+
+#adminMenu{
+    
+    
+    display: none;
+    position: absolute;
+    background-color: #158CBA;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+    
+    
+}
+
+#adminMenu a{
+    
+    color: white;
+    
+}
+
+#adminButton:hover #adminMenu {
+    display: block;
 }

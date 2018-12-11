@@ -9,6 +9,9 @@ require_once'../Models/User.php';
 require_once'../Models/Disposition.php';
 require_once '../Models/Employee.php';
 require_once '../Models/UserManager.php';
+require_once '../Models/Database.php';
+//include'../Content/header1.php';
+
 //require('footer1');
 // TODO - Disposition submit logic here
 //  - Then re route back to Ticket Detail View
@@ -18,6 +21,7 @@ require_once '../Models/UserManager.php';
 // TODO - Fix DATE SUBMITTED time stamp - not currently working
 // initialize ticket ID variable for future use
 $ticketno;
+$conn = new Database();
 
 if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
@@ -36,9 +40,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             $body = $_POST['disposition'];
             
             // --Technically time doesn't matter, submitted on SQL/server side
-            //$dateSubmitted = date('m-d-Y h:i:s');
-            //$t = time();
-            //$dateSubmitted = date("Y-m-d", $t);
             $dateSubmitted ="";
             
             $ticketID = $ticketno;
@@ -63,12 +64,13 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             $body = $_POST['newDispoBody'];
         }
 
-        $dispo = Disposition::createFromDispoID($dispoID);
+        $dispo = Disposition::createFromDispoID($conn, $dispoID);
         $dispo->setBody($body);
         $dispo->update();
 
         // get ticket number to pass into header and re-direct back to ticket detail controller
         $ticketno = $dispo->getTicketID();
+      
     }
 
     // Delete disposition
@@ -82,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             $dispoID = $_POST['dispono'];
         }
 
-        $dispo = Disposition::createFromDispoID($dispoID);
+        $dispo = Disposition::createFromDispoID($conn, $dispoID);
         $dispo->delete();
 
 

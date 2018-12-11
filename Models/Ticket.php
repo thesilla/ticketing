@@ -210,7 +210,7 @@ class Ticket {
         //delete ticket
         $sql_delete = "delete from tickets where ticketID = '$this->id'";
 
-        if ($this->dbc->query($sql_delete_dispos) && $dbc->query($sql_delete)) {
+        if ($this->dbc->query($sql_delete_dispos) && $this->dbc->query($sql_delete)) {
 
             echo "<p> Ticket Successfully Deleted </p>";
             return true;

@@ -90,11 +90,23 @@
 
 
     </div>
-    <div>
-            <button id="adminButton" type="button" class="btn btn-outline-primary dropdown1">ADMIN</button>
-            <div> <a href ="logoutController.php"> Log Out </a></div>
-            <div class="dropdown-content1"> hello </div>
-            <div>
+
+
+
+
+    <div id="adminButton"> <!-- btn btn-outline-primary dropdown1 -- > put this back in admin button class -->
+        <button type="button" class ="btn btn-outline-primary dropdown1" >ADMIN</button>
+        <!--  -->
+        <div id="adminMenu"> 
+            
+            <div> <a href ="adminController.php"> Settings </a></div> 
+            <div> <a href ="adminController.php"> Manage Users </a></div>
+            <br/>
+            <div> <a href ="logoutController.php"> Log Out </a></div> 
+ 
+             
+        </div>
+    </div>
 </nav>
 <br/>
 
