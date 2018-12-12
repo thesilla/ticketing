@@ -3,7 +3,7 @@
 <div id="submitTicket" class="jumbotron">
 
     <form action ="ticketsController.php" method ="post" id="submitTicketForm" class = "form">
-        <legend>Create New Ticket</legend>
+        <h1>Create New Ticket</h1>
         <hr class="my-4">
         <div class="form-group">
             <label for="subject">Subject:</label>

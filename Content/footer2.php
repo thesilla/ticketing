@@ -1,5 +1,5 @@
 </div>
-<script src="../Scripts/functions.js"></script>
+ <script src="../Scripts/functions.js"></script>
     </body>        
 
 </html>

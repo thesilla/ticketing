@@ -28,6 +28,7 @@ require_once '../Models/UserManager.php';
 require_once '../Models/Database.php';
 
 $dbc = new Database();
+$ticket;
 // generate Ticket object
 // if any form submitted at all:
 // when page is first loaded it will GET. After that with CRUD commands it will POST
@@ -66,13 +67,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
         // TODO: - Add filtering to post items for security purposes
         $ticketID = $ticket_initialize->getId();
         
-        $subject = $_POST['subject'];
-        $details = $_POST['details'];
-        $orderid = $_POST['orderid'];
-        $priority = $_POST['priority'];
-        $status = $_POST['status'];
-        $category = $_POST['category'];
-        $assignedto = $_POST['assignedto'];
+        if (!empty($_POST['subject'])){
+            
+            $subject = $_POST['subject'];
+            
+        }
+        
+        if (!empty($_POST['details'])){
+            
+            $details = $_POST['details'];
+            
+        } else {
+            
+            $details = "not working";
+            
+            
+        }
+        
+        
+        if (!empty($_POST['orderid'])){
+            
+            $orderid = $_POST['orderid'];
+            
+        }
+        
+        if (!empty($_POST['priority'])){
+            
+            $priority = $_POST['priority'];
+            
+        }
+        
+        if (!empty($_POST['status'])){
+            
+            $status = $_POST['status'];
+            
+        }
+        
+        if (!empty($_POST['category'])){
+            
+            $category = $_POST['category'];
+            
+        }
+        
+        if (!empty($_POST['assignedto'])){
+            
+            $assignedto = $_POST['assignedto'];
+            
+        }
+        
+     
+        
         $userID = $ticket_initialize->getUserID();
         $requestedby = $ticket_initialize->getRequestedBy();
         $datesubmitted = $ticket_initialize->getDateSubmitted();
@@ -140,10 +184,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
 $id = $ticket->getId();
 $allDispositions = Disposition::getDispositionsByTicket($dbc, $id);
 // generate views
-//$ticket = Ticket::createFromID($_GET['ticketno'], $dbc);
+$ticket = Ticket::createFromID($dbc, $id);
 echo "<br/>";
 echo '<div id="ticket-display" class="jumbotron">';
 
+$employees = Employee::getEmployees($dbc);
+$users = User::getUsers($dbc);
 include("../Views/ticketDetailView.php");
 include("../Views/ticketEditView.php");
 

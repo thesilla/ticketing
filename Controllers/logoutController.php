@@ -1,22 +1,27 @@
 <?php
-session_start();
-require_once("../Models/UserManager.php");
 
-if(UserManager::logout()){
+require_once("../Models/UserManager.php");
+require_once("../Content/header2.php");
+
+
+if (UserManager::logout()) {
+
     
-    echo "<div> you have logged out </div>";
-    echo "<div> <a href = 'homeController.php'> Return to Login </a> </div>";
+    ?>
+
+<div class="card" id="logout-successful">
+  <div class="card-body">
+    <h4 class="card-title">Logout Successful!</h4>
+    <a href="homeController.php" class="card-link">Return to Login</a>
+
+  </div>
+</div>
+
+
+
+   <?php 
     
-} else {
-    
-    
-    echo "<div> logout didnt work </div>";
-    
-}
-    
-    
-    
-    
+    } 
 
 
 

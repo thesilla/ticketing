@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             $dateSubmitted ="";
             
             $ticketID = $ticketno;
-            $disposition = Disposition::create($dispoID, $userID, $body, $dateSubmitted, $ticketID);
+            $disposition = Disposition::create($conn, $dispoID, $userID, $body, $dateSubmitted, $ticketID);
             $disposition->add();
         }
     }

@@ -52,10 +52,5 @@ if (!UserManager::isLoggedIn()) {
 <?php
 include('navbar.php');
 
-if (UserManager::isLoggedIn()) {
-
-    echo "<div> Welcome, " . $_SESSION['fname'] . "!</div>";
-}
-
 
 ?>

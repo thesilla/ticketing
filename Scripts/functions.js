@@ -27,6 +27,36 @@ closeTicketSubmitButton.onclick = closeSubmitTicket;
 
 
 
+//var closestTr = document.querySelector("#openTicketsOnly").closest("tr");   
+//FIXME - JS TICKET FILTER DOESNT WORK 
+ 
+ function hideCompleted(){
+     
+     console.log("hello");
+    var allCompleted = document.getElementsByTagName("TD");
+ 
+    //var i  = 11;
+    var i  = 0;
+    while (i<allCompleted.length){
+        
+        if(allCompleted[i].innerHTML == "YES"){
+            
+            var closestTr = allCompleted[i].closest("tr");
+            closestTr.style.display = "none"; 
+            
+        }
+        
+        //i = i + 11;
+        i = i + 1;
+    }   
+}    
+    var filterClosedTixButton =  document.getElementById("openTicketsOnly");
+    filterClosedTixButton.onclick = hideCompleted();
+    
+
+
+
+
 
 
 function sortTable(n) {

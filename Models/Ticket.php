@@ -176,6 +176,80 @@ class Ticket {
             echo "<p> Could not run query </p>";
         }
     }
+    
+    
+    // returns array of only open tickets
+        public static function getOpenTickets($conn) {
+
+        
+        
+        // set static database connection (not datbase object)
+        $dbc = $conn->getDbc();
+        
+
+        $sql_showTix = "SELECT * FROM tickets where completed = 'NO'";
+
+
+        if ($result = $dbc->query($sql_showTix)) {
+
+            
+            // Create tickets array
+            $tickets = [];
+
+            while ($row = $result->fetch()) {
+
+                $tickets[] = Ticket::create($conn, $row['ticketID'], $row['subject'], $row['body'], $row['userID'], $row['requestedby'], $row['datesubmitted'], $row['dateresolved'], $row['orderID'], $row['priority'], $row['category'], $row['status'], $row['assignedto'], $row['completed'], $row['vendor'], $row['reason']);
+
+                // TODO delete this, for testing only
+                //print_r($tickets);
+            }
+            // return tickets array
+            return $tickets;
+        } else {
+
+            echo "<p> Could not run query </p>";
+        }
+    }
+    
+        // returns array of only open tickets
+        public static function getClosedTickets($conn) {
+
+        
+        
+        // set static database connection (not datbase object)
+        $dbc = $conn->getDbc();
+        
+
+        $sql_showTix = "SELECT * FROM tickets where completed = 'YES'";
+
+
+        if ($result = $dbc->query($sql_showTix)) {
+
+            
+            // Create tickets array
+            $tickets = [];
+
+            while ($row = $result->fetch()) {
+
+                $tickets[] = Ticket::create($conn, $row['ticketID'], $row['subject'], $row['body'], $row['userID'], $row['requestedby'], $row['datesubmitted'], $row['dateresolved'], $row['orderID'], $row['priority'], $row['category'], $row['status'], $row['assignedto'], $row['completed'], $row['vendor'], $row['reason']);
+
+                // TODO delete this, for testing only
+                //print_r($tickets);
+            }
+            // return tickets array
+            return $tickets;
+        } else {
+
+            echo "<p> Could not run query </p>";
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
 
 //  method takes a DB object and ADDS the ticket to the database
     public function add() {
@@ -189,7 +263,7 @@ class Ticket {
         if ($this->dbc->query($sql_addTix)) {
 
             //TODO - DO SOMETHING MORE ELABORATE THAT INDICATES SUCESSFUL SUBMISSION FOR NOW JUST PRINT SUCCESS
-            echo "<p> Ticket Successfully Submited </p>";
+            echo '<div class="alert alert-dismissible alert-success"> Ticket Successfully Submited </div>';
             return true;
         } else {
 
@@ -212,7 +286,7 @@ class Ticket {
 
         if ($this->dbc->query($sql_delete_dispos) && $this->dbc->query($sql_delete)) {
 
-            echo "<p> Ticket Successfully Deleted </p>";
+            echo '<div class="alert alert-dismissible alert-success"> Ticket Successfully Deleted </div>';
             return true;
         } else {
 
@@ -231,7 +305,7 @@ class Ticket {
         $sql_update = "update tickets SET subject = '$this->subject', body = '$this->body', orderID = '$this->orderID', priority = '$this->priority', category = '$this->category', status = '$this->status', assignedto = '$this->assignedTo', completed = '$this->completed', dateresolved = '$this->dateResolved', vendor = '$this->vendor', reason = '$this->reason' where ticketID = '$this->id'";
         if ($this->dbc->query($sql_update)) {
 
-            echo "<p> Ticket Successfully Updated </p>";
+            echo '<div class="alert alert-dismissible alert-success"> Ticket Successfully Updated </div>';
             return true;
         } else {
 
@@ -255,7 +329,7 @@ class Ticket {
 
         if ($this->dbc->query($sql_close)) {
 
-            echo "<p> Ticket Successfully Closed </p>";
+            echo '<div class="alert alert-dismissible alert-success"> Ticket Successfully Closed </div>';
             return true;
         } else {
 
@@ -280,7 +354,7 @@ class Ticket {
 
         if ($this->dbc->query($sql_open)) {
 
-            echo "<p> Ticket Successfully Re-opened </p>";
+            echo '<div class="alert alert-dismissible alert-success"> Ticket Successfully Re-opened </div>';
             return true;
         } else {
 

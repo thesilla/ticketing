@@ -1,4 +1,6 @@
-<?php ?>
+<?php
+require_once '../Models/UserManager.php';
+?>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a href = '../Controllers/homeController.php'><img src ="../Images/tmod.jpg"></a>
@@ -49,65 +51,47 @@
         <ul class="nav nav-tabs">
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#home">Home</a>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Tools</a>
-                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 44px, 0px);">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
+            <li class="nav-item dropdown" id="tools-dropdown">
+                <a  class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Tools</a>
+                <div id="tools-dropdown-content">
+                    <a class="dropdown-item" href="#">Container Multiplier Calculator</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Separated link</a>
+                    <a class="dropdown-item" href="#">Ticketing and Cases</a>
                 </div>
             </li>
 
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Maintenence</a>
-                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 44px, 0px);">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Separated link</a>
-                </div>
-            </li>
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#home">About</a>
             </li>
 
 
-
-
         </ul>
-
-
-
-
-
-
-
-
-
-
 
     </div>
 
 
+    <div id="account-greeting"><h3><?php
+if (UserManager::isLoggedIn()) {
 
+    echo "<div> Welcome, " . $_SESSION['fname'] . "!</div>";
+}
+?></h3></div>
 
     <div id="adminButton"> <!-- btn btn-outline-primary dropdown1 -- > put this back in admin button class -->
-        <button type="button" class ="btn btn-outline-primary dropdown1" >ADMIN</button>
+        <button type="button" class ="btn btn-outline-primary dropdown1" ><div>ADMIN:</div></button>
         <!--  -->
         <div id="adminMenu"> 
-            
-            <div> <a href ="adminController.php"> Settings </a></div> 
+
+            <div> <a href ="adminController.php"> Application Settings </a></div> 
             <div> <a href ="adminController.php"> Manage Users </a></div>
+            <div> <a href ="adminController.php"> Manage Account </a></div>
+            <div> <a href ="adminController.php"> Create New Account </a></div>
             <br/>
-            <div> <a href ="logoutController.php"> Log Out </a></div> 
- 
-             
+            <div id="logoutDiv"><a href ="logoutController.php"><button class="btn btn-info"> Log Out </button> </a></div> 
+
+
         </div>
     </div>
 </nav>
 <br/>
-
 

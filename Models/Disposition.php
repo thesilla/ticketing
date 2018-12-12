@@ -174,7 +174,7 @@ class Disposition {
 
         if ($result = $dbc->query($sql_deleteDispos)) {
 
-            echo "<p> Dispositions Successfully Deleted </p>";
+            echo '<div class="alert alert-dismissible alert-success"> Dispositions Successfully Deleted </div>';
         } else {
 
             echo "<p> Could not run query </p>";
@@ -191,7 +191,7 @@ class Disposition {
         if ($this->dbc->query($sql_addDispo)) {
 
             //TODO - DO SOMETHING MORE ELABORATE THAT INDICATES SUCESSFUL SUBMISSION FOR NOW JUST PRINT SUCCESS
-            echo "<p> Disposition Successfully Added </p>";
+            echo '<div class="alert alert-dismissible alert-success"> Disposition Successfully Added </div>';
             return true;
         } else {
 
@@ -211,7 +211,7 @@ class Disposition {
         $sql_delete = "delete from dispositions where dispoID = '$this->dispoID'";
         if ($this->dbc->query($sql_delete)) {
 
-            echo "<p> Disposition Successfully Deleted </p>";
+            echo '<div class="alert alert-dismissible alert-success"> Disposition Successfully Deleted </div>';
             return true;
         } else {
 
@@ -231,7 +231,7 @@ class Disposition {
 
         if ($this->dbc->query($sql_update)) {
 
-            echo "<p> Disposition Successfully Updated </p>";
+            echo '<div class="alert alert-dismissible alert-success"> Disposition Successfully Updated </div>';
             return true;
         } else {
 

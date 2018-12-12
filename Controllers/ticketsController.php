@@ -12,7 +12,7 @@ require_once '../Models/UserManager.php';
 require_once '../Models/Database.php';
 include'../Content/header1.php';
 
-
+//echo phpinfo();
 
 //initialize error variable
 // TODO - create class that handles errors and generates appropriate messages
