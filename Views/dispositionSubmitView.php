@@ -17,7 +17,7 @@
         <br/>
         <div id="closeAddDisposition">
             <div id="dispositionSubmitButtonContainer"><input type = "submit" class="btn btn-success" value ="Submit Disposition" name ="submit-disposition"></div>
-            <button class="btn btn-secondary" id="closeAddDispositionButton"> Cancel </button> 
+            <button type = "button" class="btn btn-secondary" id="closeAddDispositionButton"> Cancel </button> 
         </div>
     </form>
     </div>
