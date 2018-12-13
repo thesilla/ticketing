@@ -56,7 +56,7 @@
 
 
     <form action ="ticketsController.php" method ="post" id="submitTicketForm" class = "form">-->
-    <form id = "editTicketForm" action = "ticketDetailController.php" method = "post">
+    <form class="form-horizontal" id = "editTicketForm" action = "ticketDetailController.php" method = "post">
         <h1>Ticket #: <?php echo $ticket->getId(); ?> - Modify</h1>
 
         <hr class="my-4">

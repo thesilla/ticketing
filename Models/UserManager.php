@@ -12,8 +12,9 @@ class UserManager {
     private $password;
     private $fname;
     private $lname;
-    
-    
+    private $email;
+
+
     private $dbc;
 
     // Constructor: create new UserManager object 
@@ -156,5 +157,58 @@ class UserManager {
         
         
     }
+    
+    
+  
 
+    
+    function getUserID() {
+        return $this->userID;
+    }
+
+    function getPassword() {
+        return $this->password;
+    }
+
+    function getFname() {
+        return $this->fname;
+    }
+
+    function getLname() {
+        return $this->lname;
+    }
+
+    function getEmail() {
+        return $this->email;
+    }
+
+    function getDbc() {
+        return $this->dbc;
+    }
+
+    function setUserID($userID) {
+        $this->userID = $userID;
+    }
+
+    function setPassword($password) {
+        $this->password = $password;
+    }
+
+    function setFname($fname) {
+        $this->fname = $fname;
+    }
+
+    function setLname($lname) {
+        $this->lname = $lname;
+    }
+
+    function setEmail($email) {
+        $this->email = $email;
+    }
+
+    function setDbc($dbc) {
+        $this->dbc = $dbc;
+    }
+    
+    
 }

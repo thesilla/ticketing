@@ -2,16 +2,16 @@
 
 <div id="submitTicket" class="jumbotron">
 
-    <form action ="ticketsController.php" method ="post" id="submitTicketForm" class = "form">
-        <h1>Create New Ticket</h1>
-        <hr class="my-4">
+    <form class="form-horizontal" action ="ticketsController.php" method ="post" id="submitTicketForm" class = "form">
+        <h1 style ="text-align: center;">Create New Ticket</h1>
+
         <div class="form-group">
             <label for="subject">Subject:</label>
             <input class="form-control"  type ="text" name ="subject" placeholder ="please enter subject">
         </div>
         <div class="form-group">
             <label for="details">Ticket Details - Please Explain the Issue:</label>
-            <textarea class="form-control"rows="5" name ="details" id="submitTicketDetails" form="submitTicketForm"></textarea>
+            <textarea class="form-control"rows="3" name ="details" id="submitTicketDetails" form="submitTicketForm"></textarea>
         </div>
 
 

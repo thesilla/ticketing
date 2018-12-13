@@ -49,8 +49,7 @@ require_once '../Models/UserManager.php';
         -->
 
         <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#home">Home</a>
+
             <li class="nav-item dropdown" id="tools-dropdown">
                 <a  class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Tools</a>
                 <div id="tools-dropdown-content">
@@ -58,10 +57,6 @@ require_once '../Models/UserManager.php';
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Ticketing and Cases</a>
                 </div>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#home">About</a>
             </li>
 
 

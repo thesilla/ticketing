@@ -142,6 +142,7 @@ class User {
         }
     }
 
+    // creates a new user
     public function add() {
 
         
