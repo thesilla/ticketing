@@ -155,7 +155,7 @@ class User {
         if ($this->dbc->query($sql_addUser)) {
 
             //TODO - DO SOMETHING MORE ELABORATE THAT INDICATES SUCESSFUL SUBMISSION FOR NOW JUST PRINT SUCCESS
-            echo "<p> User Successfully Added </p>";
+            echo "<div class='alert alert-dismissible alert-success'> User Successfully Added </div>";
             return true;
         } else {
 

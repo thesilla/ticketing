@@ -10417,3 +10417,11 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
 #tools-dropdown:hover #tools-dropdown-content{
     display: block;
 }
+
+#createUserContainer{
+    
+    width: 50%;
+    margin: auto;
+    
+    
+}

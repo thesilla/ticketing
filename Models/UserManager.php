@@ -26,12 +26,13 @@ class UserManager {
         $this->password = $user->getPassword();
         $this->fname = $user->getFirstName();
         $this->lname = $user->getLastName();
+        $this->email = $user->getEmail();
         
 
         // set db connection for running checks - inject with User.
         $this->dbc = $user->getDbc();
     }
-
+    // checks if user/password combination exists in database
     public function userExists() {
 
 
@@ -55,6 +56,35 @@ class UserManager {
             
         }
     }
+    
+    
+    // checks if email already exists in database
+        public function emailExists() {
+
+
+
+        $sql_userExists = "SELECT COUNT(*) FROM users where email = '$this->email'";
+
+
+        if ($result = $this->dbc->query($sql_userExists)) {
+
+            $number_of_rows = $result->fetchColumn();
+            if($number_of_rows == 1){
+                
+                return true;
+               
+                
+                
+            } else {
+                
+                return false;
+            }
+            
+        }
+    }
+    
+    
+    
     
     // log in the input user
     // return true if successful, false if not
