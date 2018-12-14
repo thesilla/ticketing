@@ -1,3 +1,9 @@
+
+<?php
+   
+require_once('../Content/navbarBottom.php');
+    
+    ?>
 </div>
 
 

@@ -55,7 +55,7 @@ require_once '../Models/UserManager.php';
                 <div id="tools-dropdown-content">
                     <a class="dropdown-item" href="#">Container Multiplier Calculator</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Ticketing and Cases</a>
+                    <a class="dropdown-item" href="../Controllers/ticketsController.php">Ticketing and Cases</a>
                 </div>
             </li>
 

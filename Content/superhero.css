@@ -74,12 +74,13 @@ body {
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.5;
+  
   color: #222;
   text-align: left;
 
   /*background-color: #fff; */
   
-  background-image: url('../Images/bg2.png');
+  background-image: url('../Images/bg5.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   
@@ -9898,6 +9899,7 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
     
     width: 80%;
     margin: auto;
+    box-shadow: 5px 5px 20px;
     
     
     
@@ -10008,6 +10010,7 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
     overflow: auto;
 
     margin: auto;
+    box-shadow: 5px 5px 20px;
  
 }
 
@@ -10172,6 +10175,7 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
     width: 50%;
 
     margin: auto;
+    box-shadow: 5px 5px 20px;
  
     
     
@@ -10223,6 +10227,7 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
     width: 50%;
 
     margin: auto;
+    box-shadow: 5px 5px 20px;
  
     
     
@@ -10243,6 +10248,7 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
     width: 50%;
 
     margin: auto;
+    box-shadow: 5px 5px 20px;
  
     
     
@@ -10422,6 +10428,12 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
     
     width: 100%;
     margin: auto;
+    
+    
+}
+
+#navbarBottom{
+    
     
     
 }

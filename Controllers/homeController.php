@@ -12,7 +12,7 @@ include '../Content/header1.php';
 
 include '../Views/dashboardView.php';
 
-
+require_once('../Content/footerMain.php');
 
 
 

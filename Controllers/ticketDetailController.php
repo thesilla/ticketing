@@ -186,8 +186,8 @@ $allDispositions = Disposition::getDispositionsByTicket($dbc, $id);
 // generate views
 
 $ticket = Ticket::createFromID($dbc, $id);
-echo "<br/>";
-echo '<div id="ticket-display" class="jumbotron">';
+
+//echo '<div id="ticket-display" class="jumbotron">';
 
 $employees = Employee::getEmployees($dbc);
 $users = User::getUsers($dbc);

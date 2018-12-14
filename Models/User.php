@@ -142,7 +142,7 @@ class User {
 
         // get database connection
 
-
+        //$md5password = md5($this->password);
 
         $sql_addUser = "INSERT INTO `users` (`userID`, `firstname`, `lastname`, `email`,`title`, `password`) VALUES ('$this->userID','$this->firstName', '$this->lastName','$this->email','$this->title','$this->password')";
 

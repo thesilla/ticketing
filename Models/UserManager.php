@@ -35,8 +35,8 @@ class UserManager {
     // checks if user/password combination exists in database
     public function userExists() {
 
-
-
+        //$md5password = md5($this->password);
+        //echo $md5password;
         $sql_userExists = "SELECT COUNT(*) FROM users where userID = '$this->userID' AND password = '$this->password'";
 
 
