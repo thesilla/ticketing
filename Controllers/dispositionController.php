@@ -10,7 +10,8 @@ require_once'../Models/Disposition.php';
 require_once '../Models/Employee.php';
 require_once '../Models/UserManager.php';
 require_once '../Models/Database.php';
-//include'../Content/header1.php';
+
+include'../Content/header2.php';
 
 //require('footer1');
 // TODO - Disposition submit logic here
@@ -36,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
             date_default_timezone_set('America/New_York');
 
             $dispoID = 0;
-            $userID = "mgillman"; // FIXME - MAKE THIS DYNAMIC IN THE FUTURE - PULL FROM SESSION
+            $userID = $_SESSION['username']; // FIXME - MAKE THIS DYNAMIC IN THE FUTURE - PULL FROM SESSION
             $body = $_POST['disposition'];
             
             // --Technically time doesn't matter, submitted on SQL/server side

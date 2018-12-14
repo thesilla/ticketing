@@ -8,7 +8,7 @@
     <div id="createUserContainer" class="jumbotron">
 
         <form class="form-horizontal" action="adminController.php" method="post">
-            <h1 style ="text-align: center" class="panel-title"> Create New Account </h1>
+            <h1 style ="text-align: center" class="panel-title"> Add New Administrator </h1>
             <div class="panel-body">
         
 

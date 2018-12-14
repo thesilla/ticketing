@@ -1,7 +1,7 @@
 <?php
 
-
 require_once('Database.php');
+
 class User {
 
     private $userID;
@@ -10,14 +10,9 @@ class User {
     private $email;
     private $title;
     private $password;
-    
     // database connection
     private $dbc;
-    
 
-
-
- 
 // Constructor: create new Disposition object (template)
     function __construct($conn) {
         $this->dbc = $conn->getDbc();
@@ -43,8 +38,8 @@ class User {
 
         // set static database connection
         $dbc = $conn->getDbc();
-        
-        
+
+
         $sql_getUserFromDB = "SELECT * FROM users where userID = '$userID'";
 
         if ($result = $dbc->query($sql_getUserFromDB)) {
@@ -63,62 +58,61 @@ class User {
             echo "<p> Could not run query </p>";
         }
     }
-    
+
     /*
-        public function getConnection() {
+      public function getConnection() {
 
-        try {
-
-
-            $this->dbc = new PDO("mysql:host=localhost;dbname=ticketing", "root", "");
-
-            $this->dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            //echo "<div> Sucessfully connected to Database </div>";
-        } catch (PDOException $e) {
-            $output = 'Unable to connect to the database server.';
-
-            echo "<div style='color:red;'>" . $e->getMessage() . "</div>";
-
- 
-            exit();
-        }
-    }
-    
-    
-    
-        public static function getStaticConnection(){
-        
-                // set database connection
-        try {
+      try {
 
 
-            $dbc = new PDO("mysql:host=localhost;dbname=ticketing", "root", "");
+      $this->dbc = new PDO("mysql:host=localhost;dbname=ticketing", "root", "");
 
-            $dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            
-            return $dbc;
+      $this->dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            //echo "<div> Sucessfully connected to Database </div>";
-        } catch (PDOException $e) {
-            $output = 'Unable to connect to the database server.';
+      //echo "<div> Sucessfully connected to Database </div>";
+      } catch (PDOException $e) {
+      $output = 'Unable to connect to the database server.';
 
-            echo "<div style='color:red;'>" . $e->getMessage() . "</div>";
+      echo "<div style='color:red;'>" . $e->getMessage() . "</div>";
 
 
-            exit();
-        }
-        
-    }
+      exit();
+      }
+      }
+
+
+
+      public static function getStaticConnection(){
+
+      // set database connection
+      try {
+
+
+      $dbc = new PDO("mysql:host=localhost;dbname=ticketing", "root", "");
+
+      $dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+      return $dbc;
+
+      //echo "<div> Sucessfully connected to Database </div>";
+      } catch (PDOException $e) {
+      $output = 'Unable to connect to the database server.';
+
+      echo "<div style='color:red;'>" . $e->getMessage() . "</div>";
+
+
+      exit();
+      }
+
+      }
      * 
      */
-    
 
     // static method pulling all tickets - DB/SQL object argument
     // return an array of USER objects from the database, to keep all db logic in model side
     public static function getUsers($conn) {
 
-        
+
         // set static database connection
         $dbc = $conn->getDbc();
 
@@ -145,18 +139,30 @@ class User {
     // creates a new user
     public function add() {
 
-        
+
         // get database connection
-    
-        
-        
+
+
+
         $sql_addUser = "INSERT INTO `users` (`userID`, `firstname`, `lastname`, `email`,`title`, `password`) VALUES ('$this->userID','$this->firstName', '$this->lastName','$this->email','$this->title','$this->password')";
 
         if ($this->dbc->query($sql_addUser)) {
 
-            //TODO - DO SOMETHING MORE ELABORATE THAT INDICATES SUCESSFUL SUBMISSION FOR NOW JUST PRINT SUCCESS
+            // generate alert banner
             echo "<div class='alert alert-dismissible alert-success'> User Successfully Added </div>";
+
             return true;
+
+
+            // send an email to this user confirming the creation of account;
+            // TODO/FIXME - add confirmation code mechanism through email to user
+            $to = $this->email;
+            $subject = 'the subject';
+            $message = 'Hello' . $this->firstName . " " . $this->lastName . ",\r\nYou have been successfully registered for the Tile Market of Delaware Administrative Tools Portal! \r\n Visit your Account Management panel for information and to adjust account settings. \r\n Warm regards;\r\nThe Tile Market Management Team";
+            $headers = 'From: admin@tilede.com' . "\r\n" .
+                    'Reply-To: admin@tilede.com' . "\r\n" .
+                    'X-Mailer: PHP/' . phpversion();
+            mail($to, $subject, $message, $headers);
         } else {
 
             echo "<p> Could not run query </p>";
@@ -168,8 +174,8 @@ class User {
     public function delete() {
 
         // get database connection
-        
-        
+
+
         $sql_delete = "delete from users where userID = '$this->userID'";
         if ($this->dbc->query($sql_delete)) {
 
@@ -187,13 +193,13 @@ class User {
     public function update() {
 
         // get database connection
-        
-        
-        
+
+
+
         $sql_update = "update users SET firstname = '$this->firstName', lastname = '$this->lastName', email = '$this->email', title = '$this->title', password = '$this->password' where userID = '$this->userID'";
         if ($this->dbc->query($sql_update)) {
 
-            echo "<p> User Successfully Updated </p>";
+            echo "<div class='alert alert-dismissible alert-success'> User Successfully Updated </div>";
             return true;
         } else {
 
@@ -249,7 +255,7 @@ class User {
     function setPassword($password) {
         $this->password = $password;
     }
-    
+
     function getDbc() {
         return $this->dbc;
     }

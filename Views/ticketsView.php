@@ -14,7 +14,6 @@
 
 
 
-<br/>
 <div class="jumbotron">
     <h1> Purchasing Tickets </h1>
     <hr class="my-4">

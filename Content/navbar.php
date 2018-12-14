@@ -88,5 +88,5 @@ if (UserManager::isLoggedIn()) {
         </div>
     </div>
 </nav>
-<br/>
+
 

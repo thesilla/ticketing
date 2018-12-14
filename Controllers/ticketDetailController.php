@@ -184,6 +184,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
 $id = $ticket->getId();
 $allDispositions = Disposition::getDispositionsByTicket($dbc, $id);
 // generate views
+
 $ticket = Ticket::createFromID($dbc, $id);
 echo "<br/>";
 echo '<div id="ticket-display" class="jumbotron">';
