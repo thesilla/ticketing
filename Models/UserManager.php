@@ -22,6 +22,8 @@ class UserManager {
     public function __construct(User $user) {
 
         // set username and password properities for use in analysis
+        // -->NOTE: Properties will be brought in from User object even if they do not match equivallant User attributes in database
+        // -->userExists() method below updates UserManager properies if the user exists in db
         $this->userID = $user->getUserID();
         $this->password = $user->getPassword();
         $this->fname = $user->getFirstName();
@@ -33,19 +35,37 @@ class UserManager {
         $this->dbc = $user->getDbc();
     }
     // checks if user/password combination exists in database
+    // if it does, TRUE is returned, and UserManager properties will update with existing db user attributes
+    // if not, FALSE is returned, and UserManager properties will remain as they were before
     public function userExists() {
 
         //$md5password = md5($this->password);
         //echo $md5password;
         $sql_userExists = "SELECT COUNT(*) FROM users where userID = '$this->userID' AND password = '$this->password'";
 
-
+        
         if ($result = $this->dbc->query($sql_userExists)) {
-
+            
             $number_of_rows = $result->fetchColumn();
+            
+            // if 1 result, theres a match
             if($number_of_rows == 1){
                 
+                // create database instance
+                $db = new Database();        
+                
+                // create new User object for verified existing User from database
+
+                $dbUser = User::createFromID($db, $this->userID);
+                
+                // pass this User's properties into UserManager object's attributes
+                // -- (This is for User PHP objects created with correct ID and Password but other attributes i.e first, last name do not match database
+                $this->fname = $dbUser->getFirstName();
+                $this->lname = $dbUser->getLastName();
+                $this->email = $dbUser->getEmail();
+
                 return true;
+                
                
                 
                 
@@ -54,6 +74,9 @@ class UserManager {
                 return false;
             }
             
+        } else {
+            
+            return false;
         }
     }
     
@@ -120,6 +143,7 @@ class UserManager {
                 $_SESSION['lname'] = $this->lname;
                 
             }
+            
             
             
             return true;

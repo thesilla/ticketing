@@ -16,12 +16,21 @@ class User {
 // Constructor: create new Disposition object (template)
     function __construct($conn) {
         $this->dbc = $conn->getDbc();
+
+        // all properties of object will be blank by default
+        $this->userID = "";
+        $this->firstName = "";
+        $this->lastName = "";
+        $this->email = "";
+        $this->title = "";
+        $this->password = "";
     }
 
 // ************PHP does not allow for multiple constructors - Static Function Constructors below************
     // Constructor with arguments for every attribute - create object from scratch
     public static function create($conn, $userID, $firstName, $lastName, $email, $title, $password) {
-
+        
+        // set attributes that are blank by default to values
         $instance = new self($conn); // dbc is set in this step (see base constructor above)
         $instance->setUserID($userID);
         $instance->setFirstName($firstName);
@@ -33,30 +42,50 @@ class User {
     }
 
     // Constructor which will instantiate a new object pulled from database given a User ID #
+    // If user does not exist in database, creates returns a template User object with UserID as given id# and rest of attributes the default blank values
     // - Takes User ID # and a Database Connection object
+  
     public static function createFromID($conn, $userID) {
 
         // set static database connection
         $dbc = $conn->getDbc();
 
-
+        // sql to pull data if it exists
         $sql_getUserFromDB = "SELECT * FROM users where userID = '$userID'";
+        
 
+        // if query is able to be run
         if ($result = $dbc->query($sql_getUserFromDB)) {
 
-            $row = $result->fetch();
-            $instance = new self($conn);
-            $instance->setUserID($row['userID']);
-            $instance->setFirstName($row['firstname']);
-            $instance->setLastName($row['lastname']);
-            $instance->setEmail($row['email']);
-            $instance->setTitle($row['title']);
-            $instance->setPassword($row['password']);
-            return $instance;
-        } else {
+            // sql to count number of results
+            $sql_count = "SELECT COUNT(*) FROM users where userID = '$userID'";
+            
+            $resultCount = $dbc->query($sql_count);
+            $number_of_rows = $resultCount->fetchColumn();
+            
+            //return $number_of_rows;
+            if ($number_of_rows == 1) {
 
-            echo "<p> Could not run query </p>";
-        }
+
+                $row = $result->fetch();
+                $instance = new self($conn);
+                $instance->setUserID($row['userID']);
+                $instance->setFirstName($row['firstname']);
+                $instance->setLastName($row['lastname']);
+                $instance->setEmail($row['email']);
+                $instance->setTitle($row['title']);
+                $instance->setPassword($row['password']);
+                return $instance;
+            
+                
+            // if no results AKA no user in database with that UserID, create new blank user object with input userID and default blank attributes
+            } else {
+
+                $instance = new self($conn);
+                $instance->setUserID($userID);
+                return $instance;
+            }
+        } 
     }
 
     /*
@@ -141,7 +170,6 @@ class User {
 
 
         // get database connection
-
         //$md5password = md5($this->password);
 
         $sql_addUser = "INSERT INTO `users` (`userID`, `firstname`, `lastname`, `email`,`title`, `password`) VALUES ('$this->userID','$this->firstName', '$this->lastName','$this->email','$this->title','$this->password')";

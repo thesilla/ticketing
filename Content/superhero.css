@@ -9910,7 +9910,7 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
     
    /* this is for ticket details */ 
    
-    word-wrap: break-word;
+   // word-wrap: break-word;
     
 }
 
@@ -9920,7 +9920,8 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
     flex-direction: row;
    /* justify-content: center;*/
    justify-content: space-between;
-    
+  
+   
     
     
 }
@@ -10434,6 +10435,14 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
 
 #navbarBottom{
     
+    margin-top: -35px;
+    padding: 0px;
+    
+}
+
+#titlePanel{
+    
+   min-width: 475px; 
     
     
 }

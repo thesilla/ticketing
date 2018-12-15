@@ -21,11 +21,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // FIXME - sanitze this
         //$userID = htmlspecialchars(mysqli_real_escape_string($_POST['username']));
         $userID = $_POST['username'];
+        
+
     } else {
 
 
         // TODO: Error please submit username
-        echo "<div> Please submit username </div>";
+        //echo "<div> Please submit username </div>";
         $errors = true;
     }
 
@@ -35,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         //$password = htmlspecialchars(mysqli_real_escape_string($_POST['password']));
         $password = $_POST['password'];
+   
     } else {
 
 
@@ -46,11 +49,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // if no issues, log user in
     if (!$errors) {
+        
+        // Generate a static object from userID
+        // $username and $password already provided by client above
+        $firstName="";
+        $lastName="";
+        $email="";
+        $title="";
+        
+        $user = User::create($conn, $userID, $firstName, $lastName, $email, $title, $password);
 
-        $user = User::createFromID($conn, $userID);
-
+        //
+        //$user->setPassword($password);
         $userManager = new UserManager($user);
+
         if ($userManager->login()) {
+            
 
             header('Location: homeController.php');
             exit();
@@ -65,6 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // TODO - Make login form error dynamic
     } else {
 
+       
         require_once('../Views/loginView.php');
     }
     

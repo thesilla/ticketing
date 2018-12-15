@@ -1,7 +1,7 @@
 
 <br/>
 <hr class="my-4">
-<h1 style="text-align: center; font-weight: 566pt;"> Dispositions</h1>
+<h1 class = "table" style="text-align: center; font-weight: 566pt;"> Dispositions</h1>
 <hr class="my-4">
 <?php 
 
@@ -13,7 +13,7 @@ if(count($allDispositions)!=0){
 <div> 
     <!-- Table headers -->
     <table class="table" id="displayTickets">
-        <tr>
+        <tr class="table-primary">
         
 
         <th onclick='sortTable(0)'>Submitted By:</th>
@@ -29,7 +29,7 @@ if(count($allDispositions)!=0){
 
         foreach ($allDispositions as $disposition) {
 
-            echo "<tr>";
+            echo "<tr class='table-active'>";
 
             // display data
 
