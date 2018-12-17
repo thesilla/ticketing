@@ -10437,12 +10437,40 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
     
     margin-top: -35px;
     padding: 0px;
+    //display: block;
+    color: white;
+    font-size: 12pt;
+    
+    
+}
+
+#navbarBottom ul {
+    
+    list-style: none;
+    list-style-type: none;
+    text-align: center;
+    
+}
+
+
+#navbarBottomContent{
+    
+
+    display: flex;
+    justify-content: center;
+    width: 100%;
     
 }
 
 #titlePanel{
     
    min-width: 475px; 
+    
+    
+}
+
+.footer-list{
+    padding: 30px;
     
     
 }

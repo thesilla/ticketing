@@ -147,7 +147,7 @@ class Ticket {
 // takes db object, return an array of Ticket objects from the database
     public static function getTickets($conn) {
 
-        
+
         
         // set static database connection (not datbase object)
         $dbc = $conn->getDbc();
