@@ -19,6 +19,23 @@ include'../Content/header1.php';
 $conn = new Database();
 
 
+$createUserErrors = array(
+    "firstname" => array("<p class='text-danger'> ***Please enter your FIRST name*** </p>", 0),
+    "lastname" => array("<p class='text-danger'> ***Please enter your LAST name*** </p>", 0),
+    "email" => array("<p class='text-danger'> ***Please enter a valid email address*** </p>", 0),
+    "username" => array("<p class='text-danger'> ***Please enter desired username*** </p>", 0),
+    "position" => array("<p class='text-danger'> ***Please enter occupational position*** </p>", 0),
+    "password" => array("<p class='text-danger'> ***Please enter a valid password*** </p>", 0),
+);
+
+
+
+
+
+
+
+
+
 //
 $firstname;
 $lastname;
@@ -40,11 +57,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $firstname = htmlspecialchars($_POST['firstname']);
     } else {
 
-        $problem = true;
+        $createUserErrors['firstname'][1] = 1;
     }
     if (!empty($_POST['lastname']) && isset($_POST['lastname'])) {
 
         $lastname = htmlspecialchars($_POST['lastname']);
+    } else {
+
+        $createUserErrors['lastname'][1] = 1;
     }
 
 
@@ -53,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $username = htmlspecialchars($_POST['username']);
     } else {
 
-        $problem = true;
+        $createUserErrors['username'][1] = 1;
     }
 
     if (!empty($_POST['password1']) && isset($_POST['password1'])) {
@@ -61,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $password = htmlspecialchars($_POST['password1']);
     } else {
 
-        $problem = true;
+        $createUserErrors['password'][1] = 1;
     }
 
     if (!empty($_POST['position']) && isset($_POST['position'])) {
@@ -69,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $position = htmlspecialchars($_POST['position']);
     } else {
 
-        $problem = true;
+        $createUserErrors['position'][1] = 1;
     }
 
     if (!empty($_POST['email']) && isset($_POST['email'])) {
@@ -79,12 +99,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email = htmlspecialchars($_POST['email']);
     } else {
 
-        $problem = true;
+        $createUserErrors['email'][1] = 1;
     }
 
     // if no problem to this point (must keep checking $problem variable to avoid null input into User object);
     // create User object from form submission info which was just put into variables
     // --->generate User object from input variables
+    // check to see if any errors
+    foreach ($createUserErrors as $errors) {
+
+        if ($errors[1] == 1) {
+
+            $problem = true;
+            break;
+        }
+    }
+
+
+
 
 
     if (!$problem) {
@@ -123,4 +155,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // redirect to Manage Account page cant do this because another user still logged in
 // users cannot register themself
 require_once("../views/createNewAccountView.php");
+require_once("../Content/footer3.php");
 ?>

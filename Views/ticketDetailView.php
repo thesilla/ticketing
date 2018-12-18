@@ -93,14 +93,6 @@
 <hr class="my-4">
 
 
-<div class="card border-secondary mb-3">
-    <div class="card-header">Subject</div>
-    <div class="card-body">
-        <h4 class="card-title"><?php echo $ticket->getSubject(); ?></h4>
-    </div>
-</div>
-
-
 
 <div class="details-row">
     <div class="card border-secondary mb-3" style="max-width: 20rem;">

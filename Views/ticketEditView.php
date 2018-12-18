@@ -1,34 +1,67 @@
 <!-- Hidden HTML for editing ticket - displayed through JS -->
-<div id = "editTicket"  class="alert alert-dismissible alert-secondary">
+<div id = "editTicket"  class="jumbotron" style = <?php
+
+// check if any errors exist
+// if so, show form on reload with errors displayed
+$issue = false;
+foreach($ticketEditErrors as $errors){
+    
+    if($errors[1]==1){
+        
+        $issue = true;
+        break;
+        
+    }
+}
+
+if($issue){
+    
+    
+    echo "\"" .  "display: block;". "\"";
+    
+} else {
+    
+    echo "\"" .  "display: hidden;" . "\"";
+    
+}
 
 
 
 
-    <form action ="ticketsController.php" method ="post" id="submitTicketForm" class = "form">-->
+
+?>
+
+>
+
+
+
+
+
     <form class="form-horizontal" id = "editTicketForm" action = "ticketDetailController.php" method = "post">
-        <h1>Ticket #: <?php echo $ticket->getId(); ?> - Modify</h1>
+        <h1 style ="text-align: center;">Ticket #: <?php echo $ticket->getId(); ?> - Modify</h1>
 
         <hr class="my-4">
 
-        <div>Submitted By: <?php echo $ticket->getUserID(); ?></div>
-        <div>Date Submitted: <?php echo $ticket->getDateSubmitted(); ?></div>
+        <div style ="text-align: center;">Submitted By: <?php echo $ticket->getUserID(); ?></div>
+        <div style ="text-align: center;">Date Submitted: <?php echo $ticket->getDateSubmitted(); ?></div>
 
         <hr class="my-4">
 
         <div class="form-group">
             <label for="subject">Subject</label>
             <input class="form-control"  type ="text" name ="subject" value =<?php echo "\"" . $ticket->getSubject() . "\""; ?>>
+            <?php if($ticketEditErrors['subject'][1]==1){ echo $ticketEditErrors['subject'][0];} ?>
         </div>
-        
-        
-        
+
+
+
         <div class="form-group">
-            <div>Status:</div>
+            <label for="status">Status</label>
             <select class="custom-select" name="status">
 
                 <?php
                 //TODO - add more statuses
-                $statuses = array("Awaiting Agent Reply","Awaiting Vendor Reply","Awaiting Sales Reply","Awaiting Warehouse Reply","IT Case Pending");
+                $statuses = array("Awaiting Agent Reply", "Awaiting Vendor Reply", "Awaiting Sales Reply", "Awaiting Warehouse Reply", "IT Case Pending");
 
                 foreach ($statuses as $status) {
 
@@ -36,21 +69,14 @@
                 }
                 ?>
             </select>
+            <?php if($ticketEditErrors['status'][1]==1){ echo $ticketEditErrors['status'][0];} ?>
         </div>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+
+
         <div class="form-group">
             <label for="details">Ticket Details</label>
-            <textarea class="form-control"rows="5" name ="details" id="submitTicketDetails" form="submitTicketForm"><?php echo $ticket->getBody(); ?></textarea>
+            <textarea class="form-control" rows="5" name ="details" id="submitTicketDetails" form="editTicketForm"><?php echo $ticket->getBody(); ?></textarea>
         </div>
 
 
@@ -91,8 +117,8 @@
 
         <!-- IN THE FUTURE, this should be picked from an editable dynamic list of all possible categories -->
         <div>Category:</div>
-
-        <select class="custom-select" name="category">
+<div class="form-group">
+        <select class="custom-select" name="category" form="editTicketForm">
 
             <?php
             $categories = [
@@ -113,7 +139,7 @@
             ?>
         </select>
 
-
+</div>
 
 
 
@@ -121,29 +147,26 @@
             <div>Priority:</div>
             <div class="form-check">
                 <label class="form-check-label" for="priority">
-                    <input name="priority" class="form-check-input" id="optionsRadios1" type="radio" checked="" value="3">
-                    3 (Lowest) 
+                    <input name="priority" class="form-check-input" id="optionsRadios1" type="radio" checked="" value="3">3 (Lowest)
                 </label>
             </div>
             <div class="form-check">
                 <label class="form-check-label" for="priority">
-                    <input name="priority" class="form-check-input" id="optionsRadios2" type="radio" value="2">
-                    2
+                    <input name="priority" class="form-check-input" id="optionsRadios2" type="radio" value="2">2
                 </label>
             </div>
             <div class="form-check">
                 <label class="form-check-label" for="priority">
-                    <input name="priority" class="form-check-input" id="optionsRadios3" type="radio" value="1">
-                    1 (Highest)
+                    <input name="priority" class="form-check-input" id="optionsRadios3" type="radio" value="1">1 (Highest)
                 </label>
             </div>
-        </fieldset>
+       </fieldset> 
 
 
         <!-- Assigned To: -->
         <div class="form-group">
             <div>Assigned To:</div>
-            <select class="custom-select" name="assignedto">
+            <select class="custom-select" name="assignedto" form="editTicketForm">
 
                 <?php
                 // pull all users and display
@@ -151,18 +174,32 @@
 
                 foreach ($users as $user) {
 
-                    echo '<option value=' . $user->getFirstName() . '>' . $user->getFirstName() . '</option>';
+                    $selected;
+                    // iterate through users
+                    //  -- if ticket assignedTo property is equal to a user name, make that User name default select value
+                    if($ticket->getAssignedTo()===$user->getFirstName()){
+                        $selected = $ticket->getAssignedTo();
+                        echo '<option selected=' . $selected . 'value=' . $user->getFirstName() . '>' . $user->getFirstName()  . '</option>';
+                        
+                    } else {
+                        
+                        echo '<option value=' . $user->getFirstName() . '>' . $user->getFirstName()  . '</option>';
+                        
+                        
+                    }
+                   
                 }
                 ?>
             </select>
+            <?php if($ticketEditErrors['assignedto'][1]==1){ echo $ticketEditErrors['assignedto'][0];} ?>
         </div>
 
         <br/>
 
-        <div>
+        <div class="closeEditTicketControls">
             <input name = 'ticketno' id = 'editTicket' type = 'hidden' value = <?php echo "\"" . $ticket->getId() . "\""; ?>> 
-            <input id ="editTicketSubmit" name ="submit" type ="submit" value ="Update Ticket">
-            <button type = "button" id="closeEditTicket"> Cancel </button>
+            <input class="btn btn-success" id ="editTicketSubmit" name ="submit" type ="submit" value ="Update Ticket">
+            <button type = "button" class="btn btn-default" id="closeEditTicket"> Cancel </button>
         </div>
         <!-- submit button 
         <input  id  ="submitTicketButton" class="btn btn-primary btn-lg btn-block" type ="submit" value ="Submit Ticket" name ="submitticketbutton">

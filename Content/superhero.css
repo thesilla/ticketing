@@ -5290,6 +5290,7 @@ input[type="button"].btn-block {
   color: #155f17;
   background-color: #d4f0d5;
   border-color: #c3ebc4;
+  
 }
 
 .alert-success hr {
@@ -9972,9 +9973,24 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
     
     width: 100%; 
     display: block;
+    box-sizing: border-box;
 }
 
 #editTicketForm input{
+    
+    
+    display: block;
+    width: 98%;
+    margin: auto;
+}
+
+#editTicketForm input[type=radio]{
+
+//fixme
+}
+
+#editTicketForm select{
+    
     
     display: block;
     width: 98%;
@@ -10026,9 +10042,15 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
 
 #closeEditTicket {
     
-    float: right;
+    margin: auto;
+    display: block;
+    
+ 
+    float: center;
     
 }
+
+
 
 
 
@@ -10472,5 +10494,50 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
 .footer-list{
     padding: 30px;
     
+    
+}
+
+#pwerror {
+    
+    display: none;
+    position: fixed;
+    z-index: 1; /* Sit on top */
+    /*margin-top: 50px;  Location of the box */
+    left: 40%;
+    top: 25%;
+    width: 20%;
+
+    margin: auto;
+    box-shadow: 5px 5px 20px;
+    background-color: #f0f0f0;
+    
+    
+    
+}
+
+#pwerror p{
+    
+    margin-top: 30px;
+    font-size: 18pt;
+    color: red;
+    text-align:center;
+
+    
+}
+
+#pwerror div{
+    
+
+    font-size: 14pt;
+ 
+    text-align:center;
+
+    
+}
+
+#closePwAlert{
+    
+    float: right;
+    margin: 5px;
     
 }

@@ -6,10 +6,11 @@
         <div class="footer-list">
             <ul>
 
-                <li>
+                <li style = "font-weight: bold;">
                     Wilmington - Location #100
 
                 </li>  
+                <br/>
                 <li>
                     405 E. Marsh Lane
                 </li>  
@@ -21,16 +22,16 @@
                 </li>
 
                 <li>
-                    Wilmington Reception: 100	
+                    Reception: 100	
                 </li> 
                 <li>
-                    Wilmington Sales: 188	
+                    Sales: 188	
                 </li> 
                 <li>
-                    Wilmington Warehouse: 189	
+                    Warehouse: 189	
                 </li> 
                 <li>
-                    SS Sales Desk: 388	
+                    Stone Shop Sales Desk: 388	
                 </li> 
             </ul>
         </div>
@@ -38,10 +39,11 @@
         <div class="footer-list"> 
             <ul>
 
-                <li>
+                <li style = "font-weight: bold;">
                     Lewes - Location #200
 
                 </li>  
+                <br/>
                 <li>
                     17701 Dartmouth Dr.
 
@@ -54,13 +56,13 @@
                 </li> 
 
                 <li>
-                    Lewes Reception: 200
+                    Reception: 200
                 </li> 
                 <li>
-                    Lewes Sales: 288
+                    Sales: 288
                 </li> 
                 <li>
-                    Lewes Warehouse: 289	
+                    Warehouse: 289	
                 </li> 
             </ul>
         </div>
@@ -68,10 +70,11 @@
 
             <ul>
 
-                <li>
+                <li style = "font-weight: bold;">
                     Middletown - Location #201
 
                 </li>  
+                <br/>
                 <li>
                     110 Patriot Dr.
 
@@ -84,13 +87,13 @@
                 </li> 
 
                 <li>
-                    Middletown Reception: 400	
+                    Reception: 400	
                 </li> 
                 <li>
-                    Middletown Sales: 488	
+                    Sales: 488	
                 </li> 
                 <li>
-                    Middletown Warehouse: 489	
+                    Warehouse: 489	
                 </li> 
             </ul>
         </div>
@@ -99,10 +102,11 @@
 
             <ul>
 
-                <li>
+                <li style = "font-weight: bold;">
                     Group / Email Address:
 
                 </li>  
+                                <br/>
                 <li>
                     ALL / tmod.all@tilemarketofde.com
 
@@ -130,8 +134,8 @@
         <br/>
 
 
-<!-- <p style = "color: white;"> Designed and Developed by Max Gillman. Property of the Tile Market of Delaware. 2018 All Rights Reserved. -->
+ 
 
-    </div>
-
+</div>
+    <!--<div style = "color: white; display: block; float: bottom;"> Designed and Developed by Maxwell Gillman. Property of the Tile Market of Delaware 2018 - All Rights Reserved.</div> -->
 </div>
