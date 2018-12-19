@@ -12,6 +12,30 @@ require_once '../Models/UserManager.php';
 require_once '../Models/Database.php';
 include'../Content/header1.php';
 
+
+
+
+
+
+
+// array of errors
+//set inner array to 1 if problem
+//pass to view
+$ticketSubmitErrors = array(
+    "subject" => array("<p class='text-danger'> *Please submit valid ticket subject </p>", 0),
+    "requestedby" => array("<p class='text-danger'> *Please provide name of requesting individual </p>", 0),
+    "category" => array("<p class='text-danger'> *Please assign category</p>", 0),
+    "assignedto" => array("<p class='text-danger'> *Please submit valid user to assign task to </p>", 0)
+);
+
+
+
+
+
+
+
+
+
 //echo phpinfo();
 
 //initialize error variable
@@ -42,35 +66,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (!empty($_POST['subject'])) {
 
-            $subject = $_POST['subject'];
+            $subject = htmlentities($_POST['subject']);
         } else {
 
-            echo "<div> Please Enter Subject </div>";
+            $ticketSubmitErrors['subject'][1]=1;
             $problem = true;
         }
 
         if (!empty($_POST['details'])) {
 
-            $body = $_POST['details'];
-        } else {
-
-            echo "<div> Please Enter ticket details </div>";
-            $problem = true;
+            $body = htmlentities($_POST['details']);
         }
-
 
         if (!empty($_POST['requestedby'])) {
 
-            $requestedBy = $_POST['requestedby'];
+            $requestedBy = htmlentities($_POST['requestedby']);
         } else {
 
-            echo "<div> Please provide the name of individual requesting ticket </div>";
+            $ticketSubmitErrors['requestedby'][1] = 1;
             $problem = true;
         }
 
         if (!empty($_POST['orderid'])) {
 
-            $orderID = $_POST['orderid'];
+            $orderID = htmlentities($_POST['orderid']);
         }
         
         if (!empty($_POST['vendor'])) {
@@ -82,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (!empty($_POST['priority'])) {
 
-            $priority = $_POST['priority'];
+            $priority = htmlentities($_POST['priority']);
         } else {
 
             echo "<div> Please provide priority level </div>";
@@ -91,19 +110,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (!empty($_POST['category'])) {
 
-            $category = $_POST['category'];
+            $category = htmlentities($_POST['category']);
         } else {
 
-            echo "<div> Please provide topic category </div>";
+            $ticketSubmitErrors['category'][1] = 1;
             $problem = true;
         }
 
         if (!empty($_POST['assignedto'])) {
 
-            $assignedTo = $_POST['assignedto'];
+            $assignedTo = htmlentities($_POST['assignedto']);
         } else {
 
-            echo "<div> Please indicate which agent ticket will be assigned to </div>";
+            $ticketSubmitErrors['assignedto'][1] = 1;
             $problem = true;
         }
 

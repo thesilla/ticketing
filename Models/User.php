@@ -183,7 +183,7 @@ class User {
 
 
             // send an email to this user confirming the creation of account;
-            // TODO/FIXME - add confirmation code mechanism through email to user
+            
             $to = $this->email;
             $subject = 'the subject';
             $message = 'Hello' . $this->firstName . " " . $this->lastName . ",\r\nYou have been successfully registered for the Tile Market of Delaware Administrative Tools Portal! \r\n Visit your Account Management panel for information and to adjust account settings. \r\n Warm regards;\r\nThe Tile Market Management Team";
@@ -207,7 +207,7 @@ class User {
         $sql_delete = "delete from users where userID = '$this->userID'";
         if ($this->dbc->query($sql_delete)) {
 
-            //TODO - DO SOMETHING MORE ELABORATE THAT INDICATES SUCESSFUL SUBMISSION FOR NOW JUST PRINT SUCCESS
+       
             echo "<p> User Successfully Deleted </p>";
             return true;
         } else {

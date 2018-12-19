@@ -8,10 +8,6 @@ session_start();
 require_once '../Models/UserManager.php';
 if (!UserManager::isLoggedIn()) {
 
-    //$path = "Location: ..\Views\loginView.php";
-    //$path = "Location: Views/loginView.php";
-    //$path = $web_root = "http://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."/";
-
     $path = "Location: userController.php";
 
     header($path);
@@ -29,7 +25,7 @@ if (!UserManager::isLoggedIn()) {
 
     <head>
 
-        <!-- TODO: make page name dynamic -->
+
         <title> Purchasing Portal </title>
         <meta charset = "utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,8 +45,6 @@ if (!UserManager::isLoggedIn()) {
         <div id ="main-container">
 
 
-<?php
-include('navbar.php');
-
-
-?>
+            <?php
+            include('navbar.php');
+            ?>

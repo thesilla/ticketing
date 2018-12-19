@@ -63,12 +63,4 @@
 
 
 
-
-deleteTicketDisplayButton
-
-
-
-
-
-
 </script>

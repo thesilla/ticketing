@@ -1,11 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 require_once '../Models/Ticket.php';
 require_once'../Models/User.php';
 require_once'../Models/Disposition.php';
@@ -28,15 +22,6 @@ $createUserErrors = array(
     "password" => array("<p class='text-danger'> ***Please enter a valid password*** </p>", 0),
 );
 
-
-
-
-
-
-
-
-
-//
 $firstname;
 $lastname;
 $email;
@@ -48,7 +33,6 @@ $problem = false;
 
 // get variables from form if they are set, otherwise error and show form again 
 // just pass in variables here, dont perform any checks besides sanitation
-// FIXME - SQL SANITIZE THIS
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
@@ -116,9 +100,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
 
-
-
-
     if (!$problem) {
 
         $user = User::create($conn, $username, $firstname, $lastname, $email, $position, $password);
@@ -153,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // then create UserManager to 
 // send confirmation/verification code email
 // redirect to Manage Account page cant do this because another user still logged in
-// users cannot register themself
+// users cannot register themselves - must request an Admin do it
 require_once("../views/createNewAccountView.php");
 require_once("../Content/footer3.php");
 ?>

@@ -6,18 +6,22 @@
 
 
 
-    
-    
-    <div id="ticketHeader"   >
-        
-        
-        <div id="titlePanel" class=" <?php if($ticket->getCompleted()=='NO'){ echo "card text-white bg-success mb-3"; } else {echo "card text-white bg-danger mb-3"; }?>" </div>
+
+
+    <div id="ticketHeader">
+
+
+        <div id="titlePanel" class=" <?php
+        if ($ticket->getCompleted() == 'NO') {
+            echo "card text-white bg-success mb-3";
+        } else {
+            echo "card text-white bg-danger mb-3";
+        }
+        ?>" </div>
         <div class="card-header">Ticket #<?php
-            
-                echo $ticket->getId();
-          
-            ?>
-            </div>
+        echo $ticket->getId();
+        ?>
+        </div>
         <div class="card-body">
             <h4 class="card-title"><?php
                 if ($ticket->getCompleted() == "YES") {
@@ -29,8 +33,8 @@
             <p class="card-text"><?php echo "Subject: " . $ticket->getSubject(); ?></p>
         </div>
     </div>
-        
-    
+
+
     <div id = "priorityAlert" class="<?php
     if ($ticket->getPriority() == 1) {
         echo "alert alert-dismissible alert-danger";
@@ -76,7 +80,6 @@
     } else {
 
         echo '<button id ="closeTicketButton" type="button" class="btn btn-warning">Close Ticket</button>';
-        //reopenTicketButton
     }
     ?>
 

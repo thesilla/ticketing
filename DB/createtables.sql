@@ -49,3 +49,28 @@ CREATE TABLE `employees` (
 `lname` VARCHAR(255) NOT NULL , 
 `email` VARCHAR(255) NOT NULL , 
 PRIMARY KEY (`id`));
+
+
+
+
+
+
+
+
+
+INSERT INTO `users`(
+`userID`,
+`firstname`,
+`lastname`,
+`email`,
+`title`,
+`password`
+)
+VALUES (
+'admin',
+'Admin',
+'Admin',
+'admin@admin.com',
+'admin',
+'admin'
+);

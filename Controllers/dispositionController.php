@@ -1,10 +1,6 @@
 <?php
 
-//require('header1');
-
-
-// import class files into controller
-require_once '../Models/Ticket.php'; 
+require_once '../Models/Ticket.php';
 require_once'../Models/User.php';
 require_once'../Models/Disposition.php';
 require_once '../Models/Employee.php';
@@ -13,14 +9,7 @@ require_once '../Models/Database.php';
 
 include'../Content/header2.php';
 
-//require('footer1');
-// TODO - Disposition submit logic here
-//  - Then re route back to Ticket Detail View
-//  - - build dynamic get request and send back to proper ticket detail page
-// TODO - USER ID should be taken from session variable
-//  - user that is currently logged in
-// TODO - Fix DATE SUBMITTED time stamp - not currently working
-// initialize ticket ID variable for future use
+
 $ticketno;
 $conn = new Database();
 
@@ -38,11 +27,11 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
             $dispoID = 0;
             $userID = $_SESSION['username']; // FIXME - MAKE THIS DYNAMIC IN THE FUTURE - PULL FROM SESSION
-            $body = $_POST['disposition'];
-            
+            $body = htmlentities($_POST['disposition']);
+
             // --Technically time doesn't matter, submitted on SQL/server side
-            $dateSubmitted ="";
-            
+            $dateSubmitted = "";
+
             $ticketID = $ticketno;
             $disposition = Disposition::create($conn, $dispoID, $userID, $body, $dateSubmitted, $ticketID);
             $disposition->add();
@@ -56,13 +45,13 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         if (!empty($_POST['dispono'])) {
 
             // store ticket number in variable for later
-            $dispoID = $_POST['dispono'];
+            $dispoID = htmlentities($_POST['dispono']);
         }
 
         if (!empty($_POST['newDispoBody'])) {
 
 
-            $body = $_POST['newDispoBody'];
+            $body = htmlentities($_POST['newDispoBody']);
         }
 
         $dispo = Disposition::createFromDispoID($conn, $dispoID);
@@ -71,7 +60,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
         // get ticket number to pass into header and re-direct back to ticket detail controller
         $ticketno = $dispo->getTicketID();
-      
     }
 
     // Delete disposition
@@ -82,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
         if (!empty($_POST['dispono'])) {
 
             // store ticket number in variable for later
-            $dispoID = $_POST['dispono'];
+            $dispoID = htmlentities($_POST['dispono']);
         }
 
         $dispo = Disposition::createFromDispoID($conn, $dispoID);

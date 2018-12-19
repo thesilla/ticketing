@@ -106,7 +106,7 @@
                     Group / Email Address:
 
                 </li>  
-                                <br/>
+                <br/>
                 <li>
                     ALL / tmod.all@tilemarketofde.com
 
@@ -134,8 +134,8 @@
         <br/>
 
 
- 
 
-</div>
+
+    </div>
     <!--<div style = "color: white; display: block; float: bottom;"> Designed and Developed by Maxwell Gillman. Property of the Tile Market of Delaware 2018 - All Rights Reserved.</div> -->
 </div>

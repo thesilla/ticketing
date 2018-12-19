@@ -1,9 +1,8 @@
 
 <!DOCTYPE html>
-<?php 
+<?php
 ob_start();
 session_start();
-
 ?>
 <html lang = "en">
 
@@ -13,14 +12,14 @@ session_start();
 
     <head>
 
-        <!-- TODO: make page name dynamic -->
+
         <title> Purchasing Portal </title>
         <meta charset = "utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" >
         <link rel="stylesheet"  href="../Content/superhero.css">
-        
-        
+
+
         <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 

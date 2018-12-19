@@ -68,12 +68,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
         // define variables for updated ticket
         // non-editable fields will be pulled from $ticket_initialize
         // attributes changed by user will be pulled from post variable
-        // TODO: - Add filtering to post items for security purposes
+
         $ticketID = $ticket_initialize->getId();
 
         if (!empty($_POST['subject'])) {
 
-            $subject = $_POST['subject'];
+            $subject = htmlentities($_POST['subject']);
         } else {
 
             $ticketEditErrors['subject'][1] = 1;
@@ -81,23 +81,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
 
         if (!empty($_POST['details'])) {
 
-            $details = $_POST['details'];
+            $details = htmlentities($_POST['details']);
         }
 
 
         if (!empty($_POST['orderid'])) {
 
-            $orderid = $_POST['orderid'];
+            $orderid = htmlentities($_POST['orderid']);
         } 
 
         if (!empty($_POST['priority'])) {
 
-            $priority = $_POST['priority'];
+            $priority = htmlentities($_POST['priority']);
         }
 
         if (!empty($_POST['status'])) {
 
-            $status = $_POST['status'];
+            $status = htmlentities($_POST['status']);
         } else {
 
             $ticketEditErrors['status'][1] = 1;
@@ -105,12 +105,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
 
         if (!empty($_POST['category'])) {
 
-            $category = $_POST['category'];
+            $category = htmlentities($_POST['category']);
         }
 
         if (!empty($_POST['assignedto'])) {
 
-            $assignedto = $_POST['assignedto'];
+            $assignedto = htmlentities($_POST['assignedto']);
         } else {
 
 
@@ -164,7 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
         if (!empty($_POST['reason']) && $ticket->getCompleted() == "NO") {
 
 
-            $reason = $_POST['reason'];
+            $reason = htmlentities($_POST['reason']);
             $completed = "YES";
 
 
@@ -177,10 +177,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
             $ticket = Ticket::createFromID($dbc, $_POST['tickno2']);
             $ticket->open();
 
-
-
-
-            // SHOW ERROR MESSAGE - FIELD IS EMPTY
         }
     }
 
@@ -201,7 +197,7 @@ $allDispositions = Disposition::getDispositionsByTicket($dbc, $id);
 
 $ticket = Ticket::createFromID($dbc, $id);
 
-//echo '<div id="ticket-display" class="jumbotron">';
+
 
 $employees = Employee::getEmployees($dbc);
 $users = User::getUsers($dbc);

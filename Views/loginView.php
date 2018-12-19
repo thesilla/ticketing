@@ -9,6 +9,9 @@ require '../Content/header2.php';
     <div id="loginTitle">
         <img id="loginLogo"  src="../Images/tmod.jpg">
         <h1>Admin Portal Login</h1>
+        <?php if ($loginErrors['dne'][1] == 1) {
+            echo $loginErrors['dne'][0];
+        } ?>
     </div>
     <form action="../Controllers/userController.php" method ="post">
         <fieldset>
@@ -16,12 +19,16 @@ require '../Content/header2.php';
             <div class="form-group">
                 <label class="col-form-label" for="inputDefault">Username</label>
                 <input name = "username" type="text" class="form-control" placeholder="Please enter username" id="inputDefault">
-                 <?php if($loginErrors['username'][1]==1){ echo $loginErrors['username'][0];} ?>
+<?php if ($loginErrors['username'][1] == 1) {
+    echo $loginErrors['username'][0];
+} ?>
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
                 <input name="password" type="password"  class="form-control" id="exampleInputPassword1" placeholder="Password">
-                <?php if($loginErrors['password'][1]==1){ echo $loginErrors['password'][0];} ?>
+<?php if ($loginErrors['password'][1] == 1) {
+    echo $loginErrors['password'][0];
+} ?>
             </div>
             <div class="form-group">
                 <input class="btn btn-primary btn-lg btn-block" type ="submit" name="login" value ="Log In">
@@ -30,3 +37,4 @@ require '../Content/header2.php';
         </fieldset>
     </form>
 </div>
+

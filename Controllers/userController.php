@@ -5,8 +5,9 @@ require_once '../Models/User.php';
 require_once '../Models/Database.php';
 
 $loginErrors = array(
-    "username" => array("<p class='text-danger'> ***Please enter username*** </p>", 0),
-    "password" => array("<p class='text-danger'> ***Please enter password*** </p>", 0)
+    "username" => array("<p class='text-danger'> *Please enter username </p>", 0),
+    "password" => array("<p class='text-danger'> *Please enter password </p>", 0),
+    "dne" => array("<p class='text-danger'>*The submitted username/password combination does not exist</p>", 0)
 );
 
 
@@ -26,9 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // ensure username submitted
     if (!empty($_POST['username'])) {
 
-        // FIXME - sanitze this
+
         //$userID = htmlspecialchars(mysqli_real_escape_string($_POST['username']));
-        $userID = $_POST['username'];
+        $userID = htmlentities($_POST['username']);
     } else {
 
 
@@ -37,17 +38,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
        
     }
 
-    // FIXME - sanitze this
+
     // ensure password submitted
     if (!empty($_POST['password'])) {
 
         //$password = htmlspecialchars(mysqli_real_escape_string($_POST['password']));
-        $password = $_POST['password'];
+        $password = htmlentities($_POST['password']);
     } else {
 
 
         $loginErrors['password'][1] = 1;
-      
+        
     }
 
 
@@ -85,15 +86,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             header('Location: homeController.php');
             exit();
+        
+            
+        // if there are errors, show login form with errors specified    
         } else {
-
-            //TODO - instead of bringing up blank screen with link back to login, register non-match error and show the form again
-            echo "<div> The submitted username/password combination does not exist </div>";
-            echo "<div> <a href = 'homeController.php'> Return to Login </a> </div>";
+            
+            $loginErrors['dne'][1] = 1;
+            require_once('../Views/loginView.php');
         }
 
-        // if there are errors, show login form with errors specified
-        // TODO - Make login form error dynamic
+        
+    
     } else {
 
 

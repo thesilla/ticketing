@@ -1,17 +1,4 @@
 
-<!--
-<html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="superhero.css">
-<!-- <link rel="stylesheet" type="text/css" href="styles.css"> 
-</head>
-
-
-<body>
--->
-
-
-
 
 
 <div class="jumbotron">
@@ -19,7 +6,7 @@
     <hr class="my-4">
     <div><button id="showTicketSubmit" class="btn btn-primary btn-lg" >Submit New Ticket</button></div>
     <hr class="my-4">
-    <br/>
+    <p style = "color: red;">*Click field headers to sort</p>
 
     <div id="tickets-container">
 
@@ -29,29 +16,28 @@
 
         <button id="closedTicketsOnly" class="btn btn-secondary" >Closed Tickets</button>
 
-        <!-- Table headers -->
-        <!--<table id="displayTickets">-->
+
         <table class="table table-hover" id="displayTickets">
             <tr>
-            <!-- <thead> TABLE HEAD AFFECTS JS, REMOVED -->
-            <th onclick="sortTable(0)">Ticket ID#</th>
-            <th onclick="sortTable(1)">Requested By</th>
-            <th onclick="sortTable(2)">Submitted By</th>
-            <th onclick="sortTable(3)">Date Submitted</th>
-            <th onclick="sortTable(4)">Category</th>
-            <th onclick="sortTable(5)">Subject</th>
-             <!-- <th onclick='sortTable(7)'>Details</th> -->
 
-            <th onclick="sortTable(6)">Priority</th>
-            <th onclick="sortTable(7)">Assigned To</th>
-            <th onclick"sortTable(8)">Order ID</th>
-            <th onclick="sortTable(9)">Vendor</th>
-            <th onclick="sortTable(10)">Status</th>
-            <th onclick="sortTable(11)">Completed?</th>
-            <th onclick="sortTable(12)">Date Completed</th>
-            <th></th>
-            <th></th>
-            <!--  </thead> TABLE HEAD AFFECTS JS, REMOVED -->
+                <th onclick="sortTable(0)">Ticket ID#</th>
+                <th onclick="sortTable(1)">Requested By</th>
+                <th onclick="sortTable(2)">Submitted By</th>
+                <th onclick="sortTable(3)">Date Submitted</th>
+                <th onclick="sortTable(4)">Category</th>
+                <th onclick="sortTable(5)">Subject</th>
+
+
+                <th onclick="sortTable(6)">Priority</th>
+                <th onclick="sortTable(7)">Assigned To</th>
+                <th onclick="sortTable(8)">Order ID</th>
+                <th onclick="sortTable(9)">Vendor</th>
+                <th onclick="sortTable(10)">Status</th>
+                <th onclick="sortTable(11)">Completed?</th>
+                <th onclick="sortTable(12)">Date Completed</th>
+                <th></th>
+                <th></th>
+
 
             </tr>
 
@@ -125,12 +111,12 @@
 
 
     </div>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
 
 </div> 
 
