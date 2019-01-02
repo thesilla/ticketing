@@ -10548,3 +10548,13 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
     margin: 5px;
 
 }
+
+.subdiv {
+    
+    background-color: gray;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 10px 10px;
+    border: 1pt solid black;
+    
+}

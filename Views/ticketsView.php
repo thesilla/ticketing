@@ -71,7 +71,7 @@
                 echo "<td>" . $ticket->getUserID() . "</td>";
                 echo "<td>" . $ticket->getDateSubmitted() . "</td>";
                 echo "<td>" . $ticket->getCategory() . "</td>";
-                echo "<td>" . $ticket->getSubject() . "</td>";
+                echo "<td><div class='subdiv'>" . $ticket->getSubject() . "</div></td>";
 
                 /* DEFAULT: Hide ticket body from alltickets view
                   // Body Conditional
