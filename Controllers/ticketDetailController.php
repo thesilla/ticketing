@@ -117,10 +117,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
             $ticketEditErrors['assignedto'][1] = 1;
         }
 
+        
+        
+        if (!empty($_POST['requestedby'])) {
+
+            $requestedby = htmlentities($_POST['requestedby']);
+        } else {
+
+
+            //$requestedby = $ticket_initialize->getRequestedBy();
+        }
+        
+        
 
 
         $userID = $ticket_initialize->getUserID();
-        $requestedby = $ticket_initialize->getRequestedBy();
+        
         $datesubmitted = $ticket_initialize->getDateSubmitted();
         $completed = $ticket_initialize->getCompleted();
         $dateresolved = NULL;

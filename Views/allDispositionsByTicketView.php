@@ -4,11 +4,11 @@
 
 <h1 class = "table" style="text-align: center; font-weight: 566pt;"> Dispositions</h1>
 <hr class="my-4">
-<p style = "color: red;">*Click field headers to sort</p>
+
 <?php
 if (count($allDispositions) != 0) {
     ?>
-
+    <p style = "color: red;">*Click field headers to sort</p>
     <div> 
         <!-- Table headers -->
         <table class="table" id="displayTickets">

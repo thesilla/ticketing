@@ -302,7 +302,7 @@ class Ticket {
         // (already established when object created)
         //$this->getConnection();
         
-        $sql_update = "update tickets SET subject = '$this->subject', body = '$this->body', orderID = '$this->orderID', priority = '$this->priority', category = '$this->category', status = '$this->status', assignedto = '$this->assignedTo', completed = '$this->completed', dateresolved = '$this->dateResolved', vendor = '$this->vendor', reason = '$this->reason' where ticketID = '$this->id'";
+        $sql_update = "update tickets SET subject = '$this->subject', body = '$this->body', requestedby = '$this->requestedBy', orderID = '$this->orderID', priority = '$this->priority', category = '$this->category', status = '$this->status', assignedto = '$this->assignedTo', completed = '$this->completed', dateresolved = '$this->dateResolved', vendor = '$this->vendor', reason = '$this->reason' where ticketID = '$this->id'";
         if ($this->dbc->query($sql_update)) {
 
             echo '<div class="alert alert-dismissible alert-success"> Ticket Successfully Updated </div>';
