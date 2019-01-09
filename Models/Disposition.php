@@ -57,53 +57,7 @@ class Disposition {
             echo "<p> Could not run query </p>";
         }
     }
-/*
-    // get database connection
-    public function getConnection() {
 
-        try {
-
-
-            $this->dbc = new PDO("mysql:host=localhost;dbname=ticketing", "root", "");
-
-            $this->dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            //echo "<div> Sucessfully connected to Database </div>";
-        } catch (PDOException $e) {
-            $output = 'Unable to connect to the database server.';
-
-            echo "<div style='color:red;'>" . $e->getMessage() . "</div>";
-
-            
-            exit();
-        }
-    }
-    
-    
-    public static function getStaticConnection(){
-        
-                // set database connection
-        try {
-
-
-            $dbc = new PDO("mysql:host=localhost;dbname=ticketing", "root", "");
-
-            $dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            
-            return $dbc;
-
-            //echo "<div> Sucessfully connected to Database </div>";
-        } catch (PDOException $e) {
-            $output = 'Unable to connect to the database server.';
-
-            echo "<div style='color:red;'>" . $e->getMessage() . "</div>";
-
-           
-            exit();
-        }
-        
-    }
-*/
     // static method pulling all tickets - DB/SQL object argument
     // return an array of Disposition objects from the database, to keep all db logic in model side
     public static function getDispositions($conn) {
@@ -183,14 +137,38 @@ class Disposition {
 
     public function add() {
 
-        // get database connection
-        //$this->getConnection();
+        
+        // FIXME  - STATEMENT DOESNT RUN
+        $stmt = $this->dbc->prepare("INSERT INTO `dispositions` (`dispoID`, `userID`, `body`, `datesubmitted`, `ticketID`) VALUES (NULL, :userID1, :body1, NOW(), :ticketID1");
 
-        $sql_addDispo = "INSERT INTO `dispositions` (`dispoID`, `userID`, `body`, `datesubmitted`, `ticketID`) VALUES (NULL,'$this->userID', '$this->body', NOW(),'$this->ticketID')";
+        $stmt->bindParam(':userID1', $this->userID);
+        $stmt->bindParam(':body1', $this->body);
+        $stmt->bindParam(':ticketID1', $this->ticketID);
+        
+        //$stmt->bindParam(':dispoID1', NULL);
+        //$stmt->bindParam(':datesubmitted1', 'NOW()');
+        
+        
+        
+        if ($stmt->execute()) {
 
+       
+            echo '<div class="alert alert-dismissible alert-success"> Disposition Successfully Added </div>';
+            return true;
+        } else {
+
+   
+            return false;
+        }
+        
+        
+        
+        //$sql_addDispo = "INSERT INTO `dispositions` (`dispoID`, `userID`, `body`, `datesubmitted`, `ticketID`) VALUES (NULL,'$this->userID', '$this->body', NOW(),'$this->ticketID')";
+
+        /*
         if ($this->dbc->query($sql_addDispo)) {
 
-            //TODO - DO SOMETHING MORE ELABORATE THAT INDICATES SUCESSFUL SUBMISSION FOR NOW JUST PRINT SUCCESS
+       
             echo '<div class="alert alert-dismissible alert-success"> Disposition Successfully Added </div>';
             return true;
         } else {
@@ -198,6 +176,9 @@ class Disposition {
             echo "<p> Could not run query </p>";
             return false;
         }
+         * 
+         * 
+         */
     }
 
     //  method takes a DB object and DELETES the ticket to the database

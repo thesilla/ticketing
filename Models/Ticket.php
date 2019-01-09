@@ -94,55 +94,6 @@ class Ticket {
         }
     }
 
-    /*
-    // get database connection
-    public function getConnection() {
-
-        try {
-
-
-            $this->dbc = new PDO("mysql:host=localhost;dbname=ticketing", "root", "");
-
-            $this->dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            //echo "<div> Sucessfully connected to Database </div>";
-        } catch (PDOException $e) {
-            $output = 'Unable to connect to the database server.';
-
-            echo "<div style='color:red;'>" . $e->getMessage() . "</div>";
-
-            
-            exit();
-        }
-    }
-    
-    
-        public static function getStaticConnection(){
-        
-                // set database connection
-        try {
-
-
-            $dbc = new PDO("mysql:host=localhost;dbname=ticketing", "root", "");
-
-            $dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            
-            return $dbc;
-
-            //echo "<div> Sucessfully connected to Database </div>";
-        } catch (PDOException $e) {
-            $output = 'Unable to connect to the database server.';
-
-            echo "<div style='color:red;'>" . $e->getMessage() . "</div>";
-
-            
-            exit();
-        }
-        
-    }
-    */
-    
-
 // static method pulling all tickets - DB/SQL object argument
 // takes db object, return an array of Ticket objects from the database
     public static function getTickets($conn) {
@@ -166,8 +117,6 @@ class Ticket {
 
                 $tickets[] = Ticket::create($conn, $row['ticketID'], $row['subject'], $row['body'], $row['userID'], $row['requestedby'], $row['datesubmitted'], $row['dateresolved'], $row['orderID'], $row['priority'], $row['category'], $row['status'], $row['assignedto'], $row['completed'], $row['vendor'], $row['reason']);
 
-                // TODO delete this, for testing only
-                //print_r($tickets);
             }
             // return tickets array
             return $tickets;
@@ -200,8 +149,6 @@ class Ticket {
 
                 $tickets[] = Ticket::create($conn, $row['ticketID'], $row['subject'], $row['body'], $row['userID'], $row['requestedby'], $row['datesubmitted'], $row['dateresolved'], $row['orderID'], $row['priority'], $row['category'], $row['status'], $row['assignedto'], $row['completed'], $row['vendor'], $row['reason']);
 
-                // TODO delete this, for testing only
-                //print_r($tickets);
             }
             // return tickets array
             return $tickets;
@@ -233,8 +180,7 @@ class Ticket {
 
                 $tickets[] = Ticket::create($conn, $row['ticketID'], $row['subject'], $row['body'], $row['userID'], $row['requestedby'], $row['datesubmitted'], $row['dateresolved'], $row['orderID'], $row['priority'], $row['category'], $row['status'], $row['assignedto'], $row['completed'], $row['vendor'], $row['reason']);
 
-                // TODO delete this, for testing only
-                //print_r($tickets);
+
             }
             // return tickets array
             return $tickets;
@@ -254,22 +200,34 @@ class Ticket {
 //  method takes a DB object and ADDS the ticket to the database
     public function add() {
 
-        // get database connection
-        // (already established when object created)
-        //$this->getConnection();
 
-        $sql_addTix = "INSERT INTO `tickets` (`ticketID`, `subject`, `body`, `userID`,`requestedBy`, `datesubmitted`, `dateresolved`, `orderID`, `priority`, `category`, `status`,`assignedTo`,`completed`,`vendor`,`reason`) VALUES (NULL,'$this->subject','$this->body', '$this->userID','$this->requestedBy', NOW(),NULL,'$this->orderID', '$this->priority','$this->category','$this->status','$this->assignedTo','$this->completed','$this->vendor','$this->reason')";
+        $stmt = $this->dbc->prepare("INSERT INTO `tickets` (`ticketID`, `subject`, `body`, `userID`,`requestedBy`, `datesubmitted`, `dateresolved`, `orderID`, `priority`, `category`, `status`,`assignedTo`,`completed`,`vendor`,`reason`) VALUES (NULL,:subject1,:body1,:userID1,:requestedBy1,NOW(),NULL,:orderID1,:priority1,:category1,:status1,:assignedTo1,:completed1,:vendor1,:reason1)");
 
-        if ($this->dbc->query($sql_addTix)) {
+        $stmt->bindParam(':subject1', $this->subject);
+        $stmt->bindParam(':body1', $this->body);
+        $stmt->bindParam(':userID1', $this->userID);
+        $stmt->bindParam(':requestedBy1', $this->requestedBy);
+        $stmt->bindParam(':orderID1', $this->orderID);
+        $stmt->bindParam(':priority1', $this->priority);
+        $stmt->bindParam(':category1', $this->category);
+        $stmt->bindParam(':status1', $this->status);
+        $stmt->bindParam(':assignedTo1', $this->assignedTo);
+        
+        $stmt->bindParam(':completed1', $this->completed);
+        $stmt->bindParam(':vendor1', $this->vendor);
+        $stmt->bindParam(':reason1', $this->reason);
+        
 
-            //TODO - DO SOMETHING MORE ELABORATE THAT INDICATES SUCESSFUL SUBMISSION FOR NOW JUST PRINT SUCCESS
+        if ($stmt->execute()) {
+
             echo '<div class="alert alert-dismissible alert-success"> Ticket Successfully Submited </div>';
             return true;
         } else {
 
-            echo "<p> Could not run query </p>";
             return false;
-        }
+        } 
+
+        
     }
 
 //  method takes a DB object and DELETES the ticket to the database
@@ -290,7 +248,6 @@ class Ticket {
             return true;
         } else {
 
-            echo "<p> Could not run query </p>";
             return false;
         }
     }
@@ -298,20 +255,35 @@ class Ticket {
 //  method edits the ticket and updates the database (IF OBJECT -> TICKET ID# ACTUALLY EXISTS)
     public function update() {
 
-        // get database connection
-        // (already established when object created)
-        //$this->getConnection();
         
-        $sql_update = "update tickets SET subject = '$this->subject', body = '$this->body', requestedby = '$this->requestedBy', orderID = '$this->orderID', priority = '$this->priority', category = '$this->category', status = '$this->status', assignedto = '$this->assignedTo', completed = '$this->completed', dateresolved = '$this->dateResolved', vendor = '$this->vendor', reason = '$this->reason' where ticketID = '$this->id'";
-        if ($this->dbc->query($sql_update)) {
+        $stmt = $this->dbc->prepare("update tickets SET subject = :subject1, body = :body1, requestedby = :requestedBy1, orderID = :orderID1, priority = :priority1, category = :category1, status = :status1, assignedto = :assignedTo1, completed = :completed1, dateresolved = :dateResolved1, vendor = :vendor1, reason = :reason1 where ticketID = :ticketID1");
 
-            echo '<div class="alert alert-dismissible alert-success"> Ticket Successfully Updated </div>';
+        $stmt->bindParam(':subject1', $this->subject); //
+        $stmt->bindParam(':body1', $this->body); //
+      
+        $stmt->bindParam(':requestedBy1', $this->requestedBy);//
+        $stmt->bindParam(':orderID1', $this->orderID);//
+        $stmt->bindParam(':priority1', $this->priority);//
+        $stmt->bindParam(':category1', $this->category);//
+        $stmt->bindParam(':status1', $this->status);//
+        $stmt->bindParam(':assignedTo1', $this->assignedTo);//
+        
+        $stmt->bindParam(':completed1', $this->completed);//
+        $stmt->bindParam(':vendor1', $this->vendor);//
+        $stmt->bindParam(':reason1', $this->reason);//
+        $stmt->bindParam(':ticketID1', $this->id);//
+        $stmt->bindParam(':dateResolved1', $this->dateResolved);
+        
+        
+        if ($stmt->execute()) {
+
+            echo '<div class="alert alert-dismissible alert-success"> Ticket Successfully Submited </div>';
             return true;
         } else {
 
-            echo "<p> Could not run query </p>";
             return false;
-        }
+        } 
+
     }
 
     // method takes reason for closing ticket, and closes the ticket 
@@ -333,7 +305,6 @@ class Ticket {
             return true;
         } else {
 
-            echo "<p> Could not run query </p>";
             return false;
         }
     }
@@ -358,7 +329,6 @@ class Ticket {
             return true;
         } else {
 
-            echo "<p> Could not run query </p>";
             return false;
         }
     }

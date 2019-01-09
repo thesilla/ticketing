@@ -94,6 +94,7 @@ $categories = [
     "Shipping Issue",
     "Product Broken",
     "Research Required",
+    "Product Return",
     "Other Misc",
 ];
 foreach ($categories as $category) {
