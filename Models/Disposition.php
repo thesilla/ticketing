@@ -137,17 +137,19 @@ class Disposition {
 
     public function add() {
 
+       // $dispositionID = NULL;
+        //$date = 'NOW()';
         
-        // FIXME  - STATEMENT DOESNT RUN
-        $stmt = $this->dbc->prepare("INSERT INTO `dispositions` (`dispoID`, `userID`, `body`, `datesubmitted`, `ticketID`) VALUES (NULL, :userID1, :body1, NOW(), :ticketID1");
+     
+        
+       
+        $stmt = $this->dbc->prepare("INSERT INTO `dispositions` (`dispoID`, `userID`, `body`, `datesubmitted`, `ticketID`) VALUES (NULL, :userID1, :body1, NOW(), :ticketID1)");
 
         $stmt->bindParam(':userID1', $this->userID);
         $stmt->bindParam(':body1', $this->body);
         $stmt->bindParam(':ticketID1', $this->ticketID);
         
-        //$stmt->bindParam(':dispoID1', NULL);
-        //$stmt->bindParam(':datesubmitted1', 'NOW()');
-        
+    
         
         
         if ($stmt->execute()) {
@@ -161,24 +163,7 @@ class Disposition {
             return false;
         }
         
-        
-        
-        //$sql_addDispo = "INSERT INTO `dispositions` (`dispoID`, `userID`, `body`, `datesubmitted`, `ticketID`) VALUES (NULL,'$this->userID', '$this->body', NOW(),'$this->ticketID')";
 
-        /*
-        if ($this->dbc->query($sql_addDispo)) {
-
-       
-            echo '<div class="alert alert-dismissible alert-success"> Disposition Successfully Added </div>';
-            return true;
-        } else {
-
-            echo "<p> Could not run query </p>";
-            return false;
-        }
-         * 
-         * 
-         */
     }
 
     //  method takes a DB object and DELETES the ticket to the database
@@ -204,12 +189,28 @@ class Disposition {
 //  method takes a DB object and edits the disposition and updates the database (IF OBJECT -> DISPOSITION ID ACTUALLY EXISTS)
     public function update() {
 
-        // get database connection
-        //$this->getConnection();
-        
-        
-        $sql_update = "update dispositions SET body = '$this->body', datesubmitted = NOW() where dispoID = '$this->dispoID'";
 
+        
+        
+        $stmt = $this->dbc->prepare("update dispositions SET body = :body1, datesubmitted = NOW() where dispoID = :dispoID1");
+
+        $stmt->bindParam(':dispoID1', $this->dispoID);
+        $stmt->bindParam(':body1', $this->body);
+        
+        if ($stmt->execute()) {
+
+       
+            echo '<div class="alert alert-dismissible alert-success"> Disposition Successfully Added </div>';
+            return true;
+        } else {
+
+   
+            return false;
+        }
+        
+        
+        /*
+        
         if ($this->dbc->query($sql_update)) {
 
             echo '<div class="alert alert-dismissible alert-success"> Disposition Successfully Updated </div>';
@@ -219,6 +220,9 @@ class Disposition {
             echo "<p> Could not run query </p>";
             return false;
         }
+         * 
+         * *
+         */
     }
 
     function getDispoID() {
