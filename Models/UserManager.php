@@ -38,28 +38,17 @@ class UserManager {
     // if not, FALSE is returned, and UserManager properties will remain as they were before
     public function userExists() {
 
-        //$md5password = md5($this->password);
-        //echo $md5password;
-        
-        
-        
+
+
         $stmt = $this->dbc->prepare("SELECT COUNT(*) FROM users where userID = :userID1 AND password = :password1");
 
         $stmt->bindParam(':userID1', $this->userID);
         $stmt->bindParam(':password1', $this->password);
-        
-        $stmt->execute();
-        
-        //$stmt->fetch();
-        
-        //$stmt->store_result();
-        
-        
-        
-     
-        // FIXME - num_rows not a function in PDO?
-        $number_of_rows = $stmt->num_rows;
 
+
+        if ($stmt->execute()) {
+
+            $number_of_rows = $stmt->fetchColumn();
             // if 1 result, theres a match
             if ($number_of_rows == 1) {
 
@@ -75,75 +64,6 @@ class UserManager {
                 $this->fname = $dbUser->getFirstName();
                 $this->lname = $dbUser->getLastName();
                 $this->email = $dbUser->getEmail();
-
-                return true;
-            } else {
-
-                return false;
-            }
-       
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        // FIXME - THE BELOW WORKS - TRY TO GET THE ABOVE TO WORK
-        
-        /*
-        
-        
-        $sql_userExists = "SELECT COUNT(*) FROM users where userID = '$this->userID' AND password = '$this->password'";
-
-
-        if ($result = $this->dbc->query($sql_userExists)) {
-
-            $number_of_rows = $result->fetchColumn();
-
-            // if 1 result, theres a match
-            if ($number_of_rows == 1) {
-
-                // create new database instance
-                $db = new Database();
-
-                // create new User object for verified existing User from database
-
-                $dbUser = User::createFromID($db, $this->userID);
-
-                // pass this User's properties into UserManager object's attributes
-                // -- (This is for User PHP objects created with correct ID and Password but other attributes i.e first, last name do not match database)
-                $this->fname = $dbUser->getFirstName();
-                $this->lname = $dbUser->getLastName();
-                $this->email = $dbUser->getEmail();
-
-                return true;
-            } else {
-
-                return false;
-            }
-        } else {
-
-            return false;
-        }*/
-    }
-
-    // checks if email already exists in database
-    public function emailExists() {
-
-
-
-        $sql_userExists = "SELECT COUNT(*) FROM users where email = '$this->email'";
-
-
-        if ($result = $this->dbc->query($sql_userExists)) {
-
-            $number_of_rows = $result->fetchColumn();
-            if ($number_of_rows == 1) {
 
                 return true;
             } else {
@@ -151,10 +71,32 @@ class UserManager {
                 return false;
             }
         }
-        
-         
     }
 
+    // checks if email already exists in database
+    public function emailExists() {
+
+
+        
+        $stmt = $this->dbc->prepare("SELECT COUNT(*) FROM users where email = :email1");
+
+        $stmt->bindParam(':email1', $this->email);
+        
+
+if($stmt->execute()){
+   
+
+            $number_of_rows = $stmt->fetchColumn();
+            if ($number_of_rows == 1) {
+
+                return true;
+            } else {
+
+                return false;
+            }
+        
+    }
+    }
     // log in the input user
     // return true if successful, false if not
     public function login() {
