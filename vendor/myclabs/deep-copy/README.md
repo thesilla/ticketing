@@ -12,7 +12,7 @@ DeepCopy helps you create deep copies (clones) of your objects. It is designed t
 [2.x](https://github.com/myclabs/DeepCopy/tree/2.x) version.**
 
 
-## Table of Contents
+## Table of contents
 
 1. [How](#how)
 1. [Why](#why)

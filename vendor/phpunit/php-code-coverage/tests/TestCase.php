@@ -26,7 +26,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         self::$TEST_TMP_PATH = TEST_FILES_PATH . 'tmp';
     }
 
-    protected function getXdebugDataForBankAccount()
+    protected function getXdebugdataForBankAccount()
     {
         return [
             [
@@ -80,7 +80,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
 
     protected function getCoverageForBankAccount()
     {
-        $data = $this->getXdebugDataForBankAccount();
+        $data = $this->getXdebugdataForBankAccount();
         require_once TEST_FILES_PATH . '/BankAccountTest.php';
 
         $stub = $this->createMock(Driver::class);
@@ -147,7 +147,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
 
     protected function getCoverageForBankAccountForFirstTwoTests()
     {
-        $data = $this->getXdebugDataForBankAccount();
+        $data = $this->getXdebugdataForBankAccount();
 
         $stub = $this->createMock(Driver::class);
 
@@ -187,7 +187,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
 
     protected function getCoverageForBankAccountForLastTwoTests()
     {
-        $data = $this->getXdebugDataForBankAccount();
+        $data = $this->getXdebugdataForBankAccount();
 
         $stub = $this->createMock(Driver::class);
 
@@ -230,7 +230,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         return $coverage;
     }
 
-    protected function getExpectedDataArrayForBankAccount()
+    protected function getExpecteddataArrayForBankAccount()
     {
         return [
             TEST_FILES_PATH . 'BankAccount.php' => [
@@ -264,7 +264,7 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
         ];
     }
 
-    protected function getExpectedDataArrayForBankAccountInReverseOrder()
+    protected function getExpecteddataArrayForBankAccountInReverseOrder()
     {
         return [
             TEST_FILES_PATH . 'BankAccount.php' => [

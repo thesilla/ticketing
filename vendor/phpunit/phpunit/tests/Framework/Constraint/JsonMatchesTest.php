@@ -16,7 +16,7 @@ use PHPUnit\Util\Json;
 class JsonMatchesTest extends ConstraintTestCase
 {
     /**
-     * @dataProvider evaluateDataprovider
+     * @dataProvider evaluatedataprovider
      *
      * @param mixed $expected
      * @param mixed $jsonOther
@@ -34,7 +34,7 @@ class JsonMatchesTest extends ConstraintTestCase
     }
 
     /**
-     * @dataProvider evaluateThrowsExpectationFailedExceptionWhenJsonIsValidButDoesNotMatchDataprovider
+     * @dataProvider evaluateThrowsExpectationFailedExceptionWhenJsonIsValidbutDoesNotMatchdataprovider
      *
      * @param mixed $jsonOther
      * @param mixed $jsonValue
@@ -45,7 +45,7 @@ class JsonMatchesTest extends ConstraintTestCase
      * @throws \PHPUnit\Framework\Exception
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
      */
-    public function testEvaluateThrowsExpectationFailedExceptionWhenJsonIsValidButDoesNotMatch($jsonOther, $jsonValue): void
+    public function testEvaluateThrowsExpectationFailedExceptionWhenJsonIsValidbutDoesNotMatch($jsonOther, $jsonValue): void
     {
         $constraint = new JsonMatches($jsonValue);
 
@@ -69,7 +69,7 @@ class JsonMatchesTest extends ConstraintTestCase
         $this->assertEquals('matches JSON string "' . $jsonValue . '"', $constraint->toString());
     }
 
-    public static function evaluateDataprovider()
+    public static function evaluatedataprovider()
     {
         return [
             'valid JSON'                              => [true, \json_encode(['Mascott'                           => 'Tux']), \json_encode(['Mascott'                           => 'Tux'])],
@@ -90,7 +90,7 @@ class JsonMatchesTest extends ConstraintTestCase
         ];
     }
 
-    public static function evaluateThrowsExpectationFailedExceptionWhenJsonIsValidButDoesNotMatchDataprovider()
+    public static function evaluateThrowsExpectationFailedExceptionWhenJsonIsValidbutDoesNotMatchdataprovider()
     {
         return [
             'error UTF-8'                             => [\json_encode('\xB1\x31'), \json_encode(['Mascott' => 'Tux'])],

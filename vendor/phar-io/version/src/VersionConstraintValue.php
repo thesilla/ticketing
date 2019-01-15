@@ -26,7 +26,7 @@ class VersionConstraintValue
     /**
      * @var string
      */
-    private $buildMetaData = '';
+    private $buildMetadata = '';
 
     /**
      * @var string
@@ -46,7 +46,7 @@ class VersionConstraintValue
      * @param $versionString
      */
     private function parseVersion($versionString) {
-        $this->extractBuildMetaData($versionString);
+        $this->extractBuildMetadata($versionString);
         $this->extractLabel($versionString);
 
         $versionSegments = explode('.', $versionString);
@@ -62,9 +62,9 @@ class VersionConstraintValue
     /**
      * @param string $versionString
      */
-    private function extractBuildMetaData(&$versionString) {
+    private function extractBuildMetadata(&$versionString) {
         if (preg_match('/\+(.*)/', $versionString, $matches) == 1) {
-            $this->buildMetaData = $matches[1];
+            $this->buildMetadata = $matches[1];
             $versionString       = str_replace($matches[0], '', $versionString);
         }
     }
@@ -89,8 +89,8 @@ class VersionConstraintValue
     /**
      * @return string
      */
-    public function getBuildMetaData() {
-        return $this->buildMetaData;
+    public function getBuildMetadata() {
+        return $this->buildMetadata;
     }
 
     /**

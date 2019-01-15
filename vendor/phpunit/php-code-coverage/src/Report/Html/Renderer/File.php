@@ -253,27 +253,27 @@ final class File extends Renderer
      */
     protected function renderSource(FileNode $node): string
     {
-        $coverageData = $node->getCoverageData();
-        $testData     = $node->getTestData();
+        $coveragedata = $node->getCoveragedata();
+        $testdata     = $node->getTestdata();
         $codeLines    = $this->loadFile($node->getPath());
         $lines        = '';
         $i            = 1;
 
         foreach ($codeLines as $line) {
             $trClass        = '';
-            $popoverContent = '';
+            $popovercontent = '';
             $popoverTitle   = '';
 
-            if (\array_key_exists($i, $coverageData)) {
-                $numTests = ($coverageData[$i] ? \count($coverageData[$i]) : 0);
+            if (\array_key_exists($i, $coveragedata)) {
+                $numTests = ($coveragedata[$i] ? \count($coveragedata[$i]) : 0);
 
-                if ($coverageData[$i] === null) {
+                if ($coveragedata[$i] === null) {
                     $trClass = ' class="warning"';
                 } elseif ($numTests == 0) {
                     $trClass = ' class="danger"';
                 } else {
                     $lineCss        = 'covered-by-large-tests';
-                    $popoverContent = '<ul>';
+                    $popovercontent = '<ul>';
 
                     if ($numTests > 1) {
                         $popoverTitle = $numTests . ' tests cover line ' . $i;
@@ -281,16 +281,16 @@ final class File extends Renderer
                         $popoverTitle = '1 test covers line ' . $i;
                     }
 
-                    foreach ($coverageData[$i] as $test) {
-                        if ($lineCss == 'covered-by-large-tests' && $testData[$test]['size'] == 'medium') {
+                    foreach ($coveragedata[$i] as $test) {
+                        if ($lineCss == 'covered-by-large-tests' && $testdata[$test]['size'] == 'medium') {
                             $lineCss = 'covered-by-medium-tests';
-                        } elseif ($testData[$test]['size'] == 'small') {
+                        } elseif ($testdata[$test]['size'] == 'small') {
                             $lineCss = 'covered-by-small-tests';
                         }
 
-                        switch ($testData[$test]['status']) {
+                        switch ($testdata[$test]['status']) {
                             case 0:
-                                switch ($testData[$test]['size']) {
+                                switch ($testdata[$test]['size']) {
                                     case 'small':
                                         $testCSS = ' class="covered-by-small-tests"';
 
@@ -329,14 +329,14 @@ final class File extends Renderer
                                 $testCSS = '';
                         }
 
-                        $popoverContent .= \sprintf(
+                        $popovercontent .= \sprintf(
                             '<li%s>%s</li>',
                             $testCSS,
                             \htmlspecialchars($test, $this->htmlSpecialCharsFlags)
                         );
                     }
 
-                    $popoverContent .= '</ul>';
+                    $popovercontent .= '</ul>';
                     $trClass         = ' class="' . $lineCss . ' popin"';
                 }
             }
@@ -347,7 +347,7 @@ final class File extends Renderer
                 $popover = \sprintf(
                     ' data-title="%s" data-content="%s" data-placement="bottom" data-html="true"',
                     $popoverTitle,
-                    \htmlspecialchars($popoverContent, $this->htmlSpecialCharsFlags)
+                    \htmlspecialchars($popovercontent, $this->htmlSpecialCharsFlags)
                 );
             }
 

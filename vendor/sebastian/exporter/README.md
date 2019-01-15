@@ -30,7 +30,7 @@ Exception Object &0000000078de0f0d000000002003a261 (
 print $exporter->export(new Exception);
 ```
 
-## Data Types
+## data Types
 
 Exporting simple types:
 

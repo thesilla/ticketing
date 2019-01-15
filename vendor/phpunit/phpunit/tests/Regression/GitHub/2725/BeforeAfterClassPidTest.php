@@ -12,7 +12,7 @@ class BeforeAfterClassPidTest extends TestCase
     /**
      * @beforeClass
      */
-    public static function showPidBefore()
+    public static function showPidbefore()
     {
         $GLOBALS['PID_BEFORE'] = getmypid();
     }

@@ -287,7 +287,7 @@ abstract class ResultPrinter extends Printer implements TestListener
                 $this->currentTestMethodPrettified = $this->prettifier->prettifyTestMethod($test->getName(false));
             }
 
-            if ($test->usesDataProvider()) {
+            if ($test->usesdataProvider()) {
                 $this->currentTestMethodPrettified .= ' ' . $test->dataDescription();
             }
         }

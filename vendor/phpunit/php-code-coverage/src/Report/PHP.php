@@ -33,14 +33,14 @@ final class PHP
         $buffer = \sprintf(
             '<?php
 $coverage = new SebastianBergmann\CodeCoverage\CodeCoverage;
-$coverage->setData(%s);
+$coverage->setdata(%s);
 $coverage->setTests(%s);
 
 $filter = $coverage->filter();
 $filter->setWhitelistedFiles(%s);
 
 return $coverage;',
-            \var_export($coverage->getData(true), 1),
+            \var_export($coverage->getdata(true), 1),
             \var_export($coverage->getTests(), 1),
             \var_export($filter->getWhitelistedFiles(), 1)
         );

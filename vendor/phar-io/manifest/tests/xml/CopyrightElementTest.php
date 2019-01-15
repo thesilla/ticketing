@@ -21,12 +21,12 @@ class CopyrightElementTest extends \PHPUnit_Framework_TestCase {
         $this->copyright = new CopyrightElement($this->dom->documentElement);
     }
 
-    public function testThrowsExceptionWhenGetAuthroElementsIsCalledButNodesAreMissing() {
+    public function testThrowsExceptionWhenGetAuthroElementsIsCalledbutNodesAreMissing() {
         $this->expectException(ManifestElementException::class);
         $this->copyright->getAuthorElements();
     }
 
-    public function testThrowsExceptionWhenGetLicenseElementIsCalledButNodeIsMissing() {
+    public function testThrowsExceptionWhenGetLicenseElementIsCalledbutNodeIsMissing() {
         $this->expectException(ManifestElementException::class);
         $this->copyright->getLicenseElement();
     }

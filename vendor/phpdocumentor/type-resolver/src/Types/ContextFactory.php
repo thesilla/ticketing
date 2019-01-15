@@ -58,18 +58,18 @@ final class ContextFactory
      * Build a Context for a namespace in the provided file contents.
      *
      * @param string $namespace It does not matter if a `\` precedes the namespace name, this method first normalizes.
-     * @param string $fileContents the file's contents to retrieve the aliases from with the given namespace.
+     * @param string $filecontents the file's contents to retrieve the aliases from with the given namespace.
      *
      * @see Context for more information on Contexts.
      *
      * @return Context
      */
-    public function createForNamespace($namespace, $fileContents)
+    public function createForNamespace($namespace, $filecontents)
     {
         $namespace = trim($namespace, '\\');
         $useStatements = [];
         $currentNamespace = '';
-        $tokens = new \ArrayIterator(token_get_all($fileContents));
+        $tokens = new \ArrayIterator(token_get_all($filecontents));
 
         while ($tokens->valid()) {
             switch ($tokens->current()[0]) {

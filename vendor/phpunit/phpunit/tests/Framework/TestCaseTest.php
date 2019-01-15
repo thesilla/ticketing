@@ -702,9 +702,9 @@ class TestCaseTest extends TestCase
         $test = new \TestAutoreferenced('testJsonEncodeException', $this->getAutoreferencedArray());
         $test->runBare();
 
-        $this->assertInternalType('array', $test->myTestData);
-        $this->assertArrayHasKey('data', $test->myTestData);
-        $this->assertEquals($test->myTestData['data'][0], $test->myTestData['data']);
+        $this->assertInternalType('array', $test->myTestdata);
+        $this->assertArrayHasKey('data', $test->myTestdata);
+        $this->assertEquals($test->myTestdata['data'][0], $test->myTestdata['data']);
     }
 
     public function testProvidingArrayThatMixesObjectsAndScalars(): void
@@ -718,8 +718,8 @@ class TestCaseTest extends TestCase
         $test = new \TestAutoreferenced('testJsonEncodeException', [$data]);
         $test->runBare();
 
-        $this->assertInternalType('array', $test->myTestData);
-        $this->assertSame($data, $test->myTestData);
+        $this->assertInternalType('array', $test->myTestdata);
+        $this->assertSame($data, $test->myTestdata);
     }
 
     /**
@@ -727,12 +727,12 @@ class TestCaseTest extends TestCase
      */
     private function getAutoreferencedArray()
     {
-        $recursionData   = [];
-        $recursionData[] = &$recursionData;
+        $recursiondata   = [];
+        $recursiondata[] = &$recursiondata;
 
         return [
             'RECURSION' => [
-                'data' => $recursionData
+                'data' => $recursiondata
             ]
         ];
     }

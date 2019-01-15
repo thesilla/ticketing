@@ -45,7 +45,7 @@ final class Blacklist
         Timer::class                  => 1,
         PHP_Token::class              => 1,
         TestCase::class               => 2,
-        'PHPUnit\DbUnit\TestCase'     => 2,
+        'PHPUnit\dbUnit\TestCase'     => 2,
         Generator::class              => 1,
         Text_Template::class          => 1,
         'Symfony\Component\Yaml\Yaml' => 1,

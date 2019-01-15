@@ -1,5 +1,5 @@
 <?php
-class DataProviderDependencyTest extends PHPUnit\Framework\TestCase
+class dataProviderDependencyTest extends PHPUnit\Framework\TestCase
 {
     public function testReference()
     {

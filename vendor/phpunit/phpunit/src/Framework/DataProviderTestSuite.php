@@ -9,7 +9,7 @@
  */
 namespace PHPUnit\Framework;
 
-class DataProviderTestSuite extends TestSuite
+class dataProviderTestSuite extends TestSuite
 {
     /**
      * Sets the dependencies of a TestCase.

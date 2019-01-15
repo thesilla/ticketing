@@ -1191,7 +1191,7 @@ class Generator
                 }
             }
 
-            if ($parameter->isPassedByReference()) {
+            if ($parameter->isPassedbyReference()) {
                 $reference = '&';
             }
 

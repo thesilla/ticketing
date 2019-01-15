@@ -34,9 +34,9 @@ final class BuildInformation
 
         $driverNode = $this->getNodeByName('driver');
 
-        if ($runtime->hasPHPDBGCodeCoverage()) {
+        if ($runtime->hasPHPdbGCodeCoverage()) {
             $driverNode->setAttribute('name', 'phpdbg');
-            $driverNode->setAttribute('version', \constant('PHPDBG_VERSION'));
+            $driverNode->setAttribute('version', \constant('PHPdbG_VERSION'));
         }
 
         if ($runtime->hasXdebug()) {

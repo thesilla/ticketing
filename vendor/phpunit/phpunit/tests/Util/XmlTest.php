@@ -70,7 +70,7 @@ class XmlTest extends TestCase
         Xml::load([1, 2, 3]);
     }
 
-    public function testLoadBoolean(): void
+    public function testLoadboolean(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Could not load XML from boolean');

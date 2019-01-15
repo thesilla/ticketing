@@ -25,7 +25,7 @@ class ContainsElement extends ManifestElement {
 
     public function getExtensionElement() {
         return new ExtensionElement(
-            $this->getChildByName('extension')
+            $this->getChildbyName('extension')
         );
     }
 }

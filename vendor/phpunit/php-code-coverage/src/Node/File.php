@@ -18,12 +18,12 @@ final class File extends AbstractNode
     /**
      * @var array
      */
-    private $coverageData;
+    private $coveragedata;
 
     /**
      * @var array
      */
-    private $testData;
+    private $testdata;
 
     /**
      * @var int
@@ -100,12 +100,12 @@ final class File extends AbstractNode
      */
     private $codeUnitsByLine = [];
 
-    public function __construct(string $name, AbstractNode $parent, array $coverageData, array $testData, bool $cacheTokens)
+    public function __construct(string $name, AbstractNode $parent, array $coveragedata, array $testdata, bool $cacheTokens)
     {
         parent::__construct($name, $parent);
 
-        $this->coverageData = $coverageData;
-        $this->testData     = $testData;
+        $this->coveragedata = $coveragedata;
+        $this->testdata     = $testdata;
         $this->cacheTokens  = $cacheTokens;
 
         $this->calculateStatistics();
@@ -122,17 +122,17 @@ final class File extends AbstractNode
     /**
      * Returns the code coverage data of this node.
      */
-    public function getCoverageData(): array
+    public function getCoveragedata(): array
     {
-        return $this->coverageData;
+        return $this->coveragedata;
     }
 
     /**
      * Returns the test data of this node.
      */
-    public function getTestData(): array
+    public function getTestdata(): array
     {
-        return $this->testData;
+        return $this->testdata;
     }
 
     /**
@@ -348,7 +348,7 @@ final class File extends AbstractNode
         unset($tokens);
 
         foreach (\range(1, $this->linesOfCode['loc']) as $lineNumber) {
-            if (isset($this->coverageData[$lineNumber])) {
+            if (isset($this->coveragedata[$lineNumber])) {
                 foreach ($this->codeUnitsByLine[$lineNumber] as &$codeUnit) {
                     $codeUnit['executableLines']++;
                 }
@@ -357,7 +357,7 @@ final class File extends AbstractNode
 
                 $this->numExecutableLines++;
 
-                if (\count($this->coverageData[$lineNumber]) > 0) {
+                if (\count($this->coveragedata[$lineNumber]) > 0) {
                     foreach ($this->codeUnitsByLine[$lineNumber] as &$codeUnit) {
                         $codeUnit['executedLines']++;
                     }

@@ -1,7 +1,7 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-class DataProviderFilterTest extends TestCase
+class dataProviderFilterTest extends TestCase
 {
     /**
      * @dataProvider truthProvider

@@ -2309,8 +2309,8 @@ abstract class Assert
             }
         }
 
-        Xml::removeCharacterDataNodes($expectedElement);
-        Xml::removeCharacterDataNodes($actualElement);
+        Xml::removeCharacterdataNodes($expectedElement);
+        Xml::removeCharacterdataNodes($actualElement);
 
         static::assertEquals(
             $expectedElement->childNodes->length,

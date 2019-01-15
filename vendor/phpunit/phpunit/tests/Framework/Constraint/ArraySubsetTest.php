@@ -23,7 +23,7 @@ class ArraySubsetTest extends ConstraintTestCase
      * @throws ExpectationFailedException
      * @throws \Exception
      * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
-     * @dataProvider evaluateDataProvider
+     * @dataProvider evaluatedataProvider
      */
     public function testEvaluate($expected, $subset, $other, $strict): void
     {
@@ -32,7 +32,7 @@ class ArraySubsetTest extends ConstraintTestCase
         $this->assertSame($expected, $constraint->evaluate($other, '', true));
     }
 
-    public static function evaluateDataProvider()
+    public static function evaluatedataProvider()
     {
         return [
             'loose array subset and array other' => [

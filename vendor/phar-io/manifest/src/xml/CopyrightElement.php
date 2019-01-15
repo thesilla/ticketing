@@ -19,7 +19,7 @@ class CopyrightElement extends ManifestElement {
 
     public function getLicenseElement() {
         return new LicenseElement(
-            $this->getChildByName('license')
+            $this->getChildbyName('license')
         );
     }
 }

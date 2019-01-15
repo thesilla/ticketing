@@ -58,7 +58,7 @@ class ManifestElement {
      *
      * @throws ManifestElementException
      */
-    protected function getChildByName($elementName) {
+    protected function getChildbyName($elementName) {
         $element = $this->element->getElementsByTagNameNS(self::XMLNS, $elementName)->item(0);
 
         if (!$element instanceof DOMElement) {

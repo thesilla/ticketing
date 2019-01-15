@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 use PHPUnit\Runner\PhptTestCase;
 use PHPUnit\Util\Test;
 use SebastianBergmann\CodeCoverage\Driver\Driver;
-use SebastianBergmann\CodeCoverage\Driver\PHPDBG;
+use SebastianBergmann\CodeCoverage\Driver\PHPdbG;
 use SebastianBergmann\CodeCoverage\Driver\Xdebug;
 use SebastianBergmann\CodeCoverage\Node\Builder;
 use SebastianBergmann\CodeCoverage\Node\Directory;
@@ -191,7 +191,7 @@ final class CodeCoverage
      * Returns the collected code coverage data.
      * Set $raw = true to bypass all filters.
      */
-    public function getData(bool $raw = false): array
+    public function getdata(bool $raw = false): array
     {
         if (!$raw && $this->addUncoveredFilesFromWhitelist) {
             $this->addUncoveredFilesFromWhitelist();
@@ -203,7 +203,7 @@ final class CodeCoverage
     /**
      * Sets the coverage data.
      */
-    public function setData(array $data): void
+    public function setdata(array $data): void
     {
         $this->data   = $data;
         $this->report = null;
@@ -240,7 +240,7 @@ final class CodeCoverage
         }
 
         if ($this->isInitialized === false) {
-            $this->initializeData();
+            $this->initializedata();
         }
 
         $this->currentId = $id;
@@ -889,8 +889,8 @@ final class CodeCoverage
             throw new RuntimeException('No code coverage driver available');
         }
 
-        if ($runtime->isPHPDBG()) {
-            return new PHPDBG;
+        if ($runtime->isPHPdbG()) {
+            return new PHPdbG;
         }
 
         if ($runtime->hasXdebug()) {
@@ -934,7 +934,7 @@ final class CodeCoverage
      * @throws UnintentionallyCoveredCodeException
      * @throws \ReflectionException
      */
-    private function initializeData(): void
+    private function initializedata(): void
     {
         $this->isInitialized = true;
 

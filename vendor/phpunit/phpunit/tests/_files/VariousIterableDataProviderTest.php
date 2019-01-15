@@ -1,6 +1,6 @@
 <?php
 
-class VariousIterableDataProviderTest
+class VariousIterabledataProviderTest
 {
     /**
      * @dataProvider asArrayProvider

@@ -1,10 +1,10 @@
 <?php
 
-namespace Foo\DataProviderIssue2859;
+namespace Foo\dataProviderIssue2859;
 
 use PHPUnit\Framework\TestCase;
 
-class TestWithDataProviderTest extends TestCase
+class TestWithdataProviderTest extends TestCase
 {
     /**
      * @dataProvider provide

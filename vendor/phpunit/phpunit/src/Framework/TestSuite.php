@@ -492,7 +492,7 @@ class TestSuite implements Test, SelfDescribing, IteratorAggregate
             } // TestCase($name, $data)
             else {
                 try {
-                    $data = \PHPUnit\Util\Test::getProvidedData(
+                    $data = \PHPUnit\Util\Test::getProvideddata(
                         $className,
                         $name
                     );
@@ -548,7 +548,7 @@ class TestSuite implements Test, SelfDescribing, IteratorAggregate
 
                 // Test method with @dataProvider.
                 if (isset($data)) {
-                    $test = new DataProviderTestSuite(
+                    $test = new dataProviderTestSuite(
                         $className . '::' . $name
                     );
 
@@ -943,7 +943,7 @@ class TestSuite implements Test, SelfDescribing, IteratorAggregate
 
         $test = self::createTest($class, $name);
 
-        if ($test instanceof TestCase || $test instanceof DataProviderTestSuite) {
+        if ($test instanceof TestCase || $test instanceof dataProviderTestSuite) {
             $test->setDependencies(
                 \PHPUnit\Util\Test::getDependencies($class->getName(), $name)
             );

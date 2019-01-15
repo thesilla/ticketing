@@ -21,7 +21,7 @@ class RequiresElementTest extends \PHPUnit_Framework_TestCase {
         $this->requires = new RequiresElement($this->dom->documentElement);
     }
 
-    public function testThrowsExceptionWhenGetPhpElementIsCalledButElementIsMissing() {
+    public function testThrowsExceptionWhenGetPhpElementIsCalledbutElementIsMissing() {
         $this->expectException(ManifestElementException::class);
         $this->requires->getPHPElement();
     }

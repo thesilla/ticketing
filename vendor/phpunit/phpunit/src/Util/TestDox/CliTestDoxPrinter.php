@@ -75,7 +75,7 @@ class CliTestDoxPrinter extends ResultPrinter
                 $testMethod = $this->prettifier->prettifyTestMethod($test->getName(false));
             }
 
-            $testMethod .= \substr($test->getDataSetAsString(false), 5);
+            $testMethod .= \substr($test->getdataSetAsString(false), 5);
         } elseif ($test instanceof PhptTestCase) {
             $className  = $class;
             $testMethod = $test->getName();

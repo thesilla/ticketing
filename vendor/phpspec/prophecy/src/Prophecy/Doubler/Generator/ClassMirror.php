@@ -185,8 +185,8 @@ class ClassMirror
             $node->setDefault($this->getDefaultValue($parameter));
         }
 
-        if ($parameter->isPassedByReference()) {
-            $node->setAsPassedByReference();
+        if ($parameter->isPassedbyReference()) {
+            $node->setAsPassedbyReference();
         }
 
         $node->setAsNullable($this->isNullable($parameter));

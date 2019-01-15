@@ -21,7 +21,7 @@ class BundlesElementTest extends \PHPUnit_Framework_TestCase {
         $this->bundles = new BundlesElement($this->dom->documentElement);
     }
 
-    public function testThrowsExceptionWhenGetComponentElementsIsCalledButNodesAreMissing() {
+    public function testThrowsExceptionWhenGetComponentElementsIsCalledbutNodesAreMissing() {
         $this->expectException(ManifestElementException::class);
         $this->bundles->getComponentElements();
     }

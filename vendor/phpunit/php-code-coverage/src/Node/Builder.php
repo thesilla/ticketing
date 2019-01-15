@@ -16,7 +16,7 @@ final class Builder
 {
     public function build(CodeCoverage $coverage): Directory
     {
-        $files      = $coverage->getData();
+        $files      = $coverage->getdata();
         $commonPath = $this->reducePaths($files);
         $root       = new Directory(
             $commonPath,

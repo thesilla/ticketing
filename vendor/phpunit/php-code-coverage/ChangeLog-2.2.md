@@ -37,7 +37,7 @@ All notable changes of the PHP_CodeCoverage 2.2 release series are documented in
 
 ### Added
 
-* Added a driver for PHPDBG (requires PHP 7)
+* Added a driver for PHPdbG (requires PHP 7)
 * Added `PHP_CodeCoverage::setDisableIgnoredLines()` to disable the ignoring of lines using annotations such as `@codeCoverageIgnore`
 
 ### Changed

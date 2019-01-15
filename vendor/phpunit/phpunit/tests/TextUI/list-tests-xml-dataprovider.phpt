@@ -1,5 +1,5 @@
 --TEST--
-phpunit --list-tests-xml DataProviderTest ../_files/DataProviderTest.php
+phpunit --list-tests-xml dataProviderTest ../_files/dataProviderTest.php
 --FILE--
 <?php
 $target = tempnam(sys_get_temp_dir(), __FILE__);
@@ -7,8 +7,8 @@ $target = tempnam(sys_get_temp_dir(), __FILE__);
 $_SERVER['argv'][1] = '--no-configuration';
 $_SERVER['argv'][2] = '--list-tests-xml';
 $_SERVER['argv'][3] = $target;
-$_SERVER['argv'][4] = 'DataProviderTest';
-$_SERVER['argv'][5] = __DIR__ . '/../_files/DataProviderTest.php';
+$_SERVER['argv'][4] = 'dataProviderTest';
+$_SERVER['argv'][5] = __DIR__ . '/../_files/dataProviderTest.php';
 
 require __DIR__ . '/../bootstrap.php';
 PHPUnit\TextUI\Command::main(false);
@@ -22,7 +22,7 @@ PHPUnit %s by Sebastian Bergmann and contributors.
 Wrote list of tests that would have been run to %s
 <?xml version="1.0"?>
 <tests>
- <testCaseClass name="DataProviderTest">
+ <testCaseClass name="dataProviderTest">
   <testCaseMethod name="testAdd" groups="default" dataSet="#0"/>
   <testCaseMethod name="testAdd" groups="default" dataSet="#1"/>
   <testCaseMethod name="testAdd" groups="default" dataSet="#2"/>

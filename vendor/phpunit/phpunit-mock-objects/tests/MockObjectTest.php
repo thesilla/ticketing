@@ -517,7 +517,7 @@ class MockObjectTest extends TestCase
         $this->assertEquals($a, $b);
     }
 
-    public function testMockObjectsConstructedIndepentantlyShouldBeEqual()
+    public function testMockObjectsConstructedIndepentantlyShouldbeEqual()
     {
         $a = $this->getMockBuilder(stdClass::class)
                   ->getMock();
@@ -816,7 +816,7 @@ class MockObjectTest extends TestCase
     /**
      * See https://github.com/sebastianbergmann/phpunit-mock-objects/issues/81
      */
-    public function testMockArgumentsPassedByReference()
+    public function testMockArgumentsPassedbyReference()
     {
         $foo = $this->getMockBuilder('MethodCallbackByReference')
                     ->setMethods(['bar'])
@@ -838,7 +838,7 @@ class MockObjectTest extends TestCase
     /**
      * See https://github.com/sebastianbergmann/phpunit-mock-objects/issues/81
      */
-    public function testMockArgumentsPassedByReference2()
+    public function testMockArgumentsPassedbyReference2()
     {
         $foo = $this->getMockBuilder('MethodCallbackByReference')
                     ->disableOriginalConstructor()
@@ -863,7 +863,7 @@ class MockObjectTest extends TestCase
     /**
      * @see https://github.com/sebastianbergmann/phpunit-mock-objects/issues/116
      */
-    public function testMockArgumentsPassedByReference3()
+    public function testMockArgumentsPassedbyReference3()
     {
         $foo = $this->getMockBuilder('MethodCallbackByReference')
                     ->setMethods(['bar'])
@@ -885,7 +885,7 @@ class MockObjectTest extends TestCase
     /**
      * @see https://github.com/sebastianbergmann/phpunit/issues/796
      */
-    public function testMockArgumentsPassedByReference4()
+    public function testMockArgumentsPassedbyReference4()
     {
         $foo = $this->getMockBuilder('MethodCallbackByReference')
                     ->setMethods(['bar'])

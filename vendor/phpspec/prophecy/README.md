@@ -334,18 +334,18 @@ are called mocks and in Prophecy they look almost exactly the same as stubs, exc
 they define *predictions* instead of *promises* on method prophecies:
 
 ```php
-$entityManager->flush()->shouldBeCalled();
+$entityManager->flush()->shouldbeCalled();
 ```
 
 #### Predictions
 
-The `shouldBeCalled()` method here assigns `CallPrediction` to our method prophecy.
+The `shouldbeCalled()` method here assigns `CallPrediction` to our method prophecy.
 Predictions are a delayed behavior check for your prophecies. You see, during the entire lifetime
 of your doubles, Prophecy records every single call you're making against it inside your
 code. After that, Prophecy can use this collected information to check if it matches defined
 predictions. You can assign predictions to method prophecies using the
 `MethodProphecy::should(PredictionInterface $prediction)` method. As a matter of fact,
-the `shouldBeCalled()` method we used earlier is just a shortcut to:
+the `shouldbeCalled()` method we used earlier is just a shortcut to:
 
 ```php
 $entityManager->flush()->should(new Prophecy\Prediction\CallPrediction());
@@ -364,9 +364,9 @@ are defined, it would do nothing. So it won't harm to call it after every test.
 
 There are plenty more predictions you can play with:
 
-- `CallPrediction` or `shouldBeCalled()` - checks that the method has been called 1 or more times
+- `CallPrediction` or `shouldbeCalled()` - checks that the method has been called 1 or more times
 - `NoCallsPrediction` or `shouldNotBeCalled()` - checks that the method has not been called
-- `CallTimesPrediction` or `shouldBeCalledTimes($count)` - checks that the method has been called
+- `CallTimesPrediction` or `shouldbeCalledTimes($count)` - checks that the method has been called
   `$count` times
 - `CallbackPrediction` or `should($callback)` - checks the method against your own custom callback
 

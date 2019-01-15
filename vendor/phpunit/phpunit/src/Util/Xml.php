@@ -9,7 +9,7 @@
  */
 namespace PHPUnit\Util;
 
-use DOMCharacterData;
+use DOMCharacterdata;
 use DOMDocument;
 use DOMElement;
 use DOMNode;
@@ -148,11 +148,11 @@ final class Xml
         return self::load($contents, $isHtml, $filename, $xinclude, $strict);
     }
 
-    public static function removeCharacterDataNodes(DOMNode $node): void
+    public static function removeCharacterdataNodes(DOMNode $node): void
     {
         if ($node->hasChildNodes()) {
             for ($i = $node->childNodes->length - 1; $i >= 0; $i--) {
-                if (($child = $node->childNodes->item($i)) instanceof DOMCharacterData) {
+                if (($child = $node->childNodes->item($i)) instanceof DOMCharacterdata) {
                     $node->removeChild($child);
                 }
             }
@@ -241,14 +241,14 @@ final class Xml
                 break;
 
             case 'boolean':
-                $variable = $element->textContent === 'true';
+                $variable = $element->textcontent === 'true';
 
                 break;
 
             case 'integer':
             case 'double':
             case 'string':
-                $variable = $element->textContent;
+                $variable = $element->textcontent;
 
                 \settype($variable, $element->tagName);
 

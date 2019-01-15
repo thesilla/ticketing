@@ -10,7 +10,7 @@
 
 namespace SebastianBergmann\Diff\Output;
 
-final class StrictUnifiedDiffOutputBuilderDataProvider
+final class StrictUnifiedDiffOutputBuilderdataProvider
 {
     public static function provideOutputBuildingCases(): array
     {

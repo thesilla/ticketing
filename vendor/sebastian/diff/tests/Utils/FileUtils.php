@@ -12,7 +12,7 @@ namespace SebastianBergmann\Diff\Utils;
 
 final class FileUtils
 {
-    public static function getFileContent(string $file): string
+    public static function getFilecontent(string $file): string
     {
         $content = @\file_get_contents($file);
 

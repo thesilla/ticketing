@@ -22,7 +22,7 @@ There was 1 warning:
 
 1) Warning
 The data provider specified for Issue2137Test::testBrandService is invalid.
-Data set #0 is invalid.
+data set #0 is invalid.
 
 WARNINGS!
 Tests: 1, Assertions: 0, Warnings: 1.

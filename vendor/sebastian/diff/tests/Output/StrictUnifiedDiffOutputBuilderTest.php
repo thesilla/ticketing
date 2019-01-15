@@ -69,7 +69,7 @@ final class StrictUnifiedDiffOutputBuilderTest extends TestCase
      */
     public function provideOutputBuildingCases(): array
     {
-        return StrictUnifiedDiffOutputBuilderDataProvider::provideOutputBuildingCases();
+        return StrictUnifiedDiffOutputBuilderdataProvider::provideOutputBuildingCases();
     }
 
     /**
@@ -77,7 +77,7 @@ final class StrictUnifiedDiffOutputBuilderTest extends TestCase
      */
     public function provideSample(): array
     {
-        return StrictUnifiedDiffOutputBuilderDataProvider::provideSample();
+        return StrictUnifiedDiffOutputBuilderdataProvider::provideSample();
     }
 
     /**
@@ -100,7 +100,7 @@ final class StrictUnifiedDiffOutputBuilderTest extends TestCase
 
     public function provideBasicDiffGeneration(): array
     {
-        return StrictUnifiedDiffOutputBuilderDataProvider::provideBasicDiffGeneration();
+        return StrictUnifiedDiffOutputBuilderdataProvider::provideBasicDiffGeneration();
     }
 
     /**

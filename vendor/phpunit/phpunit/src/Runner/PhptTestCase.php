@@ -290,9 +290,9 @@ class PhptTestCase implements Test, SelfDescribing
 
         foreach ($assertions as $sectionName => $sectionAssertion) {
             if (isset($sections[$sectionName])) {
-                $sectionContent = \preg_replace('/\r\n/', "\n", \trim($sections[$sectionName]));
+                $sectioncontent = \preg_replace('/\r\n/', "\n", \trim($sections[$sectionName]));
                 $assertion      = $sectionAssertion;
-                $expected       = $sectionName === 'EXPECTREGEX' ? "/{$sectionContent}/" : $sectionContent;
+                $expected       = $sectionName === 'EXPECTREGEX' ? "/{$sectioncontent}/" : $sectioncontent;
 
                 break;
             }
@@ -382,7 +382,7 @@ class PhptTestCase implements Test, SelfDescribing
             'CGI',
             'EXPECTHEADERS',
             'EXTENSIONS',
-            'PHPDBG'
+            'PHPdbG'
         ];
 
         foreach (\file($this->filename) as $line) {

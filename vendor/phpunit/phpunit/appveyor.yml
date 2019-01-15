@@ -24,7 +24,7 @@ matrix:
 
 cache:
   - c:\php -> appveyor.yml
-  - '%LOCALAPPDATA%\Composer\files'
+  - '%LOCALAPPdata%\Composer\files'
 
 init:
   - SET PATH=c:\php\%PHP_VERSION%;%PATH%

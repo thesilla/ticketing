@@ -1,5 +1,5 @@
 --TEST--
-#2380: Data Providers cannot be generators anymore
+#2380: data Providers cannot be generators anymore
 --FILE--
 <?php
 $_SERVER['argv'][1] = '--no-configuration';

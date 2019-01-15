@@ -13,7 +13,7 @@ namespace PHPUnit\Framework\Constraint;
 class IsJsonTest extends ConstraintTestCase
 {
     /**
-     * @dataProvider evaluateDataprovider
+     * @dataProvider evaluatedataprovider
      *
      * @param mixed $expected
      * @param mixed $jsonOther
@@ -29,7 +29,7 @@ class IsJsonTest extends ConstraintTestCase
         $this->assertEquals($expected, $constraint->evaluate($jsonOther, '', true));
     }
 
-    public static function evaluateDataprovider()
+    public static function evaluatedataprovider()
     {
         return [
             'valid JSON'                                     => [true, '{}'],

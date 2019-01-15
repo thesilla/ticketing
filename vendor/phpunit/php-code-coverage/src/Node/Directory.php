@@ -152,9 +152,9 @@ final class Directory extends AbstractNode implements \IteratorAggregate
      *
      * @throws InvalidArgumentException
      */
-    public function addFile(string $name, array $coverageData, array $testData, bool $cacheTokens): File
+    public function addFile(string $name, array $coveragedata, array $testdata, bool $cacheTokens): File
     {
-        $file = new File($name, $this, $coverageData, $testData, $cacheTokens);
+        $file = new File($name, $this, $coveragedata, $testdata, $cacheTokens);
 
         $this->children[] = $file;
         $this->files[]    = &$this->children[\count($this->children) - 1];

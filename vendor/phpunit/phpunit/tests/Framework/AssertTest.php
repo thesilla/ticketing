@@ -151,10 +151,10 @@ class AssertTest extends TestCase
         $this->assertArraySubset(['a' => 'item a', 'c' => ['a2' => 'item a2']], $array);
         $this->assertArraySubset(['a' => 'item a', 'd' => ['a2' => ['b3' => 'item b3']]], $array);
 
-        $arrayAccessData = new \ArrayObject($array);
+        $arrayAccessdata = new \ArrayObject($array);
 
-        $this->assertArraySubset(['a' => 'item a', 'c' => ['a2' => 'item a2']], $arrayAccessData);
-        $this->assertArraySubset(['a' => 'item a', 'd' => ['a2' => ['b3' => 'item b3']]], $arrayAccessData);
+        $this->assertArraySubset(['a' => 'item a', 'c' => ['a2' => 'item a2']], $arrayAccessdata);
+        $this->assertArraySubset(['a' => 'item a', 'd' => ['a2' => ['b3' => 'item b3']]], $arrayAccessdata);
 
         try {
             $this->assertArraySubset(['a' => 'bad value'], $array);
@@ -828,13 +828,13 @@ XML;
         );
     }
 
-    public function testXMLStructureIsSameButDataIsNot(): void
+    public function testXMLStructureIsSameButdataIsNot(): void
     {
         $expected = new \DOMDocument;
         $expected->load($this->filesDirectory . 'structureExpected.xml');
 
         $actual = new \DOMDocument;
-        $actual->load($this->filesDirectory . 'structureIsSameButDataIsNot.xml');
+        $actual->load($this->filesDirectory . 'structureIsSameButdataIsNot.xml');
 
         $this->assertEqualXMLStructure(
             $expected->firstChild,
@@ -2362,7 +2362,7 @@ XML;
     }
 
     /**
-     * @dataProvider validInvalidJsonDataprovider
+     * @dataProvider validInvalidJsondataprovider
      *
      * @param mixed $expected
      * @param mixed $actual
@@ -2388,7 +2388,7 @@ XML;
     }
 
     /**
-     * @dataProvider validInvalidJsonDataprovider
+     * @dataProvider validInvalidJsondataprovider
      *
      * @param mixed $expected
      * @param mixed $actual
@@ -2406,7 +2406,7 @@ XML;
 
     public function testAssertJsonStringEqualsJsonFile(): void
     {
-        $file    = __DIR__ . '/../_files/JsonData/simpleObject.json';
+        $file    = __DIR__ . '/../_files/Jsondata/simpleObject.json';
         $actual  = \json_encode(['Mascott' => 'Tux']);
         $message = '';
 
@@ -2415,7 +2415,7 @@ XML;
 
     public function testAssertJsonStringEqualsJsonFileExpectingExpectationFailedException(): void
     {
-        $file    = __DIR__ . '/../_files/JsonData/simpleObject.json';
+        $file    = __DIR__ . '/../_files/Jsondata/simpleObject.json';
         $actual  = \json_encode(['Mascott' => 'Beastie']);
         $message = '';
 
@@ -2435,7 +2435,7 @@ XML;
 
     public function testAssertJsonStringNotEqualsJsonFile(): void
     {
-        $file    = __DIR__ . '/../_files/JsonData/simpleObject.json';
+        $file    = __DIR__ . '/../_files/Jsondata/simpleObject.json';
         $actual  = \json_encode(['Mascott' => 'Beastie']);
         $message = '';
 
@@ -2444,8 +2444,8 @@ XML;
 
     public function testAssertJsonFileNotEqualsJsonFile(): void
     {
-        $fileExpected = __DIR__ . '/../_files/JsonData/simpleObject.json';
-        $fileActual   = __DIR__ . '/../_files/JsonData/arrayObject.json';
+        $fileExpected = __DIR__ . '/../_files/Jsondata/simpleObject.json';
+        $fileActual   = __DIR__ . '/../_files/Jsondata/arrayObject.json';
         $message      = '';
 
         $this->assertJsonFileNotEqualsJsonFile($fileExpected, $fileActual, $message);
@@ -2453,7 +2453,7 @@ XML;
 
     public function testAssertJsonFileEqualsJsonFile(): void
     {
-        $file    = __DIR__ . '/../_files/JsonData/simpleObject.json';
+        $file    = __DIR__ . '/../_files/Jsondata/simpleObject.json';
         $message = '';
 
         $this->assertJsonFileEqualsJsonFile($file, $file, $message);
@@ -2571,7 +2571,7 @@ XML;
     /**
      * @return array<string, string[]>
      */
-    public static function validInvalidJsonDataprovider()
+    public static function validInvalidJsondataprovider()
     {
         return [
             'error syntax in expected JSON' => ['{"Mascott"::}', '{"Mascott" : "Tux"}'],

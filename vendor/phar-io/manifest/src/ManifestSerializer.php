@@ -34,7 +34,7 @@ class ManifestSerializer {
         $this->addContains($manifest->getName(), $manifest->getVersion(), $manifest->getType());
         $this->addCopyright($manifest->getCopyrightInformation());
         $this->addRequirements($manifest->getRequirements());
-        $this->addBundles($manifest->getBundledComponents());
+        $this->addbundles($manifest->getBundledComponents());
 
         return $this->finishDocument();
     }
@@ -138,7 +138,7 @@ class ManifestSerializer {
         $this->xmlWriter->endElement();
     }
 
-    private function addBundles(BundledComponentCollection $bundledComponentCollection) {
+    private function addbundles(BundledComponentCollection $bundledComponentCollection) {
         if (count($bundledComponentCollection) === 0) {
             return;
         }

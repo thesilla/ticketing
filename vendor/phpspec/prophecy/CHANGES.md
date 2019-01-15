@@ -4,7 +4,7 @@
 * Support for void return types without explicit will (@crellbar)
 * Clearer error message for unexpected method calls (@meridius)
 * Clearer error message for aggregate exceptions (@meridius)
-* More verbose `shouldBeCalledOnce` expectation (@olvlvl)
+* More verbose `shouldbeCalledOnce` expectation (@olvlvl)
 * Ability to double Throwable, or methods that extend it (@ciaranmcnulty)
 * [fixed] Doubling methods where class has additional arguments to interface (@webimpress)
 * [fixed] Doubling methods where arguments are nullable but default is not null (@webimpress)

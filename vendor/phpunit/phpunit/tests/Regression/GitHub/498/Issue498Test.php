@@ -6,25 +6,25 @@ class Issue498Test extends TestCase
 {
     /**
      * @test
-     * @dataProvider shouldBeTrueDataProvider
+     * @dataProvider shouldbeTruedataProvider
      * @group falseOnly
      */
-    public function shouldBeTrue($testData)
+    public function shouldbeTrue($testdata)
     {
         $this->assertTrue(true);
     }
 
     /**
      * @test
-     * @dataProvider shouldBeFalseDataProvider
+     * @dataProvider shouldbeFalsedataProvider
      * @group trueOnly
      */
-    public function shouldBeFalse($testData)
+    public function shouldbeFalse($testdata)
     {
         $this->assertFalse(false);
     }
 
-    public function shouldBeTrueDataProvider()
+    public function shouldbeTruedataProvider()
     {
 
         //throw new Exception("Can't create the data");
@@ -34,7 +34,7 @@ class Issue498Test extends TestCase
         ];
     }
 
-    public function shouldBeFalseDataProvider()
+    public function shouldbeFalsedataProvider()
     {
         throw new Exception("Can't create the data");
 

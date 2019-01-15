@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 class Issue2380Test extends TestCase
 {
     /**
-     * @dataProvider generatorData
+     * @dataProvider generatordata
      */
     public function testGeneratorProvider($data)
     {
@@ -14,7 +14,7 @@ class Issue2380Test extends TestCase
     /**
      * @return Generator
      */
-    public function generatorData()
+    public function generatordata()
     {
         yield ['testing'];
     }

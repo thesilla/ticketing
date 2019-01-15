@@ -3,10 +3,10 @@ use PHPUnit\Framework\TestCase;
 
 class TestAutoreferenced extends TestCase
 {
-    public $myTestData = null;
+    public $myTestdata = null;
 
     public function testJsonEncodeException($data)
     {
-        $this->myTestData = $data;
+        $this->myTestdata = $data;
     }
 }

@@ -32,7 +32,7 @@ final class Line
         $this->content = $content;
     }
 
-    public function getContent(): string
+    public function getcontent(): string
     {
         return $this->content;
     }

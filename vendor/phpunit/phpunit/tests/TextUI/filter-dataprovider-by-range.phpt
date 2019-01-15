@@ -1,12 +1,12 @@
 --TEST--
-phpunit --filter testTrue#1-3 DataProviderFilterTest ../_files/DataProviderFilterTest.php
+phpunit --filter testTrue#1-3 dataProviderFilterTest ../_files/dataProviderFilterTest.php
 --FILE--
 <?php
 $_SERVER['argv'][1] = '--no-configuration';
 $_SERVER['argv'][2] = '--filter';
 $_SERVER['argv'][3] = 'testTrue#1-3';
-$_SERVER['argv'][4] = 'DataProviderFilterTest';
-$_SERVER['argv'][5] = __DIR__ . '/../_files/DataProviderFilterTest.php';
+$_SERVER['argv'][4] = 'dataProviderFilterTest';
+$_SERVER['argv'][5] = __DIR__ . '/../_files/dataProviderFilterTest.php';
 
 require __DIR__ . '/../bootstrap.php';
 PHPUnit\TextUI\Command::main();

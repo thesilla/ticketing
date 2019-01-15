@@ -160,7 +160,7 @@ $(document).ready(function() {
       .yAxis.tickFormat(d3.format('d'));
 
     d3.select('#classCoverageDistribution svg')
-      .datum(getCoverageDistributionData([0,0,0,0,0,0,0,0,0,1,0,0], "Class Coverage"))
+      .datum(getCoverageDistributiondata([0,0,0,0,0,0,0,0,0,1,0,0], "Class Coverage"))
       .transition().duration(500).call(chart);
 
     nv.utils.windowResize(chart.update);
@@ -178,7 +178,7 @@ $(document).ready(function() {
       .yAxis.tickFormat(d3.format('d'));
 
     d3.select('#methodCoverageDistribution svg')
-      .datum(getCoverageDistributionData([0,0,0,0,0,0,0,0,0,1,0,0], "Method Coverage"))
+      .datum(getCoverageDistributiondata([0,0,0,0,0,0,0,0,0,1,0,0], "Method Coverage"))
       .transition().duration(500).call(chart);
 
     nv.utils.windowResize(chart.update);
@@ -186,7 +186,7 @@ $(document).ready(function() {
     return chart;
   });
 
-  function getCoverageDistributionData(data, label) {
+  function getCoverageDistributiondata(data, label) {
     var labels = [
       '0%',
       '0-10%',
@@ -220,7 +220,7 @@ $(document).ready(function() {
       .showDistY(true)
       .showLegend(false)
       .forceX([0, 100]);
-    chart.tooltipContent(function(graph) {
+    chart.tooltipcontent(function(graph) {
       return '<p>' + graph.point.class + '</p>';
     });
 
@@ -228,7 +228,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Cyclomatic Complexity');
 
     d3.select('#classComplexity svg')
-      .datum(getComplexityData([[87.5,1,"<a href=\"source_with_class_and_anonymous_function.php.html#3\">CoveredClassWithAnonymousFunctionInStaticMethod<\/a>"]], 'Class Complexity'))
+      .datum(getComplexitydata([[87.5,1,"<a href=\"source_with_class_and_anonymous_function.php.html#3\">CoveredClassWithAnonymousFunctionInStaticMethod<\/a>"]], 'Class Complexity'))
       .transition()
       .duration(500)
       .call(chart);
@@ -244,7 +244,7 @@ $(document).ready(function() {
       .showDistY(true)
       .showLegend(false)
       .forceX([0, 100]);
-    chart.tooltipContent(function(graph) {
+    chart.tooltipcontent(function(graph) {
       return '<p>' + graph.point.class + '</p>';
     });
 
@@ -252,7 +252,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Method Complexity');
 
     d3.select('#methodComplexity svg')
-      .datum(getComplexityData([[87.5,1,"<a href=\"source_with_class_and_anonymous_function.php.html#5\">CoveredClassWithAnonymousFunctionInStaticMethod::runAnonymous<\/a>"]], 'Method Complexity'))
+      .datum(getComplexitydata([[87.5,1,"<a href=\"source_with_class_and_anonymous_function.php.html#5\">CoveredClassWithAnonymousFunctionInStaticMethod::runAnonymous<\/a>"]], 'Method Complexity'))
       .transition()
       .duration(500)
       .call(chart);
@@ -262,7 +262,7 @@ $(document).ready(function() {
     return chart;
   });
 
-  function getComplexityData(data, label) {
+  function getComplexitydata(data, label) {
     var values = [];
     $.each(data, function(key) {
       var value = Math.round(data[key][0]*100) / 100;

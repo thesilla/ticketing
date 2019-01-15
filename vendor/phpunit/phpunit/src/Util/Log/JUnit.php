@@ -327,7 +327,7 @@ class JUnit extends Printer implements TestListener
 
         if ($test instanceof TestCase) {
             $class      = new ReflectionClass($test);
-            $methodName = $test->getName(!$test->usesDataProvider());
+            $methodName = $test->getName(!$test->usesdataProvider());
 
             if ($class->hasMethod($methodName)) {
                 $method = $class->getMethod($methodName);

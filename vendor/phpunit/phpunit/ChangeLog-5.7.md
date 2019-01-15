@@ -78,7 +78,7 @@ All notable changes of the PHPUnit 5.7 release series are documented in this fil
 * Fixed [#2016](https://github.com/sebastianbergmann/phpunit/issues/2016): `prophesize()` does not work when static attributes are backed up
 * Fixed [#2568](https://github.com/sebastianbergmann/phpunit/issues/2568): `ArraySubsetConstraint` uses invalid cast to array
 * Fixed [#2573](https://github.com/sebastianbergmann/phpunit/issues/2573): `getMockFromWsdl()` does not handle URLs with query parameters
-* `PHPUnit\Util\Test::getDataFromTestWithAnnotation()` raises notice when docblock contains Windows line endings
+* `PHPUnit\Util\Test::getdataFromTestWithAnnotation()` raises notice when docblock contains Windows line endings
 
 ## [5.7.16] - 2017-03-15
 
@@ -150,7 +150,7 @@ All notable changes of the PHPUnit 5.7 release series are documented in this fil
 * Fixed [#2328](https://github.com/sebastianbergmann/phpunit/issues/2328): `TestListener` callbacks `startTest()` and `endTest()` are not called when test is skipped due to `@depends`
 * Fixed [#2331](https://github.com/sebastianbergmann/phpunit/issues/2331): Boolean environment variable values specified in XML get mangled
 * Fixed [#2333](https://github.com/sebastianbergmann/phpunit/issues/2333): `assertContains()` and `assertNotContains()` do not handle UTF-8 strings correctly
-* Fixed [#2340](https://github.com/sebastianbergmann/phpunit/pull/2340): Data providers that use `yield` or implement `Iterator` cannot be combined 
+* Fixed [#2340](https://github.com/sebastianbergmann/phpunit/pull/2340): data providers that use `yield` or implement `Iterator` cannot be combined 
 * Fixed [#2349](https://github.com/sebastianbergmann/phpunit/pull/2349): `PHPUnit_TextUI_Command` does not `exit()` when it should
 * Fixed [#2392](https://github.com/sebastianbergmann/phpunit/issues/2392): Empty (but valid) data provider should skip the test
 * Fixed [#2431](https://github.com/sebastianbergmann/phpunit/issues/2431): `assertArraySubset()` does not support `ArrayAccess`
@@ -192,7 +192,7 @@ All notable changes of the PHPUnit 5.7 release series are documented in this fil
 
 ### Fixed
 
-* Fixed [#2380](https://github.com/sebastianbergmann/phpunit/issues/2380): Data Providers cannot be generators anymore
+* Fixed [#2380](https://github.com/sebastianbergmann/phpunit/issues/2380): data Providers cannot be generators anymore
 
 ## [5.7.0] - 2016-12-02
 

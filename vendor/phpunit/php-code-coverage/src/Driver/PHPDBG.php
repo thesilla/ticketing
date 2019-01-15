@@ -13,11 +13,11 @@ namespace SebastianBergmann\CodeCoverage\Driver;
 use SebastianBergmann\CodeCoverage\RuntimeException;
 
 /**
- * Driver for PHPDBG's code coverage functionality.
+ * Driver for PHPdbG's code coverage functionality.
  *
  * @codeCoverageIgnore
  */
-final class PHPDBG implements Driver
+final class PHPdbG implements Driver
 {
     /**
      * @throws RuntimeException
@@ -26,13 +26,13 @@ final class PHPDBG implements Driver
     {
         if (PHP_SAPI !== 'phpdbg') {
             throw new RuntimeException(
-                'This driver requires the PHPDBG SAPI'
+                'This driver requires the PHPdbG SAPI'
             );
         }
 
         if (!\function_exists('phpdbg_start_oplog')) {
             throw new RuntimeException(
-                'This build of PHPDBG does not support code coverage'
+                'This build of PHPdbG does not support code coverage'
             );
         }
     }
@@ -52,7 +52,7 @@ final class PHPDBG implements Driver
     {
         static $fetchedLines = [];
 
-        $dbgData = \phpdbg_end_oplog();
+        $dbgdata = \phpdbg_end_oplog();
 
         if ($fetchedLines == []) {
             $sourceLines = \phpdbg_get_executable();
@@ -74,15 +74,15 @@ final class PHPDBG implements Driver
 
         $fetchedLines = \array_merge($fetchedLines, $sourceLines);
 
-        return $this->detectExecutedLines($fetchedLines, $dbgData);
+        return $this->detectExecutedLines($fetchedLines, $dbgdata);
     }
 
     /**
      * Convert phpdbg based data into the format CodeCoverage expects
      */
-    private function detectExecutedLines(array $sourceLines, array $dbgData): array
+    private function detectExecutedLines(array $sourceLines, array $dbgdata): array
     {
-        foreach ($dbgData as $file => $coveredLines) {
+        foreach ($dbgdata as $file => $coveredLines) {
             foreach ($coveredLines as $lineNo => $numExecuted) {
                 // phpdbg also reports $lineNo=0 when e.g. exceptions get thrown.
                 // make sure we only mark lines executed which are actually executable.

@@ -14,7 +14,7 @@ require __DIR__ . '/../_files/BankAccount.php';
 require __DIR__ . '/../_files/BankAccountTest.php';
 
 use SebastianBergmann\CodeCoverage\Driver\Driver;
-use SebastianBergmann\CodeCoverage\Driver\PHPDBG;
+use SebastianBergmann\CodeCoverage\Driver\PHPdbG;
 use SebastianBergmann\CodeCoverage\Driver\Xdebug;
 
 /**
@@ -72,11 +72,11 @@ class CodeCoverageTest extends TestCase
     public function testCanBeConstructedForPhpdbgWithoutGivenFilterObject()
     {
         if (PHP_SAPI != 'phpdbg') {
-            $this->markTestSkipped('Requires PHPDBG');
+            $this->markTestSkipped('Requires PHPdbG');
         }
 
         $this->assertAttributeInstanceOf(
-            PHPDBG::class,
+            PHPdbG::class,
             'driver',
             $this->coverage
         );
@@ -91,14 +91,14 @@ class CodeCoverageTest extends TestCase
     public function testCanBeConstructedForPhpdbgWithGivenFilterObject()
     {
         if (PHP_SAPI != 'phpdbg') {
-            $this->markTestSkipped('Requires PHPDBG');
+            $this->markTestSkipped('Requires PHPdbG');
         }
 
         $filter   = new Filter;
         $coverage = new CodeCoverage(null, $filter);
 
         $this->assertAttributeInstanceOf(
-            PHPDBG::class,
+            PHPdbG::class,
             'driver',
             $coverage
         );
@@ -218,8 +218,8 @@ class CodeCoverageTest extends TestCase
         $coverage = $this->getCoverageForBankAccount();
 
         $this->assertEquals(
-            $this->getExpectedDataArrayForBankAccount(),
-            $coverage->getData()
+            $this->getExpecteddataArrayForBankAccount(),
+            $coverage->getdata()
         );
 
         $this->assertEquals(
@@ -239,8 +239,8 @@ class CodeCoverageTest extends TestCase
         $coverage->merge($this->getCoverageForBankAccountForLastTwoTests());
 
         $this->assertEquals(
-            $this->getExpectedDataArrayForBankAccount(),
-            $coverage->getData()
+            $this->getExpecteddataArrayForBankAccount(),
+            $coverage->getdata()
         );
     }
 
@@ -250,8 +250,8 @@ class CodeCoverageTest extends TestCase
         $coverage->merge($this->getCoverageForBankAccountForFirstTwoTests());
 
         $this->assertEquals(
-            $this->getExpectedDataArrayForBankAccountInReverseOrder(),
-            $coverage->getData()
+            $this->getExpecteddataArrayForBankAccountInReverseOrder(),
+            $coverage->getdata()
         );
     }
 
@@ -265,8 +265,8 @@ class CodeCoverageTest extends TestCase
         $coverage->merge($this->getCoverageForBankAccount());
 
         $this->assertEquals(
-            $this->getExpectedDataArrayForBankAccount(),
-            $coverage->getData()
+            $this->getExpecteddataArrayForBankAccount(),
+            $coverage->getdata()
         );
     }
 

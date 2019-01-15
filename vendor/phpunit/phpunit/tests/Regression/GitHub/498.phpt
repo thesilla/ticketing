@@ -22,7 +22,7 @@ Time: %s, Memory: %s
 There was 1 warning:
 
 1) Warning
-The data provider specified for Issue498Test::shouldBeFalse is invalid.
+The data provider specified for Issue498Test::shouldbeFalse is invalid.
 Can't create the data
 
 WARNINGS!

@@ -53,19 +53,19 @@
       </xsd:complexType>
 
       <xsd:complexType name="ResultElementArray">
-        <xsd:complexContent>
+        <xsd:complexcontent>
           <xsd:restriction base="soapenc:Array">
              <xsd:attribute ref="soapenc:arrayType" wsdl:arrayType="typens:ResultElement[]"/>
           </xsd:restriction>
-        </xsd:complexContent>
+        </xsd:complexcontent>
       </xsd:complexType>
 
       <xsd:complexType name="DirectoryCategoryArray">
-        <xsd:complexContent>
+        <xsd:complexcontent>
           <xsd:restriction base="soapenc:Array">
              <xsd:attribute ref="soapenc:arrayType" wsdl:arrayType="typens:DirectoryCategory[]"/>
           </xsd:restriction>
-        </xsd:complexContent>
+        </xsd:complexcontent>
       </xsd:complexType>
 
       <xsd:complexType name="DirectoryCategory">

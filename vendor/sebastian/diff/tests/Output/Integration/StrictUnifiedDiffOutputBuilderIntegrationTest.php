@@ -70,8 +70,8 @@ final class StrictUnifiedDiffOutputBuilderIntegrationTest extends TestCase
      */
     public function testIntegrationUsingPHPFileInVendorGitApply(string $fileFrom, string $fileTo): void
     {
-        $from = FileUtils::getFileContent($fileFrom);
-        $to   = FileUtils::getFileContent($fileTo);
+        $from = FileUtils::getFilecontent($fileFrom);
+        $to   = FileUtils::getFilecontent($fileTo);
 
         $diff = (new Differ(new StrictUnifiedDiffOutputBuilder(['fromFile' => 'Original', 'toFile' => 'New'])))->diff($from, $to);
 
@@ -100,8 +100,8 @@ final class StrictUnifiedDiffOutputBuilderIntegrationTest extends TestCase
      */
     public function testIntegrationUsingPHPFileInVendorPatch(string $fileFrom, string $fileTo): void
     {
-        $from = FileUtils::getFileContent($fileFrom);
-        $to   = FileUtils::getFileContent($fileTo);
+        $from = FileUtils::getFilecontent($fileFrom);
+        $to   = FileUtils::getFilecontent($fileTo);
 
         $diff = (new Differ(new StrictUnifiedDiffOutputBuilder(['fromFile' => 'Original', 'toFile' => 'New'])))->diff($from, $to);
 
@@ -145,17 +145,17 @@ final class StrictUnifiedDiffOutputBuilderIntegrationTest extends TestCase
 
     public function provideOutputBuildingCases(): array
     {
-        return StrictUnifiedDiffOutputBuilderDataProvider::provideOutputBuildingCases();
+        return StrictUnifiedDiffOutputBuilderdataProvider::provideOutputBuildingCases();
     }
 
     public function provideSample(): array
     {
-        return StrictUnifiedDiffOutputBuilderDataProvider::provideSample();
+        return StrictUnifiedDiffOutputBuilderdataProvider::provideSample();
     }
 
     public function provideBasicDiffGeneration(): array
     {
-        return StrictUnifiedDiffOutputBuilderDataProvider::provideBasicDiffGeneration();
+        return StrictUnifiedDiffOutputBuilderdataProvider::provideBasicDiffGeneration();
     }
 
     public function provideFilePairs(): array

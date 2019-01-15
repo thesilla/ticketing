@@ -110,7 +110,7 @@ class GeneratorTest extends TestCase
     }
 
     /**
-     * @dataProvider getMockForAbstractClassExpectsInvalidArgumentExceptionDataprovider
+     * @dataProvider getMockForAbstractClassExpectsInvalidArgumentExceptiondataprovider
      */
     public function testGetMockForAbstractClassExpectingInvalidArgumentException($className, $mockClassName)
     {
@@ -126,7 +126,7 @@ class GeneratorTest extends TestCase
         $this->generator->getMockForAbstractClass('Tux');
     }
 
-    public function getMockForAbstractClassExpectsInvalidArgumentExceptionDataprovider()
+    public function getMockForAbstractClassExpectsInvalidArgumentExceptiondataprovider()
     {
         return [
             'className not a string'     => [[], ''],

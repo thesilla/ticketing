@@ -301,13 +301,13 @@ final class StandardTagFactory implements TagFactory
     /**
      * Returns whether the given tag belongs to an annotation.
      *
-     * @param string $tagContent
+     * @param string $tagcontent
      *
      * @todo this method should be populated once we implement Annotation notation support.
      *
      * @return bool
      */
-    private function isAnnotation($tagContent)
+    private function isAnnotation($tagcontent)
     {
         // 1. Contains a namespace separator
         // 2. Contains parenthesis

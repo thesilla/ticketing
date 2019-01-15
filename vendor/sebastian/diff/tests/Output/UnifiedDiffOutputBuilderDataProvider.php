@@ -10,7 +10,7 @@
 
 namespace SebastianBergmann\Diff\Output;
 
-final class UnifiedDiffOutputBuilderDataProvider
+final class UnifiedDiffOutputBuilderdataProvider
 {
     public static function provideDiffWithLineNumbers(): array
     {

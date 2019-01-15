@@ -51,9 +51,9 @@ final class Test
     /**
      * @var string
      *
-     * @todo This constant should be private (it's public because of TestTest::testGetProvidedDataRegEx)
+     * @todo This constant should be private (it's public because of TestTest::testGetProvideddataRegEx)
      */
-    public const REGEX_DATA_PROVIDER = '/@dataProvider\s+([a-zA-Z0-9._:-\\\\x7f-\xff]+)/';
+    public const REGEX_data_PROVIDER = '/@dataProvider\s+([a-zA-Z0-9._:-\\\\x7f-\xff]+)/';
 
     /**
      * @var string
@@ -383,13 +383,13 @@ final class Test
             if (isset($matches[2])) {
                 $message = \trim($matches[2]);
             } elseif (isset($annotations['method']['expectedExceptionMessage'])) {
-                $message = self::parseAnnotationContent(
+                $message = self::parseAnnotationcontent(
                     $annotations['method']['expectedExceptionMessage'][0]
                 );
             }
 
             if (isset($annotations['method']['expectedExceptionMessageRegExp'])) {
-                $messageRegExp = self::parseAnnotationContent(
+                $messageRegExp = self::parseAnnotationcontent(
                     $annotations['method']['expectedExceptionMessageRegExp'][0]
                 );
             }
@@ -397,7 +397,7 @@ final class Test
             if (isset($matches[3])) {
                 $code = $matches[3];
             } elseif (isset($annotations['method']['expectedExceptionCode'])) {
-                $code = self::parseAnnotationContent(
+                $code = self::parseAnnotationcontent(
                     $annotations['method']['expectedExceptionCode'][0]
                 );
             }
@@ -427,15 +427,15 @@ final class Test
      * @return array When a data provider is specified and exists
      *               null  When no data provider is specified
      */
-    public static function getProvidedData(string $className, string $methodName): ?array
+    public static function getProvideddata(string $className, string $methodName): ?array
     {
         $reflector  = new ReflectionMethod($className, $methodName);
         $docComment = $reflector->getDocComment();
 
-        $data = self::getDataFromDataProviderAnnotation($docComment, $className, $methodName);
+        $data = self::getdataFromdataProviderAnnotation($docComment, $className, $methodName);
 
         if ($data === null) {
-            $data = self::getDataFromTestWithAnnotation($docComment);
+            $data = self::getdataFromTestWithAnnotation($docComment);
         }
 
         if (\is_array($data) && empty($data)) {
@@ -447,7 +447,7 @@ final class Test
                 if (!\is_array($value)) {
                     throw new Exception(
                         \sprintf(
-                            'Data set %s is invalid.',
+                            'data set %s is invalid.',
                             \is_int($key) ? '#' . $key : '"' . $key . '"'
                         )
                     );
@@ -466,16 +466,16 @@ final class Test
      * @return null|array array when @testWith annotation is defined,
      *                    null when @testWith annotation is omitted
      */
-    public static function getDataFromTestWithAnnotation(string $docComment): ?array
+    public static function getdataFromTestWithAnnotation(string $docComment): ?array
     {
         $docComment = self::cleanUpMultiLineAnnotation($docComment);
 
         if (\preg_match(self::REGEX_TEST_WITH, $docComment, $matches, PREG_OFFSET_CAPTURE)) {
             $offset            = \strlen($matches[0][0]) + $matches[0][1];
-            $annotationContent = \substr($docComment, $offset);
+            $annotationcontent = \substr($docComment, $offset);
             $data              = [];
 
-            foreach (\explode("\n", $annotationContent) as $candidateRow) {
+            foreach (\explode("\n", $annotationcontent) as $candidateRow) {
                 $candidateRow = \trim($candidateRow);
 
                 if ($candidateRow[0] !== '[') {
@@ -910,7 +910,7 @@ final class Test
      *
      * @return string
      */
-    private static function parseAnnotationContent(string $message): string
+    private static function parseAnnotationcontent(string $message): string
     {
         if (\defined($message) && (\strpos($message, '::') !== false && \substr_count($message, '::') + 1 === 2)) {
             $message = \constant($message);
@@ -929,9 +929,9 @@ final class Test
      * @return array|Iterator when a data provider is specified and exists
      *                        null           when no data provider is specified
      */
-    private static function getDataFromDataProviderAnnotation(string $docComment, string $className, string $methodName): ?iterable
+    private static function getdataFromdataProviderAnnotation(string $docComment, string $className, string $methodName): ?iterable
     {
-        if (\preg_match_all(self::REGEX_DATA_PROVIDER, $docComment, $matches)) {
+        if (\preg_match_all(self::REGEX_data_PROVIDER, $docComment, $matches)) {
             $result = [];
 
             foreach ($matches[1] as $match) {
@@ -969,10 +969,10 @@ final class Test
                 }
 
                 if ($data instanceof Traversable) {
-                    $origData = $data;
+                    $origdata = $data;
                     $data     = [];
 
-                    foreach ($origData as $key => $value) {
+                    foreach ($origdata as $key => $value) {
                         if (\is_int($key)) {
                             $data[] = $value;
                         } else {

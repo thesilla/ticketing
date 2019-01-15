@@ -15,7 +15,7 @@ use PHPUnit\Util\PHP\AbstractPhpProcess;
 
 class PhptTestCaseTest extends TestCase
 {
-    private const EXPECT_CONTENT = <<<EOF
+    private const EXPECT_content = <<<EOF
 --TEST--
 EXPECT test
 --FILE--
@@ -24,7 +24,7 @@ EXPECT test
 Hello PHPUnit!
 EOF;
 
-    private const EXPECTF_CONTENT = <<<EOF
+    private const EXPECTF_content = <<<EOF
 --TEST--
 EXPECTF test
 --FILE--
@@ -33,7 +33,7 @@ EXPECTF test
 Hello %s!
 EOF;
 
-    private const EXPECTREGEX_CONTENT = <<<EOF
+    private const EXPECTREGEX_content = <<<EOF
 --TEST--
 EXPECTREGEX test
 --FILE--
@@ -87,7 +87,7 @@ EOF;
 
     public function testShouldRunFileSectionAsTest(): void
     {
-        $this->setPhpContent($this->ensureCorrectEndOfLine(self::EXPECT_CONTENT));
+        $this->setPhpcontent($this->ensureCorrectEndOfLine(self::EXPECT_content));
 
         $fileSection = '<?php echo "Hello PHPUnit!"; ?>' . PHP_EOL;
 
@@ -102,7 +102,7 @@ EOF;
 
     public function testRenderFileSection(): void
     {
-        $this->setPhpContent($this->ensureCorrectEndOfLine(
+        $this->setPhpcontent($this->ensureCorrectEndOfLine(
             <<<EOF
 --TEST--
 Something to decribe it
@@ -126,11 +126,11 @@ EOF
 
     public function testRenderSkipifSection(): void
     {
-        $phptContent = self::EXPECT_CONTENT . PHP_EOL;
-        $phptContent .= '--SKIPIF--' . PHP_EOL;
-        $phptContent .= "<?php echo 'skip: ' . __FILE__; ?>" . PHP_EOL;
+        $phptcontent = self::EXPECT_content . PHP_EOL;
+        $phptcontent .= '--SKIPIF--' . PHP_EOL;
+        $phptcontent .= "<?php echo 'skip: ' . __FILE__; ?>" . PHP_EOL;
 
-        $this->setPhpContent($phptContent);
+        $this->setPhpcontent($phptcontent);
 
         $renderedCode = "<?php echo 'skip: ' . '" . $this->filename . "'; ?>" . PHP_EOL;
 
@@ -147,11 +147,11 @@ EOF
     {
         $skipifSection = '<?php /** Nothing **/ ?>' . PHP_EOL;
 
-        $phptContent = self::EXPECT_CONTENT . PHP_EOL;
-        $phptContent .= '--SKIPIF--' . PHP_EOL;
-        $phptContent .= $skipifSection;
+        $phptcontent = self::EXPECT_content . PHP_EOL;
+        $phptcontent .= '--SKIPIF--' . PHP_EOL;
+        $phptcontent .= $skipifSection;
 
-        $this->setPhpContent($phptContent);
+        $this->setPhpcontent($phptcontent);
 
         $this->phpProcess
              ->expects($this->at(0))
@@ -166,11 +166,11 @@ EOF
     {
         $skipifSection = '<?php echo "skip: Reason"; ?>' . PHP_EOL;
 
-        $phptContent = self::EXPECT_CONTENT . PHP_EOL;
-        $phptContent .= '--SKIPIF--' . PHP_EOL;
-        $phptContent .= $skipifSection;
+        $phptcontent = self::EXPECT_content . PHP_EOL;
+        $phptcontent .= '--SKIPIF--' . PHP_EOL;
+        $phptcontent .= $skipifSection;
 
-        $this->setPhpContent($phptContent);
+        $this->setPhpcontent($phptcontent);
 
         $this->phpProcess
              ->expects($this->once())
@@ -185,11 +185,11 @@ EOF
     {
         $cleanSection = '<?php unlink("/tmp/something"); ?>' . PHP_EOL;
 
-        $phptContent = self::EXPECT_CONTENT . PHP_EOL;
-        $phptContent .= '--CLEAN--' . PHP_EOL;
-        $phptContent .= $cleanSection;
+        $phptcontent = self::EXPECT_content . PHP_EOL;
+        $phptcontent .= '--CLEAN--' . PHP_EOL;
+        $phptcontent .= $cleanSection;
 
-        $this->setPhpContent($phptContent);
+        $this->setPhpcontent($phptcontent);
 
         $this->phpProcess
              ->expects($this->at(1))
@@ -201,7 +201,7 @@ EOF
 
     public function testShouldThrowsAnExceptionWhenPhptFileIsEmpty(): void
     {
-        $this->setPhpContent('');
+        $this->setPhpcontent('');
 
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Invalid PHPT file');
@@ -211,7 +211,7 @@ EOF
 
     public function testShouldThrowsAnExceptionWhenFileSectionIsMissing(): void
     {
-        $this->setPhpContent(
+        $this->setPhpcontent(
             <<<EOF
 --TEST--
 Something to decribe it
@@ -228,7 +228,7 @@ EOF
 
     public function testShouldThrowsAnExceptionWhenThereIsNoExpecOrExpectifOrExpecregexSectionInPhptFile(): void
     {
-        $this->setPhpContent(
+        $this->setPhpcontent(
             <<<EOF
 --TEST--
 Something to decribe it
@@ -247,7 +247,7 @@ EOF
 
     public function testShouldValidateExpectSession(): void
     {
-        $this->setPhpContent(self::EXPECT_CONTENT);
+        $this->setPhpcontent(self::EXPECT_content);
 
         $this->phpProcess
              ->expects($this->once())
@@ -262,7 +262,7 @@ EOF
 
     public function testShouldValidateExpectfSession(): void
     {
-        $this->setPhpContent(self::EXPECTF_CONTENT);
+        $this->setPhpcontent(self::EXPECTF_content);
 
         $this->phpProcess
              ->expects($this->once())
@@ -277,7 +277,7 @@ EOF
 
     public function testShouldValidateExpectregexSession(): void
     {
-        $this->setPhpContent(self::EXPECTREGEX_CONTENT);
+        $this->setPhpcontent(self::EXPECTREGEX_content);
 
         $this->phpProcess
              ->expects($this->once())
@@ -295,7 +295,7 @@ EOF
      *
      * @param string $content
      */
-    private function setPhpContent($content): void
+    private function setPhpcontent($content): void
     {
         \file_put_contents($this->filename, $content);
     }

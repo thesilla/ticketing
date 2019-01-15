@@ -247,7 +247,7 @@ class MethodProphecy
      *
      * @return $this
      */
-    public function shouldBeCalled()
+    public function shouldbeCalled()
     {
         return $this->should(new Prediction\CallPrediction);
     }
@@ -273,7 +273,7 @@ class MethodProphecy
      *
      * @return $this
      */
-    public function shouldBeCalledTimes($count)
+    public function shouldbeCalledTimes($count)
     {
         return $this->should(new Prediction\CallTimesPrediction($count));
     }
@@ -285,9 +285,9 @@ class MethodProphecy
      *
      * @return $this
      */
-    public function shouldBeCalledOnce()
+    public function shouldbeCalledOnce()
     {
-        return $this->shouldBeCalledTimes(1);
+        return $this->shouldbeCalledTimes(1);
     }
 
     /**

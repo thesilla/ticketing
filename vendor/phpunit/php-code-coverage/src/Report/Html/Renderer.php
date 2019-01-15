@@ -259,7 +259,7 @@ abstract class Renderer
             $runtime->getVersion()
         );
 
-        if ($runtime->hasXdebug() && !$runtime->hasPHPDBGCodeCoverage()) {
+        if ($runtime->hasXdebug() && !$runtime->hasPHPdbGCodeCoverage()) {
             $buffer .= \sprintf(
                 ' with <a href="https://xdebug.org/">Xdebug %s</a>',
                 \phpversion('xdebug')

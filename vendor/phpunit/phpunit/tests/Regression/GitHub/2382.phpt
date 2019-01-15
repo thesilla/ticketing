@@ -1,5 +1,5 @@
 --TEST--
-#2382: Data Providers throw error with uncloneable object
+#2382: data Providers throw error with uncloneable object
 --FILE--
 <?php
 $_SERVER['argv'][1] = '--no-configuration';

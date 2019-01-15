@@ -41,12 +41,12 @@ class TestSuiteTest extends TestCase
         $suite->addTest(new self('testOneTestCase'));
         $suite->addTest(new self('testShadowedTests'));
         $suite->addTest(new self('testBeforeClassAndAfterClassAnnotations'));
-        $suite->addTest(new self('testBeforeClassWithDataProviders'));
+        $suite->addTest(new self('testBeforeClassWithdataProviders'));
         $suite->addTest(new self('testBeforeAnnotation'));
         $suite->addTest(new self('testTestWithAnnotation'));
-        $suite->addTest(new self('testSkippedTestDataProvider'));
-        $suite->addTest(new self('testTestDataProviderDependency'));
-        $suite->addTest(new self('testIncompleteTestDataProvider'));
+        $suite->addTest(new self('testSkippedTestdataProvider'));
+        $suite->addTest(new self('testTestdataProviderDependency'));
+        $suite->addTest(new self('testIncompleteTestdataProvider'));
         $suite->addTest(new self('testRequirementsBeforeClassHook'));
         $suite->addTest(new self('testDoNotSkipInheritedClass'));
 
@@ -148,15 +148,15 @@ class TestSuiteTest extends TestCase
         $this->assertEquals(1, \BeforeClassAndAfterClassTest::$afterClassWasRun, '@afterClass method was not run once for the whole suite.');
     }
 
-    public function testBeforeClassWithDataProviders(): void
+    public function testBeforeClassWithdataProviders(): void
     {
-        $suite = new TestSuite(\BeforeClassWithOnlyDataProviderTest::class);
+        $suite = new TestSuite(\BeforeClassWithOnlydataProviderTest::class);
 
-        \BeforeClassWithOnlyDataProviderTest::resetProperties();
+        \BeforeClassWithOnlydataProviderTest::resetProperties();
         $suite->run($this->result);
 
-        $this->assertTrue(\BeforeClassWithOnlyDataProviderTest::$setUpBeforeClassWasCalled, 'setUpBeforeClass method was not run.');
-        $this->assertTrue(\BeforeClassWithOnlyDataProviderTest::$beforeClassWasCalled, '@beforeClass method was not run.');
+        $this->assertTrue(\BeforeClassWithOnlydataProviderTest::$setUpBeforeClassWasCalled, 'setUpBeforeClass method was not run.');
+        $this->assertTrue(\BeforeClassWithOnlydataProviderTest::$beforeClassWasCalled, '@beforeClass method was not run.');
     }
 
     public function testBeforeAnnotation(): void
@@ -180,9 +180,9 @@ class TestSuiteTest extends TestCase
         $this->assertCount(4, $result->passed());
     }
 
-    public function testSkippedTestDataProvider(): void
+    public function testSkippedTestdataProvider(): void
     {
-        $suite = new TestSuite(\DataProviderSkippedTest::class);
+        $suite = new TestSuite(\dataProviderSkippedTest::class);
 
         $suite->run($this->result);
 
@@ -190,9 +190,9 @@ class TestSuiteTest extends TestCase
         $this->assertEquals(1, $this->result->skippedCount());
     }
 
-    public function testTestDataProviderDependency(): void
+    public function testTestdataProviderDependency(): void
     {
-        $suite = new TestSuite(\DataProviderDependencyTest::class);
+        $suite = new TestSuite(\dataProviderDependencyTest::class);
 
         $suite->run($this->result);
 
@@ -200,12 +200,12 @@ class TestSuiteTest extends TestCase
         $lastSkippedResult = \array_pop($skipped);
         $message           = $lastSkippedResult->thrownException()->getMessage();
 
-        $this->assertContains('Test for DataProviderDependencyTest::testDependency skipped by data provider', $message);
+        $this->assertContains('Test for dataProviderDependencyTest::testDependency skipped by data provider', $message);
     }
 
-    public function testIncompleteTestDataProvider(): void
+    public function testIncompleteTestdataProvider(): void
     {
-        $suite = new TestSuite(\DataProviderIncompleteTest::class);
+        $suite = new TestSuite(\dataProviderIncompleteTest::class);
 
         $suite->run($this->result);
 

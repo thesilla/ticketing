@@ -1,6 +1,6 @@
 <?php
 
-namespace Foo\DataProviderIssue2833;
+namespace Foo\dataProviderIssue2833;
 
 use PHPUnit\Framework\TestCase;
 

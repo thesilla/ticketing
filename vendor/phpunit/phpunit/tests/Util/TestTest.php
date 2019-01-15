@@ -581,25 +581,25 @@ class TestTest extends TestCase
     /**
      * @todo This test does not really test functionality of \PHPUnit\Util\Test
      */
-    public function testGetProvidedDataRegEx(): void
+    public function testGetProvideddataRegEx(): void
     {
-        $result = \preg_match(Test::REGEX_DATA_PROVIDER, '@dataProvider method', $matches);
+        $result = \preg_match(Test::REGEX_data_PROVIDER, '@dataProvider method', $matches);
         $this->assertEquals(1, $result);
         $this->assertEquals('method', $matches[1]);
 
-        $result = \preg_match(Test::REGEX_DATA_PROVIDER, '@dataProvider class::method', $matches);
+        $result = \preg_match(Test::REGEX_data_PROVIDER, '@dataProvider class::method', $matches);
         $this->assertEquals(1, $result);
         $this->assertEquals('class::method', $matches[1]);
 
-        $result = \preg_match(Test::REGEX_DATA_PROVIDER, '@dataProvider namespace\class::method', $matches);
+        $result = \preg_match(Test::REGEX_data_PROVIDER, '@dataProvider namespace\class::method', $matches);
         $this->assertEquals(1, $result);
         $this->assertEquals('namespace\class::method', $matches[1]);
 
-        $result = \preg_match(Test::REGEX_DATA_PROVIDER, '@dataProvider namespace\namespace\class::method', $matches);
+        $result = \preg_match(Test::REGEX_data_PROVIDER, '@dataProvider namespace\namespace\class::method', $matches);
         $this->assertEquals(1, $result);
         $this->assertEquals('namespace\namespace\class::method', $matches[1]);
 
-        $result = \preg_match(Test::REGEX_DATA_PROVIDER, '@dataProvider メソッド', $matches);
+        $result = \preg_match(Test::REGEX_data_PROVIDER, '@dataProvider メソッド', $matches);
         $this->assertEquals(1, $result);
         $this->assertEquals('メソッド', $matches[1]);
     }
@@ -607,9 +607,9 @@ class TestTest extends TestCase
     /**
      * Check if all data providers are being merged.
      */
-    public function testMultipleDataProviders(): void
+    public function testMultipledataProviders(): void
     {
-        $dataSets = Test::getProvidedData(\MultipleDataProviderTest::class, 'testOne');
+        $dataSets = Test::getProvideddata(\MultipledataProviderTest::class, 'testOne');
 
         $this->assertCount(9, $dataSets);
 
@@ -628,9 +628,9 @@ class TestTest extends TestCase
         $this->assertEquals(3, $cCount);
     }
 
-    public function testMultipleYieldIteratorDataProviders(): void
+    public function testMultipleYieldIteratordataProviders(): void
     {
-        $dataSets = Test::getProvidedData(\MultipleDataProviderTest::class, 'testTwo');
+        $dataSets = Test::getProvideddata(\MultipledataProviderTest::class, 'testTwo');
 
         $this->assertCount(9, $dataSets);
 
@@ -649,9 +649,9 @@ class TestTest extends TestCase
         $this->assertEquals(3, $cCount);
     }
 
-    public function testWithVariousIterableDataProviders(): void
+    public function testWithVariousIterabledataProviders(): void
     {
-        $dataSets = Test::getProvidedData(\VariousIterableDataProviderTest::class, 'test');
+        $dataSets = Test::getProvideddata(\VariousIterabledataProviderTest::class, 'test');
 
         $this->assertEquals([
             ['A'],
@@ -668,13 +668,13 @@ class TestTest extends TestCase
 
     public function testTestWithEmptyAnnotation(): void
     {
-        $result = Test::getDataFromTestWithAnnotation("/**\n * @anotherAnnotation\n */");
+        $result = Test::getdataFromTestWithAnnotation("/**\n * @anotherAnnotation\n */");
         $this->assertNull($result);
     }
 
     public function testTestWithSimpleCase(): void
     {
-        $result = Test::getDataFromTestWithAnnotation('/**
+        $result = Test::getdataFromTestWithAnnotation('/**
                                                                      * @testWith [1]
                                                                      */');
         $this->assertEquals([[1]], $result);
@@ -682,7 +682,7 @@ class TestTest extends TestCase
 
     public function testTestWithMultiLineMultiParameterCase(): void
     {
-        $result = Test::getDataFromTestWithAnnotation('/**
+        $result = Test::getdataFromTestWithAnnotation('/**
                                                                      * @testWith [1, 2]
                                                                      * [3, 4]
                                                                      */');
@@ -691,7 +691,7 @@ class TestTest extends TestCase
 
     public function testTestWithVariousTypes(): void
     {
-        $result = Test::getDataFromTestWithAnnotation('/**
+        $result = Test::getdataFromTestWithAnnotation('/**
             * @testWith ["ab"]
             *           [true]
             *           [null]
@@ -701,7 +701,7 @@ class TestTest extends TestCase
 
     public function testTestWithAnnotationAfter(): void
     {
-        $result = Test::getDataFromTestWithAnnotation('/**
+        $result = Test::getdataFromTestWithAnnotation('/**
                                                                      * @testWith [1]
                                                                      *           [2]
                                                                      * @annotation
@@ -711,7 +711,7 @@ class TestTest extends TestCase
 
     public function testTestWithSimpleTextAfter(): void
     {
-        $result = Test::getDataFromTestWithAnnotation('/**
+        $result = Test::getdataFromTestWithAnnotation('/**
                                                                      * @testWith [1]
                                                                      *           [2]
                                                                      * blah blah
@@ -721,28 +721,28 @@ class TestTest extends TestCase
 
     public function testTestWithCharacterEscape(): void
     {
-        $result = Test::getDataFromTestWithAnnotation('/**
+        $result = Test::getdataFromTestWithAnnotation('/**
                                                                      * @testWith ["\"", "\""]
                                                                      */');
         $this->assertEquals([['"', '"']], $result);
     }
 
-    public function testTestWithThrowsProperExceptionIfDatasetCannotBeParsed(): void
+    public function testTestWithThrowsProperExceptionIfdatasetCannotBeParsed(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessageRegExp('/^The data set for the @testWith annotation cannot be parsed:/');
 
-        Test::getDataFromTestWithAnnotation('/**
+        Test::getdataFromTestWithAnnotation('/**
                                                            * @testWith [s]
                                                            */');
     }
 
-    public function testTestWithThrowsProperExceptionIfMultiLineDatasetCannotBeParsed(): void
+    public function testTestWithThrowsProperExceptionIfMultiLinedatasetCannotBeParsed(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessageRegExp('/^The data set for the @testWith annotation cannot be parsed:/');
 
-        Test::getDataFromTestWithAnnotation('/**
+        Test::getdataFromTestWithAnnotation('/**
                                                            * @testWith ["valid"]
                                                            *           [invalid]
                                                            */');

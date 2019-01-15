@@ -37,8 +37,8 @@ final class LineTest extends TestCase
         $this->assertSame(Line::UNCHANGED, $this->line->getType());
     }
 
-    public function testContentCanBeRetrieved(): void
+    public function testcontentCanBeRetrieved(): void
     {
-        $this->assertSame('', $this->line->getContent());
+        $this->assertSame('', $this->line->getcontent());
     }
 }

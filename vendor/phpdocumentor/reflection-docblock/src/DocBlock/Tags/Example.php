@@ -28,7 +28,7 @@ final class Example extends BaseTag
 
     /**
      * @var bool Whether the file path component represents an URI. This determines how the file portion
-     *     appears at {@link getContent()}.
+     *     appears at {@link getcontent()}.
      */
     private $isURI = false;
 
@@ -62,7 +62,7 @@ final class Example extends BaseTag
     /**
      * {@inheritdoc}
      */
-    public function getContent()
+    public function getcontent()
     {
         if (null === $this->description) {
             $filePath = '"' . $this->filePath . '"';

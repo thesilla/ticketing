@@ -73,7 +73,7 @@ final class UnifiedDiffOutputBuilderIntegrationTest extends TestCase
     public function provideDiffWithLineNumbers()
     {
         return \array_filter(
-            UnifiedDiffOutputBuilderDataProvider::provideDiffWithLineNumbers(),
+            UnifiedDiffOutputBuilderdataProvider::provideDiffWithLineNumbers(),
             static function ($key) {
                 return !\is_string($key) || false === \strpos($key, 'non_patch_compat');
             },

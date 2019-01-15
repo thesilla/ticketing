@@ -320,7 +320,7 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
             $this->getName(false)
         );
 
-        return $buffer . $this->getDataSetAsString();
+        return $buffer . $this->getdataSetAsString();
     }
 
     public function count(): int
@@ -350,10 +350,10 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
      * @throws SebastianBergmann\RecursionContext\InvalidArgumentException
      * @throws \Exception
      */
-    public function getName(bool $withDataSet = true): ?string
+    public function getName(bool $withdataSet = true): ?string
     {
-        if ($withDataSet) {
-            return $this->name . $this->getDataSetAsString(false);
+        if ($withdataSet) {
+            return $this->name . $this->getdataSetAsString(false);
         }
 
         return $this->name;
@@ -1076,7 +1076,7 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
         return new ConsecutiveCallsStub($args);
     }
 
-    public function usesDataProvider(): bool
+    public function usesdataProvider(): bool
     {
         return !empty($this->data);
     }
@@ -1101,7 +1101,7 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
         $this->customComparators[] = $comparator;
     }
 
-    public function getDataSetAsString(bool $includeData = true): string
+    public function getdataSetAsString(bool $includedata = true): string
     {
         $buffer = '';
 
@@ -1114,7 +1114,7 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
 
             $exporter = new Exporter;
 
-            if ($includeData) {
+            if ($includedata) {
                 $buffer .= \sprintf(' (%s)', $exporter->shortenedRecursiveExport($this->data));
             }
         }
@@ -1587,7 +1587,7 @@ abstract class TestCase extends Assert implements Test, SelfDescribing
      *
      * @return array
      */
-    protected function getProvidedData(): array
+    protected function getProvideddata(): array
     {
         return $this->data;
     }

@@ -22,7 +22,7 @@ interface File
      *
      * @return string
      */
-    public function getContents();
+    public function getcontents();
 
     /**
      * Returns md5 hash of the file.

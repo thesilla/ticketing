@@ -85,6 +85,6 @@ final class UnifiedDiffOutputBuilderTest extends TestCase
 
     public function provideDiffWithLineNumbers(): array
     {
-        return UnifiedDiffOutputBuilderDataProvider::provideDiffWithLineNumbers();
+        return UnifiedDiffOutputBuilderdataProvider::provideDiffWithLineNumbers();
     }
 }

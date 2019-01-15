@@ -36,7 +36,7 @@ class ExampleFinder
     {
         $filename = $example->getFilePath();
 
-        $file = $this->getExampleFileContents($filename);
+        $file = $this->getExampleFilecontents($filename);
         if (!$file) {
             return "** File not found : {$filename} **";
         }
@@ -101,7 +101,7 @@ class ExampleFinder
      *
      * @return string|null
      */
-    private function getExampleFileContents($filename)
+    private function getExampleFilecontents($filename)
     {
         $normalizedPath = null;
 

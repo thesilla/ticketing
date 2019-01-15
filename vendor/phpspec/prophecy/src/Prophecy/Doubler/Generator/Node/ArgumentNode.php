@@ -70,12 +70,12 @@ class ArgumentNode
         return $this->optional;
     }
 
-    public function setAsPassedByReference($byReference = true)
+    public function setAsPassedbyReference($byReference = true)
     {
         $this->byReference = $byReference;
     }
 
-    public function isPassedByReference()
+    public function isPassedbyReference()
     {
         return $this->byReference;
     }
