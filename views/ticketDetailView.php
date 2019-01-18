@@ -2,9 +2,9 @@
 
 
 <div id="ticket-display" class="jumbotron">
-    <div><a href = "ticketsController.php">Return To Tickets</a></div>
+    <div style="font-size:12pt;"><a href = "ticketsController.php">Return To Tickets</a></div>
 
-
+<br/>
 
 
 
@@ -19,8 +19,8 @@
         }
         ?>" </div>
         <div class="card-header">Ticket #<?php
-        echo $ticket->getId();
-        ?>
+            echo $ticket->getId();
+            ?>
         </div>
         <div class="card-body">
             <h4 class="card-title"><?php
@@ -30,19 +30,57 @@
                     echo "<strong>OPEN<strong>";
                 }
                 ?></h4>
-            <p class="card-text"><?php echo "Subject: " . $ticket->getSubject(); ?></p>
+            <p class="card-text"><?php echo $ticket->getSubject(); ?></p>
+
+<!-- update status dropdown -->
+
+            <form action = "ticketDetailController.php" method = "post">
+                <input type ="hidden" name ="status-ticketno" value=<?php echo $ticket->getID();  ?>>
+                <select  id="statusOnDetailPage" name="status-main" onchange="this.form.submit()">
+
+                    <?php
+//TODO - add more statuses
+                    $statuses = array("Awaiting Agent Reply", "Awaiting Vendor Reply", "Awaiting Sales Reply", "Awaiting Warehouse Reply", "IT Case Pending");
+
+                    foreach ($statuses as $status) {
+
+                        if ($status == $ticket->getStatus()) {
+
+                            echo "<option value=" . "\"" . $status . "\"" . "selected>" . $status . "</option>";
+                        } else {
+
+                            echo "<option value=" . "\"" . $status . "\">" . $status . "</option>";
+                        }
+                    }
+                    ?>
+                </select>
+                <?php
+                if ($ticketEditErrors['status'][1] == 1) {
+                    echo $ticketEditErrors['status'][0];
+                }
+                ?>
+
+
+
+
+                
+            </form>
+
+
+
+
         </div>
     </div>
 
 
     <div id = "priorityAlert" class="<?php
     if ($ticket->getPriority() == 1) {
-        echo "alert alert-dismissible alert-danger";
+        echo "priority1";
     } else {
         if ($ticket->getPriority() == 2) {
-            echo "alert alert-dismissible alert-warning";
+            echo "priority2";
         } else {
-            echo "alert alert-dismissible alert-primary";
+            echo "priority3";
         }
     }
     ?>">
@@ -51,8 +89,8 @@
 
         <?php
         if ($ticket->getPriority() == 1) {
-            echo "Priority " . $ticket->getPriority();
-            echo " HIGH";
+            echo "<p>Priority </p><p>" . $ticket->getPriority();
+            echo " </p><p>HIGH</p>";
         } else {
             if ($ticket->getPriority() == 2) {
                 echo "Priority " . $ticket->getPriority();
@@ -92,11 +130,91 @@
     <button id="deleteTicketDisplayButton" type="button" class="btn btn-danger">Delete Ticket </button>
     <button id="addDispositionButton" class="btn btn-success"> Add Disposition </button>
 
+
+
+
+
+
+
+
+
+
+
 </div>
 <hr class="my-4">
 
+<div id="details-container">
+    <table class="details-display-table">
+        <tr>
+            
+            <th>Requested By</th>
+            <th>Submitted By</th>
+            <th>Assigned To</th>
+            
+            
+            
+ 
+        </tr>
+        <tr>
+            <td><?php echo $ticket->getRequestedby(); ?></td>
+            <td><?php echo $ticket->getUserID(); ?></td>
+            <td><?php echo $ticket->getAssignedTo(); ?></td>
+        </tr>
+    </table>
+    
+    
+    
+    
+        <table class="details-display-table">
+        <tr>
+            
+            
+            <th>Category</th>
+            <th>Vendor</th>
+            <th>Order ID</th>
+          
+            
+            
+            
+        </tr>
+        <tr>
+            
+            
+            <td><?php echo $ticket->getCategory(); ?></td>
+            <td><?php echo $ticket->getVendor(); ?></td>
+            <td><?php echo $ticket->getOrderID(); ?></td>
+            
+ 
+        </tr>
+ 
+
+    </table>
+    
+    <table class="details-display-table">
+        
+        <tr>
+           <th>Date Submitted</th>
+            <th>Date Resolved</th> 
+            
+        </tr>
+        <tr>
+            
+            
+            
+            <td><?php echo $ticket->getDateSubmitted(); ?></td>
+            <td><?php echo $ticket->getDateResolved(); ?></td>
+            
 
 
+        </tr>
+    </table>
+    
+    
+    
+    
+</div>
+
+<!--
 <div class="details-row">
     <div class="card border-secondary mb-3" style="max-width: 20rem;">
         <div class="card-header">Submitted By</div>
@@ -126,17 +244,7 @@
             <h4 class="card-title"><?php echo $ticket->getAssignedTo(); ?></h4>
         </div>
     </div>
-</div>
 
-<div class="card border-secondary mb-3">
-    <div class="card-header">Details</div>
-    <div class="card-body">
-        <p class="card-text"><?php echo $ticket->getBody(); ?></p>
-    </div>
-</div>
-
-
-<div class="details-row">
     <div class="card border-secondary mb-3" style="max-width: 20rem;">
         <div class="card-header">Date Resolved</div>
         <div class="card-body">
@@ -144,12 +252,13 @@
         </div>
     </div>
 
+   
     <div class="card border-secondary mb-3" style="max-width: 20rem;">
         <div class="card-header">Status</div>
         <div class="card-body">
             <h4 class="card-title"><?php echo $ticket->getStatus(); ?></h4>
         </div>
-    </div>
+    </div> 
 
     <div class="card border-secondary mb-3" style="max-width: 20rem;">
         <div class="card-header">Originally Requested By</div>
@@ -173,11 +282,18 @@
             <h4 class="card-title"><?php echo $ticket->getVendor(); ?></h4>
         </div>
     </div>
+    
+
 
 </div>
+-->
 
 
-
-
+    <div class="card border-secondary mb-3">
+    <div class="card-header">Details</div>
+    <div class="card-body">
+        <p class="card-text"><?php echo $ticket->getBody(); ?></p>
+    </div>
+</div>
 
 

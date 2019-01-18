@@ -57,53 +57,6 @@ class Employee {
         }
     }
     
-    /*
-        public function getConnection() {
-
-        try {
-
-
-            $this->dbc = new PDO("mysql:host=localhost;dbname=ticketing", "root", "");
-
-            $this->dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            //echo "<div> Sucessfully connected to database </div>";
-        } catch (PDOException $e) {
-            $output = 'Unable to connect to the database server.';
-
-            echo "<div style='color:red;'>" . $e->getMessage() . "</div>";
-
- 
-            exit();
-        }
-    }
-    
-    
-    
-        public static function getStaticConnection(){
-        
-                // set database connection
-        try {
-
-
-            $dbc = new PDO("mysql:host=localhost;dbname=ticketing", "root", "");
-
-            $dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            
-            return $dbc;
-
-            //echo "<div> Sucessfully connected to database </div>";
-        } catch (PDOException $e) {
-            $output = 'Unable to connect to the database server.';
-
-            echo "<div style='color:red;'>" . $e->getMessage() . "</div>";
-
-
-            exit();
-        }
-        
-    }
-    */
 
     // static method pulling all tickets - db/SQL object argument
     // return an array of USER objects from the database, to keep all db logic in model side

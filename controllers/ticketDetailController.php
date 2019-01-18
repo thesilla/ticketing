@@ -58,6 +58,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
 
         $ticket = Ticket::createFromID($dbc, $_GET['ticketno']);
     }
+
+
+
+
+
+
+
+
+
+
     // when submitting edit ticket form, post is used
     if (!empty($_POST['ticketno'])) {
 
@@ -88,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
         if (!empty($_POST['orderid'])) {
 
             $orderid = htmlentities($_POST['orderid']);
-        } 
+        }
 
         if (!empty($_POST['priority'])) {
 
@@ -117,8 +127,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
             $ticketEditErrors['assignedto'][1] = 1;
         }
 
-        
-        
+
+
         if (!empty($_POST['requestedby'])) {
 
             $requestedby = htmlentities($_POST['requestedby']);
@@ -127,18 +137,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
 
             //$requestedby = $ticket_initialize->getRequestedby();
         }
-        
-        
+
+
 
 
         $userID = $ticket_initialize->getUserID();
-        
+
         $datesubmitted = $ticket_initialize->getDateSubmitted();
         $completed = $ticket_initialize->getCompleted();
         $dateresolved = NULL;
         $vendor = $_POST['vendor'];
         $reason = NULL;
         $issue = false;
+
+
+
+
+
 
         // check to see if any errors
         foreach ($ticketEditErrors as $errors) {
@@ -150,23 +165,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
             }
         }
         // if no issue, update ticket
-        if(!$issue){
-            
+        if (!$issue) {
+
             // create NEW updated ticket object from user form.
             $ticket = Ticket::create($dbc, $ticketID, $subject, $details, $userID, $requestedby, $datesubmitted, $dateresolved, $orderid, $priority, $category, $status, $assignedto, $completed, $vendor, $reason);
 
             // update this ticket (and subsquently equivallant ticket in db
             $ticket->update();
-            
-        // if issue, set ticket back to default ticket
-        } else {
-            
-            $ticket = $ticket_initialize;
-            
-        }
 
- 
+            // if issue, set ticket back to default ticket
+        } else {
+
+            $ticket = $ticket_initialize;
+        }
     }
+
+    // if ONLY status is changed on front ticket page:
+    if (!empty($_POST['status-ticketno'])) {
+
+        // create ticket from passed ticket number
+        $ticket = Ticket::createFromID($dbc, $_POST['status-ticketno']);
+
+        if (!empty($_POST['status-main'])) {
+
+            // pass status from post to variable
+            $status = $_POST['status-main'];
+
+            //set new status in ticket object
+            $ticket->setStatus($status);
+
+            //update ticket with current ticket information but NEW $status
+            $ticket->update();
+        }
+    }
+
+
 
     if (!empty($_POST['submitCloseTicket'])) {
 
@@ -188,7 +221,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET
 
             $ticket = Ticket::createFromID($dbc, $_POST['tickno2']);
             $ticket->open();
-
         }
     }
 

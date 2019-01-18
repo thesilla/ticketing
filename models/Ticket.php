@@ -277,7 +277,7 @@ class Ticket {
         
         if ($stmt->execute()) {
 
-            echo '<div class="alert alert-dismissible alert-success"> Ticket Successfully Submited </div>';
+            echo '<div class="alert alert-dismissible alert-success"> Ticket Successfully Updated </div>';
             return true;
         } else {
 

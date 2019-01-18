@@ -47,7 +47,7 @@ if ($issue) {
 
 
 
-        <div class="form-group">
+       <div class="form-group">
             <label for="status">Status</label>
             <select class="custom-select" name="status">
 
@@ -57,7 +57,18 @@ if ($issue) {
 
                 foreach ($statuses as $status) {
 
-                    echo '<option value=' . $status . '>' . $status . '</option>';
+                    if($status==$ticket->getStatus()){
+                        
+                        echo "<option value=" . "\"" . $status . "\"".  "selected>" . $status . "</option>";
+                        
+                    } else {
+                       
+                        echo "<option value=" . "\"" . $status . "\">" . $status . "</option>";
+                        
+                    }
+                    
+                    
+                    
                 }
                 ?>
             </select>
@@ -66,7 +77,7 @@ if ($issue) {
                 echo $ticketEditErrors['status'][0];
             }
             ?>
-        </div>
+        </div> 
 
 
 
@@ -89,10 +100,27 @@ if ($issue) {
 // pull all employees and display
 // $allusers is in ticketsController.php
 
-
+                
+                
+                
+//FIXME - DEFAULT VALUE NOT DISPLAYING IMMEDIATELY
                 foreach ($employees as $employee) {
+                    
+                    if($employee->getEmail()==$ticket->getRequestedby()){
+                    
+                        
+                        echo "<option value=" . "\""  . $employee->getEmail() . "\"" . "selected>" . $employee->getFirstName() . " " . $employee->getLastName() . " (" . $employee->getEmail() . ")" . '</option>'; 
+                        
+                    } else {
+                        
+                        
+                       echo '<option value=' . $employee->getEmail() . '>' . $employee->getFirstName() . " " . $employee->getLastName() . " (" . $employee->getEmail() . ")" . '</option>'; 
+                        
+                     
+                    }
+                    
 
-                    echo '<option value=' . $employee->getEmail() . '>' . $employee->getFirstName() . " " . $employee->getLastName() . " (" . $employee->getEmail() . ")" . '</option>';
+                    
                 }
                 ?>
             </select>
@@ -129,8 +157,18 @@ if ($issue) {
 <?php
 
 foreach ($vendors as $vendor) {
+    
+    if($vendor==$ticket->getVendor()){
+        
+        echo "<option value=" . "\"" . $vendor . "\"" . "selected>" . $vendor . "</option>";
+        
+    } else {
+        
+        echo "<option value=" . "\"" . $vendor . "\">" . $vendor . "</option>";
+        
+    }
 
-    echo "<option value=" . "\"" . $vendor . "\">" . $vendor . "</option>";
+    
 }
 ?>
         </select>
@@ -140,23 +178,7 @@ foreach ($vendors as $vendor) {
         
         
         <div id="vendor-other" style="display: none;"><input id="vendor-other-id" class="form-control" type ="text" name ="vendor-hidden" placeholder ="Enter Vendor Name"></div>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
         
         <!-- IN THE FUTURE, this should be picked from an editable dynamic list of all possible categories -->
         <div>Category:</div>
@@ -178,7 +200,16 @@ foreach ($vendors as $vendor) {
                 ];
                 foreach ($categories as $category) {
 
-                    echo '<option value=' . $category . '>' . $category . '</option>';
+                    if($category==$ticket->getCategory()){
+                        
+                        echo "<option value=" . "\"" . $category . "\"". "selected>" . $category . "</option>";
+                        
+                    } else {
+                        
+                        echo "<option value=" . "\"" . $category . "\">" . $category . "</option>";
+                    }
+                    
+                    
                 }
                 ?>
             </select>
