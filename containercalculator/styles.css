@@ -1,0 +1,134 @@
+* {
+    
+  
+}
+
+
+#test{
+    
+      border: 1pt solid black;
+    
+    
+}
+
+body {
+    
+    background-color: #428ff4;
+    font-family: Archivo;
+    
+    
+}
+
+
+#mainContainer {
+    
+    padding: 20px;
+    width: 50%;
+    margin: auto;
+    border: 1pt solid black;
+    background-color: white;
+    border-radius: 20px 20px;
+    /*box-shadow: 10px 10px 20px;*/
+    
+}
+
+#innerContainer {
+    
+    width: 90%;
+    margin: auto;
+    font-size: 16pt;
+    color: #428ff4;
+    font-weight: bold;
+    
+    
+}
+
+#innerContainer input {
+    
+    display: block;
+    width: 90%;
+    height: 35px;
+    font-size: 20pt;
+    
+
+}
+
+#submit {
+    
+  height: 50px;
+  font-size: 14pt;
+  background-color: #428ff4;
+  color: white;
+  border-radius: 20px 20px;
+  border: 1.5pt solid black;
+    
+    
+}
+
+#submit:hover {
+
+    background-color: blue;
+    
+}
+
+#logo {
+    
+    color: #b3c5e2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: "Times New Roman", Times, serif;
+    text-shadow: -1px 0 #428ff4, 0 1px #428ff4, 1px 0 #428ff4, 0 -1px #428ff4;
+    
+}
+.error {
+    
+    color: red;
+    font-style: italic;
+    font-family: Arial;
+    
+}
+
+td {
+    
+    padding: 5px;
+    font-size: 18pt;
+  
+
+}
+
+
+
+/* results TABLE */
+#results {
+    
+    overflow: auto;
+    border: 0.75pt solid black;
+    border-radius: 20px 20px;
+    width: 25%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #ffe7a3;
+    
+    
+}
+
+
+/* results CELL (actual Multiplier) */
+.results {
+    
+    color: red;
+    font-weight: bold;
+    
+    
+}
+
+.resultslabel {
+    
+    
+    
+    
+}
+
+

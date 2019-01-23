@@ -10657,6 +10657,8 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
     
     font-size: 12pt;
     font-weight: normal;
+    padding: 10px;
+   // border: 1pt solid black;
     
     
 }

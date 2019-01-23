@@ -16,9 +16,12 @@ require_once '../models/UserManager.php';
             <li class="nav-item dropdown" id="tools-dropdown">
                 <a  class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Tools</a>
                 <div id="tools-dropdown-content">
-                    <a class="dropdown-item" href="#">Container Multiplier Calculator</a>
+                    <a class="dropdown-item" href="../containercalculator/containercontroller.php">Container Multiplier Calculator</a>
+                    <a class="dropdown-item" href="#">Backer Board Calculator</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="../controllers/ticketsController.php">Ticketing and Cases</a>
+                    <div class="dropdown-divider"></div>
+                    
                 </div>
             </li>
 

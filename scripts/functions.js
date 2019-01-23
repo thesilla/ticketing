@@ -54,6 +54,7 @@ function unhideAll() {
 var showAllTickets = document.getElementById('showAllTickets');
 showAllTickets.onclick = unhideAll;
 
+// TODO RENAME THIS
 function hideCompleted() {
 
     unhideAll();
@@ -189,3 +190,9 @@ function showOtherBox(){
 }
 
 vendorSelect.onclick = showOtherBox;
+
+//show only open tickets upon pageload
+window.onload = hideCompleted();
+
+// default sort by priority
+window.onload = sortTable(6);

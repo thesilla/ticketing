@@ -16,7 +16,7 @@ if (count($allDispositions) != 0) {
 
 
                 <th onclick='sortTable(0)' style="text-align: center;">Submitted By:</th>
-                <th onclick='sortTable(1)' style="text-align: center;">Date Submitted</th>
+                <th id="datecolumn" onclick='sortTable(1)' style="text-align: center;">Date Submitted</th>
                 <th onclick='sortTable(2)' style="text-align: center;">Details</th>
                 <th></th>
 
@@ -202,6 +202,10 @@ if (count($allDispositions) != 0) {
             }
         }
     }
+    
+  window.onload=sortTable(1);
+  
+
 
 
 

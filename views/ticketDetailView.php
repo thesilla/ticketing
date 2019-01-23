@@ -22,7 +22,7 @@
             echo $ticket->getId();
             ?>
         </div>
-        <div class="card-body">
+        <div class="card-body" style="text-align: center;">
             <h4 class="card-title"><?php
                 if ($ticket->getCompleted() == "YES") {
                     echo "<strong>CLOSED<strong>";
