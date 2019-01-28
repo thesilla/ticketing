@@ -156,16 +156,11 @@
  
         </tr>
         <tr>
-            <td><?php echo $ticket->getRequestedby(); ?></td>
-            <td><?php echo $ticket->getUserID(); ?></td>
-            <td><?php echo $ticket->getAssignedTo(); ?></td>
+            <td><div class = "detail-div"><?php echo $ticket->getRequestedby(); ?></div></td>
+            <td><div class = "detail-div"><?php echo $ticket->getUserID(); ?></div></td>
+            <td><div class = "detail-div"><?php echo $ticket->getAssignedTo(); ?></div></td>
         </tr>
-    </table>
-    
-    
-    
-    
-        <table class="details-display-table">
+
         <tr>
             
             
@@ -180,29 +175,26 @@
         <tr>
             
             
-            <td><?php echo $ticket->getCategory(); ?></td>
-            <td><?php echo $ticket->getVendor(); ?></td>
-            <td><?php echo $ticket->getOrderID(); ?></td>
+            <td><div class = "detail-div"><?php echo $ticket->getCategory(); ?></div></td>
+            <td><div class = "detail-div"><?php echo $ticket->getVendor(); ?></div></td>
+            <td><div class = "detail-div"><?php echo $ticket->getOrderID(); ?></div></td>
             
  
         </tr>
  
 
-    </table>
-    
-    <table class="details-display-table">
         
         <tr>
-           <th>Date Submitted</th>
+            <th>Date Submitted</th>
             <th>Date Resolved</th> 
+            <th>Reason For Closure</th> 
             
         </tr>
         <tr>
-            
-            
-            
-            <td><?php echo $ticket->getDateSubmitted(); ?></td>
-            <td><?php echo $ticket->getDateResolved(); ?></td>
+
+            <td><div class = "detail-div"><?php echo $ticket->getDateSubmitted(); ?></div></td>
+            <td><div class = "detail-div"><?php echo $ticket->getDateResolved(); ?></div></td>
+            <td><div class = "detail-div"><?php echo $ticket->getReason(); ?></div></td>
             
 
 
@@ -288,9 +280,9 @@
 </div>
 -->
 
-
+<br/>
     <div class="card border-secondary mb-3">
-    <div class="card-header">Details</div>
+        <div class="card-header"><h1>Details</h1></div>
     <div class="card-body">
         <p class="card-text"><?php echo $ticket->getBody(); ?></p>
     </div>

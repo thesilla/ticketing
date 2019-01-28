@@ -9,7 +9,7 @@
 <!-- Close ticket modal -->
 <?php
 // Reasons for closing ticket
-$reasons = array("No Response From Customer", "No Response From Vendor", "Issue Resolved", "Customer Cancelled", "Product Unavailable");
+$reasons = array("No Response From Customer", "No Response From Vendor", "Issue Resolved", "Customer Cancelled", "Product Unavailable", "OTHER");
 ?>
 
 
@@ -56,6 +56,11 @@ $reasons = array("No Response From Customer", "No Response From Vendor", "Issue 
 ?>
 
                 </select>
+                
+                
+                <!-- CONDITIONAL OTHER REASON -->
+                <div id="reason-other" style = "display: none; width: 90%;"><input style = "width: 90%;" name ="other" type="text" id="reason-other-input" placeholder="Type reason for closing ticket"></div>
+                
                 <input type="hidden" name ="tickno2" value =<?php echo "\"" . $ticket->getId() . "\""; ?>>
                 <br/>
                 <div id="closeDispositionControls">
@@ -106,6 +111,62 @@ $reasons = array("No Response From Customer", "No Response From Vendor", "Issue 
 
     var cancelCloseTicket = document.getElementById('cancelCloseTicket');
     cancelCloseTicket.onclick = cancelShowCloseTicket;
+
+
+
+
+
+
+
+
+
+//*************************************
+
+
+
+
+// if vendorSelect = OTHER, 
+// 1. change name of first vendor box away from vendor so post doesnt grab value
+// 2. change name of new other vendor box to vendor so post grabs that instead
+// 3. reveal other vendor box, text input box
+// 4. hide original vendor select list
+var reasonSelect = document.getElementById("ticketCloseReasons");
+var reasonOther = document.getElementById("reason-other");
+var reasonOtherInput = document.getElementById("reason-other-input");
+
+function showOtherBox(){
+     
+    if(reasonSelect.value == "OTHER"){
+         
+         
+         reasonOther.style.display = "block";
+         reasonOtherInput.setAttribute('name', 'reason');
+         reasonSelect.setAttribute('name', 'other');
+         reasonSelect.style.display = "none";
+     }
+
+}
+
+reasonSelect.onclick = showOtherBox;
+
+//show only open tickets upon pageload
+window.onload = hideCompleted();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </script>

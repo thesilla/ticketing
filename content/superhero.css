@@ -10639,6 +10639,7 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
     //border: 1pt solid black;
     text-align: center;
     width: 100%;
+   
 }
 
 .details-display-table th{
@@ -10650,6 +10651,7 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
     color: #158CBA;
     text-align: center;
     //background-color: #cccccc;
+    //border: 1pt solid black;
 }
 
 
@@ -10659,6 +10661,7 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
     font-weight: normal;
     padding: 10px;
    // border: 1pt solid black;
+   
     
     
 }
@@ -10666,6 +10669,66 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
 .details-display-table tr{
     
     width: 100%;
+   
     
     
 }
+
+.detail-div {
+    
+    background-color: white;
+    box-shadow: 3px 3px 10px gray;
+    padding: 3px;
+    border: 0.5pt solid #158CBA;
+    
+    
+}
+
+#results {
+    
+    overflow: auto;
+    border: 0.75pt solid black;
+    border-radius: 10px 10px;
+    width: 15%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #ffe7a3;
+    
+    
+}
+
+#results td {
+    
+    padding: 5px;
+    
+    
+    
+}
+
+#resultsTable{
+    
+    margin: auto;
+    
+    
+}
+
+
+/* results CELL (actual Multiplier) */
+.results {
+    
+    color: red;
+    font-weight: bold;
+    
+    
+}
+
+
+
+.error {
+    
+    color: red;
+    font-style: italic;
+    font-family: Arial;
+    
+}
+

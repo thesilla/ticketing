@@ -23,7 +23,7 @@ require_once '../models/database.php';
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="styles.css">
+        <link rel="stylesheet" type="text/css" href="superhero.css">
         <title>Container Calculator - Landed Costs</title>
     </head>
     <body>
@@ -341,6 +341,7 @@ where pol.po_no = '$po5' AND pol.cancel_flag='N') q group by q.po_no";
     // SHOW RESULTS/MULTIPLIERS
 
     print "<div id ='results'>";
+    print "<p style='text-align: center; font-size: 16pt;'>Calculated Multipliers</p>";
     print "<table id = 'resultsTable'>";
 
     //print "<tr>";
@@ -425,7 +426,7 @@ where pol.po_no = '$po5' AND pol.cancel_flag='N') q group by q.po_no";
                         ?>>
                     </div>
                     <br/>
-                    <div><input id = "submit" type ="submit" name ="submit" value="Generate Multipliers"></div>
+                    <div><input class ="btn btn-primary"id = "submit" type ="submit" name ="submit" value="Generate Multipliers"></div>
 
 
                 </form>
