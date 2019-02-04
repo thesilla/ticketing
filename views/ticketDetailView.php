@@ -40,7 +40,16 @@
 
                     <?php
 //TODO - add more statuses
-                    $statuses = array("Awaiting Agent Reply", "Awaiting Vendor Reply", "Awaiting Sales Reply", "Awaiting Warehouse Reply", "IT Case Pending");
+                    
+                    if ($ticket->getCompleted() == 'YES'){
+                        
+                        
+                        $statuses = array("Awaiting Agent Reply", "Awaiting Vendor Reply", "Awaiting Sales Reply", "Awaiting Warehouse Reply", "IT Case Pending", "Waiting On Associate to Complete Task", "TICKET CLOSED");
+                    } else {
+                        
+                        $statuses = array("Awaiting Agent Reply", "Awaiting Vendor Reply", "Awaiting Sales Reply", "Awaiting Warehouse Reply", "IT Case Pending", "Waiting On Associate to Complete Task");
+                    }
+                    
 
                     foreach ($statuses as $status) {
 

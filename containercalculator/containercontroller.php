@@ -3,7 +3,7 @@ ob_start();
 
 // Connect to database
 
-require '../content/header1.php';
+require '../content/header_container.php';
 // TODO: - do one of the following:
 // 1. Create functions thats translate view input variables OR
 // PROBABLY DO THIS --> 2. Make views into functions that include the HTML view files and take input and convert inputs to correct variables, etc AKA make another layer <--
@@ -47,7 +47,7 @@ require_once '../models/database.php';
 
 try {
 
-    $dbc = new PDO("sqlsrv:server=SQL2012;database=P21_V12_15", "", "");
+    $dbc = new PDO("ODBC:dsn=SQL2012;database=P21_V12_15", "", "");
 
     $dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {

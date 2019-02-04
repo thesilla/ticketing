@@ -189,13 +189,6 @@ class Ticket {
             echo "<p> Could not run query </p>";
         }
     }
-    
-    
-    
-    
-    
-    
-    
 
 //  method takes a db object and ADDS the ticket to the database
     public function add() {
@@ -232,10 +225,7 @@ class Ticket {
 
 //  method takes a db object and DELETES the ticket to the database
     public function delete() {
-        
-        // get database connection
-        // (already established when object created)
-        //$this->getConnection();
+
         //first delete all corresponding dispositions to satisfy SQL foreign key requirement
         $sql_delete_dispos = "delete from dispositions where ticketID = '$this->id'";
 
@@ -289,10 +279,6 @@ class Ticket {
     // method takes reason for closing ticket, and closes the ticket 
     public function close($reason) {
 
-        // get database connection
-        // (already established when object created)
-        //$this->getConnection();
-        
         $completed = "YES";
         $this->setReason($reason);
         $this->setCompleted($completed);
@@ -312,9 +298,6 @@ class Ticket {
     //re-open closed ticket
     public function open() {
 
-        // get database connection
-        // (already established when object created)
-        //$this->getConnection();
         
         $completed = "NO";
         $reason = "";

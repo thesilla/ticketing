@@ -47,7 +47,7 @@ if ($issue) {
 
 
 
-       <div class="form-group">
+        <div class="form-group">
             <label for="status">Status</label>
             <select class="custom-select" name="status">
 
@@ -57,26 +57,21 @@ if ($issue) {
 
                 foreach ($statuses as $status) {
 
-                    if($status==$ticket->getStatus()){
-                        
-                        echo "<option value=" . "\"" . $status . "\"".  "selected>" . $status . "</option>";
-                        
+                    if ($status == $ticket->getStatus()) {
+
+                        echo "<option value=" . "\"" . $status . "\"" . "selected>" . $status . "</option>";
                     } else {
-                       
+
                         echo "<option value=" . "\"" . $status . "\">" . $status . "</option>";
-                        
                     }
-                    
-                    
-                    
                 }
                 ?>
             </select>
-            <?php
-            if ($ticketEditErrors['status'][1] == 1) {
-                echo $ticketEditErrors['status'][0];
-            }
-            ?>
+                <?php
+                if ($ticketEditErrors['status'][1] == 1) {
+                    echo $ticketEditErrors['status'][0];
+                }
+                ?>
         </div> 
 
 
@@ -96,33 +91,23 @@ if ($issue) {
 
             <select class="custom-select" name="requestedby">
 
-                <?php
+<?php
 // pull all employees and display
 // $allusers is in ticketsController.php
-
-                
-                
-                
 //FIXME - DEFAULT VALUE NOT DISPLAYING IMMEDIATELY
-                foreach ($employees as $employee) {
-                    
-                    if($employee->getEmail()==$ticket->getRequestedby()){
-                    
-                        
-                        echo "<option value=" . "\""  . $employee->getEmail() . "\"" . "selected>" . $employee->getFirstName() . " " . $employee->getLastName() . " (" . $employee->getEmail() . ")" . '</option>'; 
-                        
-                    } else {
-                        
-                        
-                       echo '<option value=' . $employee->getEmail() . '>' . $employee->getFirstName() . " " . $employee->getLastName() . " (" . $employee->getEmail() . ")" . '</option>'; 
-                        
-                     
-                    }
-                    
+foreach ($employees as $employee) {
 
-                    
-                }
-                ?>
+    if ($employee->getEmail() == $ticket->getRequestedby()) {
+
+
+        echo "<option value=" . "\"" . $employee->getEmail() . "\"" . "selected>" . $employee->getFirstName() . " " . $employee->getLastName() . " (" . $employee->getEmail() . ")" . '</option>';
+    } else {
+
+
+        echo '<option value=' . $employee->getEmail() . '>' . $employee->getFirstName() . " " . $employee->getLastName() . " (" . $employee->getEmail() . ")" . '</option>';
+    }
+}
+?>
             </select>
 
 
@@ -131,87 +116,75 @@ if ($issue) {
         <div>Order ID: </div>
         <div><input class="form-control" type ="text" name ="orderid" value =<?php echo "\"" . $ticket->getOrderID() . "\""; ?>></div>
 
-        
+
         <!--
         <div>Vendor: </div>
         <div><input class="form-control" type ="text" name ="vendor" value =<?php //echo "\"" . $ticket->getVendor() . "\""; ?>></div>
 
         -->
-        
-         <?php
-        
-        $vendors = [
-        "Marazzi USA", "American Olean","Stone Mosaics","Porcelanosa","Arley Wholesale","Island Stone","Sita Tile Distributors","WOW USA INC.","Ferguson Enterprises Inc.","Marble Systems","Lunada Bay Tile","Wet Dog Tile","Florida Tile","Garden State Tile Distributors","StoneMar Natural Stone Company LLC","Glazzio Tiles","Medicine Bluff Studio","Custom Building Products Inc.","Standard Tile Supply Co.","Standard Tile Imports Inc.","Cosa Marble Company","Renaissance Ceramic Tile and Marble","American TileMakers (Ken Mason)","SQF Studios","Artistic Tile","Tile Gallery","Elon Inc.","Stone Impressions","Mir Mosaic","Ironrock Capital"," Inc. (Metropolitan)","National Pool Tile","Panaria","Daltile Distribution Inc.","New Ravenna","The Cleftstone Works","Landmark MetalCoat","Stone Art","BellaVita Tile","Heartland Ceramic Tile Dist.","Stone Partnership","Mark E. Industries","Alpha Concrete Products Inc.","Trikeenan Tileworks","Caribe International","J.J. Haines and Company Inc.","MS International","Imer U.S.A.","Jeffrey Court","Barwalt Tool Company","Original Style LTD","Mapei Corporation","Imola North America","Chesapeake Tile and Marble","Sawmaster Diamond Tools","T N Master Tile","Quemere International LLC","Noble Company","B and F Ceramics","Boulder Creek Stone and Brick Company","Surving Studios","Honor Life","Dewalt Service Center","Alpha Professional Tools","Bisazza North America Inc.","AKDO Intertrade Inc.","European Granite and Marble Of New Jersey","United States Gypsum Company","Watts Water Technologies Inc.","Innovis Corporation","Rubitools USA Inc.","Marshalltown","Schluter Systems L.P.","Nelson Watson","TileWare Products","Power Line Imports","Laticrete","Onyx France","Delos Mosaics","Adex USA","Solistone","Paloma Pewter","Maniscalco","Bostik","Florim USA Inc.","Cepac Tile","SYZYGY","Architectural Ceramics","National Gypsum","ISLA","Rondine","Astor Gruppo Beta","Ermes","Imola","Ceramica Sant Agostino","Florim Ceramiche SPA","Grespania","Bella Casa","Argenta (WSG)","Ape","Adex - Spain","Porcelanicos HDC","OTHER"];
 
-        
-        
-        
-        ?>
-      
+<?php
+$vendors = [
+    "Marazzi USA", "American Olean", "Stone Mosaics", "Porcelanosa", "Arley Wholesale", "Island Stone", "Sita Tile Distributors", "WOW USA INC.", "Ferguson Enterprises Inc.", "Marble Systems", "Lunada Bay Tile", "Wet Dog Tile", "Florida Tile", "Garden State Tile Distributors", "StoneMar Natural Stone Company LLC", "Glazzio Tiles", "Medicine Bluff Studio", "Custom Building Products Inc.", "Standard Tile Supply Co.", "Standard Tile Imports Inc.", "Cosa Marble Company", "Renaissance Ceramic Tile and Marble", "American TileMakers (Ken Mason)", "SQF Studios", "Artistic Tile", "Tile Gallery", "Elon Inc.", "Stone Impressions", "Mir Mosaic", "Ironrock Capital", " Inc. (Metropolitan)", "National Pool Tile", "Panaria", "Daltile Distribution Inc.", "New Ravenna", "The Cleftstone Works", "Landmark MetalCoat", "Stone Art", "BellaVita Tile", "Heartland Ceramic Tile Dist.", "Stone Partnership", "Mark E. Industries", "Alpha Concrete Products Inc.", "Trikeenan Tileworks", "Caribe International", "J.J. Haines and Company Inc.", "MS International", "Imer U.S.A.", "Jeffrey Court", "Barwalt Tool Company", "Original Style LTD", "Mapei Corporation", "Imola North America", "Chesapeake Tile and Marble", "Sawmaster Diamond Tools", "T N Master Tile", "Quemere International LLC", "Noble Company", "B and F Ceramics", "Boulder Creek Stone and Brick Company", "Surving Studios", "Honor Life", "Dewalt Service Center", "Alpha Professional Tools", "Bisazza North America Inc.", "AKDO Intertrade Inc.", "European Granite and Marble Of New Jersey", "United States Gypsum Company", "Watts Water Technologies Inc.", "Innovis Corporation", "Rubitools USA Inc.", "Marshalltown", "Schluter Systems L.P.", "Nelson Watson", "TileWare Products", "Power Line Imports", "Laticrete", "Onyx France", "Delos Mosaics", "Adex USA", "Solistone", "Paloma Pewter", "Maniscalco", "Bostik", "Florim USA Inc.", "Cepac Tile", "SYZYGY", "Architectural Ceramics", "National Gypsum", "ISLA", "Rondine", "Astor Gruppo Beta", "Ermes", "Imola", "Ceramica Sant Agostino", "Florim Ceramiche SPA", "Grespania", "Bella Casa", "Argenta (WSG)", "Ape", "Adex - Spain", "Porcelanicos HDC", "OTHER"];
+?>
+
         <div class="form-group">Vendor: </div>
-        
 
-        
+
+
         <select id="vendor-select" class="custom-select" name="vendor">
 
 <?php
-
 foreach ($vendors as $vendor) {
-    
-    if($vendor==$ticket->getVendor()){
-        
-        echo "<option value=" . "\"" . $vendor . "\"" . "selected>" . $vendor . "</option>";
-        
-    } else {
-        
-        echo "<option value=" . "\"" . $vendor . "\">" . $vendor . "</option>";
-        
-    }
 
-    
+    if ($vendor == $ticket->getVendor()) {
+
+        echo "<option value=" . "\"" . $vendor . "\"" . "selected>" . $vendor . "</option>";
+    } else {
+
+        echo "<option value=" . "\"" . $vendor . "\">" . $vendor . "</option>";
+    }
 }
 ?>
         </select>
-        
-        
-        
-        
-        
+
+
+
+
+
         <div id="vendor-other" style="display: none;"><input id="vendor-other-id" class="form-control" type ="text" name ="vendor-hidden" placeholder ="Enter Vendor Name"></div>
 
-        
+
         <!-- IN THE FUTURE, this should be picked from an editable dynamic list of all possible categories -->
         <div>Category:</div>
         <div class="form-group">
             <select class="custom-select" name="category" form="editTicketForm">
 
-                <?php
-                $categories = [
-                    "Need ETA",
-                    "Pricing Issue",
-                    "Build Items",
-                    "Expedite Needed",
-                    "Labels Needed",
-                    "Shipping Issue",
-                    "Product Broken",
-                    "Research Required",
-                    "Product Return",
-                    "Other Misc",
-                ];
-                foreach ($categories as $category) {
+            <?php
+            $categories = [
+                "Need ETA",
+                "Pricing Issue",
+                "Build Items",
+                "Expedite Needed",
+                "Labels Needed",
+                "Shipping Issue",
+                "Freight Quote Needed",
+                "Product Broken",
+                "Research Required",
+                "Product Return",
+                "Other Misc",
+            ];
+            foreach ($categories as $category) {
 
-                    if($category==$ticket->getCategory()){
-                        
-                        echo "<option value=" . "\"" . $category . "\"". "selected>" . $category . "</option>";
-                        
-                    } else {
-                        
-                        echo "<option value=" . "\"" . $category . "\">" . $category . "</option>";
-                    }
-                    
-                    
+                if ($category == $ticket->getCategory()) {
+
+                    echo "<option value=" . "\"" . $category . "\"" . "selected>" . $category . "</option>";
+                } else {
+
+                    echo "<option value=" . "\"" . $category . "\">" . $category . "</option>";
                 }
-                ?>
+            }
+            ?>
             </select>
 
         </div>
@@ -222,17 +195,38 @@ foreach ($vendors as $vendor) {
             <div>Priority:</div>
             <div class="form-check">
                 <label class="form-check-label" for="priority">
-                    <input name="priority" class="form-check-input" id="optionsRadios1" type="radio" checked="" value="3">3 (Lowest)
+
+
+
+                    <input name="priority" class="form-check-input" id="optionsRadios1" type="radio"                     
+                <?php
+                if ($ticket->getPriority() == 3) {
+
+                    echo 'checked=""';
+                }
+                ?> value="3">3 (Lowest)
+
+
                 </label>
             </div>
             <div class="form-check">
                 <label class="form-check-label" for="priority">
-                    <input name="priority" class="form-check-input" id="optionsRadios2" type="radio" value="2">2
+                    <input name="priority" class="form-check-input" id="optionsRadios2" type="radio" value="2" <?php
+                if ($ticket->getPriority() == 2) {
+
+                    echo 'checked=""';
+                }
+                ?>>2
                 </label>
             </div>
             <div class="form-check">
                 <label class="form-check-label" for="priority">
-                    <input name="priority" class="form-check-input" id="optionsRadios3" type="radio" value="1">1 (Highest)
+                    <input name="priority" class="form-check-input" id="optionsRadios3" type="radio" value="1" <?php
+                if ($ticket->getPriority() == 1) {
+
+                    echo 'checked=""';
+                }
+                ?>>1 (Highest)
                 </label>
             </div>
         </fieldset> 
@@ -243,30 +237,30 @@ foreach ($vendors as $vendor) {
             <div>Assigned To:</div>
             <select class="custom-select" name="assignedto" form="editTicketForm">
 
-                <?php
+<?php
 // pull all users and display
 // $allusers is in ticketsController.php
 
-                foreach ($users as $user) {
+foreach ($users as $user) {
 
-                    $selected;
-                    // iterate through users
-                    //  -- if ticket assignedTo property is equal to a user name, make that User name default select value
-                    if ($ticket->getAssignedTo() === $user->getFirstName()) {
-                        $selected = $ticket->getAssignedTo();
-                        echo '<option selected=' . $selected . 'value=' . $user->getFirstName() . '>' . $user->getFirstName() . '</option>';
-                    } else {
+    $selected;
+    // iterate through users
+    //  -- if ticket assignedTo property is equal to a user name, make that User name default select value
+    if ($ticket->getAssignedTo() === $user->getFirstName()) {
+        $selected = $ticket->getAssignedTo();
+        echo '<option selected=' . $selected . 'value=' . $user->getFirstName() . '>' . $user->getFirstName() . '</option>';
+    } else {
 
-                        echo '<option value=' . $user->getFirstName() . '>' . $user->getFirstName() . '</option>';
-                    }
-                }
-                ?>
-            </select>
-<?php
-if ($ticketEditErrors['assignedto'][1] == 1) {
-    echo $ticketEditErrors['assignedto'][0];
+        echo '<option value=' . $user->getFirstName() . '>' . $user->getFirstName() . '</option>';
+    }
 }
 ?>
+            </select>
+                    <?php
+                    if ($ticketEditErrors['assignedto'][1] == 1) {
+                        echo $ticketEditErrors['assignedto'][0];
+                    }
+                    ?>
         </div>
 
         <br/>
@@ -315,24 +309,24 @@ if ($ticketEditErrors['assignedto'][1] == 1) {
     editTicketButton.onclick = editTicket;
 
 
-var vendorSelect = document.getElementById("vendor-select");
-var vendorOther = document.getElementById("vendor-other");
-var vendorOtherInput = document.getElementById("vendor-other-id");
+    var vendorSelect = document.getElementById("vendor-select");
+    var vendorOther = document.getElementById("vendor-other");
+    var vendorOtherInput = document.getElementById("vendor-other-id");
 
-function showOtherBox(){
-     
-    if(vendorSelect.value == "OTHER"){
-         
-         
-         vendorOther.style.display = "block";
-         vendorOtherInput.setAttribute('name', 'vendor');
-         vendorSelect.setAttribute('name', 'vendor-old');
-         vendorSelect.style.display = "none";
-     }
+    function showOtherBox() {
 
-}
+        if (vendorSelect.value == "OTHER") {
 
-vendorSelect.onclick = showOtherBox;
+
+            vendorOther.style.display = "block";
+            vendorOtherInput.setAttribute('name', 'vendor');
+            vendorSelect.setAttribute('name', 'vendor-old');
+            vendorSelect.style.display = "none";
+        }
+
+    }
+
+    vendorSelect.onclick = showOtherBox;
 
 
 </script>

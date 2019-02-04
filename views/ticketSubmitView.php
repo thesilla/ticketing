@@ -118,6 +118,7 @@ $categories = [
     "Expedite Needed",
     "Labels Needed",
     "Shipping Issue",
+    "Freight Quote Needed",
     "Product Broken",
     "Research Required",
     "Product Return",
