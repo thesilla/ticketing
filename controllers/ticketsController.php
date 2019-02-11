@@ -76,6 +76,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!empty($_POST['details'])) {
 
             $body = htmlentities($_POST['details']);
+        } else {
+            
+            $body = "";
         }
 
         if (!empty($_POST['requestedby'])) {

@@ -21,6 +21,7 @@ require_once '../models/UserManager.php';
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="../controllers/ticketsController.php">Ticketing and Cases</a>
                     <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="../controllers/reportsController.php">Purchasing Reports</a>
                     
                 </div>
             </li>

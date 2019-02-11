@@ -44,10 +44,9 @@ require_once '../models/database.php';
 // in first form enter how many POs on groupage
 // then generate second form with only as many boxes as needed
 
-
 try {
 
-    $dbc = new PDO("ODBC:dsn=SQL2012;database=P21_V12_15", "", "");
+    $dbc = new PDO("sqlsrv:server=SQL2012;database=P21_V12_15", "", "");
 
     $dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
