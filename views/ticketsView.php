@@ -95,7 +95,7 @@
                 echo "<td>" . $ticket->getPriority() . "</td>";
                 
                 
-                if($ticket->getAssignedTo()=='Max'){
+                if($ticket->getAssignedTo()=='Sayward'){
                     
                     echo "<td><div class='assignedToUser1'>" . $ticket->getAssignedTo() . "</td>";
                     

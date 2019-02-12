@@ -1,16 +1,37 @@
-
 <?php
+// SCRIPT FOR GENERATING EXCEL VERSION OF REPORT FILE
 
 
+require_once '../models/msdatabase.php';
+require_once '../models/CriticalImportItemsReport.php';
+//include'../content/header1.php';
+
+
+
+
+
+$dbc = new msdatabase();
+$report = new CriticalImportItemsReport($dbc);
+
+// get results, pass to view
+$results = $report->run();
+
+date_default_timezone_set('America/New_York');
+$date = date('m/d/Y h:i:s a', time());
+
+
+$file="Critical Import Items " . $date . ".xls";
+//$test="<table  ><tr><td>Cell 1</td><td>Cell 2</td></tr></table>";
+header("Content-type: application/vnd.ms-excel");
+header("Content-Disposition: attachment; filename=$file");
 
 
 ?>
 
 <div class="jumbotron">
-    <h2> Critical Import Items Report </h2>
+    <h2> Critical Import Items Report <?php echo $date ?> </h2>
     <hr class="my-4">
-    <button class="btn btn-secondary"><a href = "../scripts/criticalImportItemsExcel.php">Export to Excel</a></button>
-    <hr class="my-4">
+    <button type ="submit" name ="export"></button>
 
 
 
@@ -55,6 +76,12 @@
             echo "</tr>";
         }
         
+       
+        
+        
+        
+
+
 
         
         ?>
@@ -66,7 +93,11 @@
 
 
 </div>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 
-
-
-
+</div> 
