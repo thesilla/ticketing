@@ -57,11 +57,6 @@ try {
     exit();
 }
 
-if(true){
-
-    //test commit from git
-
-}
 
 
 
