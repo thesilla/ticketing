@@ -59,7 +59,6 @@ try {
 
 
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $duty = 0;
     $misc = 0;

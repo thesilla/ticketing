@@ -1,7 +1,6 @@
 <?php
 
-// Connect to database
-//require('db_connect.php');
+
 
 // import class files into controller
 require_once '../models/Ticket.php'; 
