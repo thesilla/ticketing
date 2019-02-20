@@ -4,9 +4,9 @@
 
 
 <!-- for toggling permabase calculator -->
-<div id="permabase" class = "table"> 
+<div id="permabase" > 
 
- <table> 
+ <table class = "table"> 
     <tr>
         <th scope="col">Item</th>
         <th scope="col">Weight</th>
@@ -47,6 +47,50 @@
 
 
 <!-- for toggling hardibacker calculator -->
-<div id="hardibacker"> </div>
+<div id="hardibacker">
+
+<table class = "table"> 
+    <tr>
+        <th scope="col">Item</th>
+        <th scope="col">Weight</th>
+        <th scope="col">Monthly Usage</th>
+        <th scope="col">Total Stock - All Locations</th>
+        <th scope="col">Months Remaining</th>
+    </tr>
+
+    <tr>
+        
+        <td>HARDI030512</td>
+        <td>45.00</td>
+        <td ><?php echo $hardi12usage;  ?></td>
+        <td><?php echo $hardi12stock;  ?></td>
+        <td><?php echo $hardi12stock/$hardi12usage; ?></td>
+
+
+
+    </tr>
+
+
+    <tr>
+        
+        <td>HARDI030514</td>
+        <td>30.00</td>
+        <td><?php echo $hardi14usage;  ?></td>
+        <td><?php echo $hardi14stock;  ?></td>
+        <td><?php echo $hardi14stock/$hardi14usage; ?></td>
+
+
+    </tr>
+
+
+ </table>
+
+
+
+
+
+
+
+ </div>
 
 </div>
