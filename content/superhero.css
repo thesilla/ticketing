@@ -10732,3 +10732,101 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
     
 }
 
+#hardibacker {
+
+
+    display: block;
+    background-color: #FF851B;
+    padding: 10px;
+}
+
+#permabase {
+
+    display: none;
+    background-color: #28B62C;
+    padding: 10px;
+
+}
+
+#hardibacker table {
+
+
+    /*border: 1pt solid black; */
+}
+
+#backerboard {
+
+    
+    padding: 20px;
+    box-shadow: 5px 5px 25px;
+    border-radius: 20px 20px;
+
+}
+
+
+#backerboard table{
+
+    border: 1pt solid black;
+    margin: auto;
+
+}
+
+#backerboard table th,td{
+
+    
+    padding: 8px;
+    text-align: center;
+
+}
+
+#backerboard table td{
+
+    border: 1pt solid black;
+
+
+}
+
+
+
+.total-weight {
+
+
+    border: 1pt solid black;
+    width: 15%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 5px;
+
+
+}
+
+.backer-label {
+
+    color: white;
+    background-color: #158CBA;
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+    box-shadow: 2px 2px 10px black;
+    text-align: center;
+    padding: 8px;
+    border-radius: 50px 50px;
+
+
+}
+
+
+
+
+/*
+
+--primary: #158CBA;
+--success: #28B62C;
+
+--warning: #FF851B;
+
+
+*/

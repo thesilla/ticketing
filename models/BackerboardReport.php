@@ -144,8 +144,8 @@ order by final.item_id
 
         $row = $this->stmt->fetch(PDO::FETCH_ASSOC);
 
-        $this->perma12usage = $row['final_calc_usage'];
-        $this->perma12stock = $row['total_available'];
+        $this->perma12usage = round($row['final_calc_usage'],2);
+        $this->perma12stock = round($row['total_available'],2);
 
     }
 
@@ -254,8 +254,8 @@ order by final.item_id
 
         $row = $this->stmt->fetch(PDO::FETCH_ASSOC);
 
-        $this->perma14usage = $row['final_calc_usage'];
-        $this->perma14stock = $row['total_available'];
+        $this->perma14usage = round($row['final_calc_usage'],2);
+        $this->perma14stock = round($row['total_available'],2);
 
 
 
@@ -367,8 +367,8 @@ order by final.item_id
 
         $row = $this->stmt->fetch(PDO::FETCH_ASSOC);
 
-        $this->hardi12usage = $row['final_calc_usage'];
-        $this->hardi12stock = $row['total_available'];
+        $this->hardi12usage = round($row['final_calc_usage'],2);
+        $this->hardi12stock = round($row['total_available'],2);
 
 
 
@@ -479,8 +479,8 @@ order by final.item_id
 
         $row = $this->stmt->fetch(PDO::FETCH_ASSOC);
 
-        $this->hardi14usage = $row['final_calc_usage'];
-        $this->hardi14stock = $row['total_available'];
+        $this->hardi14usage = round($row['final_calc_usage'],2);
+        $this->hardi14stock = round($row['total_available'],2);
 
 
 
