@@ -17,10 +17,11 @@
 
 
 
-<div id="permabase" >
-<div class = "backer-label" > <h3> Permabase </h3> </div>
+<div id="permabase" class = "backer-indv-div" >
+<div class = "backer-label" > <div> Permabase </div></div>
 
 <div id ="perma-total-weight" class = "total-weight">--</div>
+<div id = "perma-error">- WARNING: Truck cannot exceed 48000 lbs - </div>
  <table  style = "border: 1pt solid black;" >
     <tr>
         <th >Item</th>
@@ -41,7 +42,7 @@
         <td id = "perma12usage"><?php echo $perma12usage; ?></td>
         <td id = "perma12stock"><?php echo $perma12stock; ?></td>
         <td id = "perma12mr"><?php echo round($perma12stock / $perma12usage, 2); ?></td>
-        <td id="perma-results12"></td>
+        <td ><div id="perma-results12" class = "xresults">--</div></td>
        
 
 
@@ -55,7 +56,7 @@
         <td id ="perma14usage"><?php echo $perma14usage; ?></td>
         <td id ="perma14stock"><?php echo $perma14stock; ?></td>
         <td id ="perma14mr"><?php echo round($perma14stock / $perma14usage, 2); ?></td>
-        <td id="perma-results14"></td>
+        <td ><div id="perma-results14" class = "xresults">--</div></td>
 
     </tr>
 
@@ -64,8 +65,8 @@
 
  <div id = "perma-months-supply" class = "months-supply"> 
 
-    <div> Month's Supply </div>
-    <div><input id ="pms" type="text"></div>
+    <div class = "mslabel"> Months of Supply: </div>
+    <div><input class ="ms" id ="pms" type="number" step ="0.01"></div>
     <button id = "perma-calc-button" class = "btn btn-primary"> Calculate Quantities </button>
  
 
@@ -79,10 +80,11 @@
 
 
 <!-- for toggling hardibacker calculator -->
-<div id="hardibacker">
-<div class = "backer-label" > <h3> Hardibacker </h3> </div>
+<div id="hardibacker" class = "backer-indv-div">
+<div class = "backer-label" > <div> Hardibacker  </div> </div>
 
 <div id ="hardi-total-weight" class = "total-weight"> --</div>
+<div id = "hardi-error">- WARNING: Truck cannot exceed 48000 lbs - </div>
 
 <table  >
     <tr>
@@ -101,7 +103,7 @@
         <td id ="hardi12usage"><?php echo $hardi12usage; ?></td>
         <td id ="hardi12stock"><?php echo $hardi12stock; ?></td>
         <td id ="hardi12mr"><?php echo round($hardi12stock / $hardi12usage, 2); ?></td>
-        <td id="hardi-results12"></td>
+        <td ><div id="hardi-results12" class = "xresults">--</div></td>
 
 
     </tr>
@@ -114,7 +116,7 @@
         <td id ="hardi14usage"><?php echo $hardi14usage; ?></td>
         <td id ="hardi14stock"><?php echo $hardi14stock; ?></td>
         <td id ="hardi14mr"><?php echo round($hardi14stock / $hardi14usage, 2); ?></td>
-        <td id="hardi-results14"></td>
+        <td ><div id="hardi-results14" class = "xresults">--</div></td>
 
     </tr>
 
@@ -123,8 +125,9 @@
 
  <div id = "hardi-months-supply" class = "months-supply"> 
 
-    <div> Month's Supply </div>
-    <div><input id ="hms" type="text"></div>
+    <div class = "mslabel"> Months of Supply: </div>
+
+    <div><input class ="ms" id ="hms" type="number" step ="0.01"></div>
     <button id = "hardi-calc-button" class = "btn btn-primary"> Calculate Quantities </button>
     
 
@@ -182,6 +185,11 @@ hardibackerButton.onclick = showHardi;
 
 
 // ---------------- calculate functions ----------------------------------
+
+// error divs
+var hardiError = document.getElementById("hardi-error");
+var permaError = document.getElementById("perma-error");
+
 
 // calc buttons
 var calcHardiButton = document.getElementById("hardi-calc-button");
@@ -264,11 +272,46 @@ function calcHardibacker(){
     var units12 = Math.floor(results12/pt12) * pt12;
     var units14 = Math.floor(results14/pt14) * pt14;
 
+    if(units12 < 0) {
+
+        units12 = 0;
+
+    }
+
+        if(units14 < 0) {
+
+        units14 = 0;
+
+    }
+
+
+
+
     hardi12results.innerHTML = units12;
     hardi14results.innerHTML = units14 ;
   
     var totalwt = (units12 * 45) + (units14 * 30);
-    hardiTotalWt.innerHTML =  totalwt;
+
+    if(totalwt < 0) {
+
+        totalwt = 0;
+
+    }
+
+    if(totalwt > 48000){
+
+        hardiTotalWt.style.backgroundColor = "#fcb0a6";
+        hardiTotalWt.style.color = "red";
+        hardiError.style.display = "block";
+    } else {
+
+        hardiTotalWt.style.backgroundColor =  "#f0f0f0";
+        hardiTotalWt.style.color = "black";
+        hardiError.style.display = "none";
+    }
+
+
+    hardiTotalWt.innerHTML =  totalwt + " lbs";
 
 }
 
@@ -296,6 +339,20 @@ function calcPermabase(){
     var units12 = Number(Math.floor(results12/pt12) * pt12);
     var units14 = Number(Math.floor(results14/pt14) * pt14);
 
+
+    if(units12 < 0) {
+
+        units12 = 0;
+
+    }
+
+    if(units14 < 0) {
+
+        units14 = 0;
+
+    }
+
+
     perma12results.innerHTML = units12;
     perma14results.innerHTML = units14;
 
@@ -303,7 +360,32 @@ function calcPermabase(){
 
     var totalwt = (units12 * 45) + (units14 * 30);
 
-    permaTotalWt.innerHTML =  totalwt;
+    if(totalwt < 0) {
+
+        totalwt = 0;
+
+    }
+
+
+    if(totalwt > 48000){
+
+        permaTotalWt.style.backgroundColor = "#fcb0a6";
+        permaTotalWt.style.color = "red";
+        permaError.style.display = "block";
+        
+    } else {
+
+        permaTotalWt.style.backgroundColor =  "#f0f0f0";
+        permaTotalWt.style.color = "black";
+        permaError.style.display = "none";
+    }
+
+
+    permaTotalWt.innerHTML =  totalwt + " lbs";
+
+
+
+
 
 }
 
