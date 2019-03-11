@@ -29,3 +29,9 @@ require_once '../models/database.php';
     
     
 </div>
+
+<?php 
+
+require_once('../content/footer1.php');
+
+?>

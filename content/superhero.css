@@ -10491,6 +10491,7 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
 
 #navbarBottom{
 
+    background-color: #555;
     margin-top: -35px;
     padding: 0px;
     //display: block;
@@ -10720,6 +10721,20 @@ a.list-group-item-danger.active:hover, a.list-group-item-danger.active:focus {
     font-weight: bold;
     
     
+}
+
+.resultslabel2 {
+
+    font-weight: bold;
+    text-align: center;
+
+    
+}
+
+.resultsdiv{
+
+    text-align: center;
+
 }
 
 

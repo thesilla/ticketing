@@ -69,6 +69,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $po4;
     $po5;
 
+
+
+
+
     $dutyMultiplier = 0.085;
     $freightMultiplier;
     $miscMultiplier;
@@ -359,7 +363,72 @@ where pol.po_no = '$po5' AND pol.cancel_flag='N') q group by q.po_no";
 
 
     print "</table>";
+    print "<hr>";
+
+    // Total Landed
+    $totalLanded = 0;
+
+    // display total landed for each PO (when applicable)
+    if (!empty($_POST['po1'])) {
+
+        $po1TotalLanded = round(($po1Amount * $dutyMultiplier) + ($po1Weight * $freightMultiplier) + ($po1Weight * $miscMultiplier),2);
+        $totalLanded += $po1TotalLanded;
+        print "<div class='resultslabel2'> Total Landed - " . $po1 . ": </div><div class='resultsdiv'> $" . $po1TotalLanded . "</div>";
+        
+        
+    }
+
+    if (!empty($_POST['po2'])) {
+
+        $po2TotalLanded = round(($po2Amount * $dutyMultiplier) + ($po2Weight * $freightMultiplier) + ($po2Weight * $miscMultiplier),2);
+        $totalLanded += $po2TotalLanded;
+        print "<div class='resultslabel2'> Total Landed - " . $po2 . ": </div><div class='resultsdiv'> $" . $po2TotalLanded . "</div>";
+        
+
+    }
+
+    if (!empty($_POST['po3'])) {
+
+        $po3TotalLanded = round(($po3Amount * $dutyMultiplier) + ($po3Weight * $freightMultiplier) + ($po3Weight * $miscMultiplier),2);
+        $totalLanded += $po3TotalLanded;
+        print "<div class='resultslabel2'> Total Landed - " . $po3 . ": </div><div class='resultsdiv'> $" . $po3TotalLanded . "</div>";
+        
+
+    }
+
+    if (!empty($_POST['po4'])) {
+
+        $po4TotalLanded = round(($po4Amount * $dutyMultiplier) + ($po4Weight * $freightMultiplier) + ($po4Weight * $miscMultiplier),2);
+        $totalLanded += $po4TotalLanded;
+        print "<div class='resultslabel2'> Total Landed - " . $po4 . ": </div><div class='resultsdiv'> $" . $po4TotalLanded . "</div>";
+        
+
+    }
+
+    if (!empty($_POST['po5'])) {
+
+        $po5TotalLanded = round(($po5Amount * $dutyMultiplier) + ($po5Weight * $freightMultiplier) + ($po5Weight * $miscMultiplier),2);
+        $totalLanded += $po5TotalLanded;
+        print "<div class='resultslabel2'> Total Landed - " . $po5 . ": </div><div class='resultsdiv'> $" . $po5TotalLanded . "</div>";
+        
+
+    }
+
+
+    //$totalLanded = round($totalLanded,2);
+
+    print "<div class='resultslabel2'> Grand Total Landed: </div><div class='resultsdiv'> $" . $totalLanded . "</div>";
+
+    $enteredInvoice =  $duty + $misc + $freight;
+
+    print "<div class='resultslabel2'> On Invoice: </div><div class='resultsdiv'> $" . $enteredInvoice . "</div>";
+
+    $totalDifference = round($enteredInvoice - $totalLanded,2);
+
+    print "<div class='resultslabel2'> Difference: </div><div class='resultsdiv'> $" . $totalDifference . "</div>";
+
     print "</div>";
+
 }
 ?>
 
@@ -371,19 +440,19 @@ where pol.po_no = '$po5' AND pol.cancel_flag='N') q group by q.po_no";
                 <form action ="containercontroller.php" method ="post">
                     <div id="invoice">
                         <p>U.S. Customs Duty (As on invoice):</p>
-                        <input type ="text" name ="duty" value = <?php
+                        <input type ="number" step="0.01" name ="duty" value = <?php
             if (!empty($_POST['duty'])) {
                 echo $_POST['duty'];
             }
 ?>>
                         <p>Misc Charge (added up on invoice):</p>
-                        <input type ="text" name ="misc" value = <?php
+                        <input type ="number" step="0.01" name ="misc" value = <?php
                         if (!empty($_POST['misc'])) {
                             echo $_POST['misc'];
                         }
                         ?>>
                         <p>Air/Ocean Freight:</p>
-                        <input type ="text" name ="freight" value = <?php
+                        <input type ="number" step="0.01" name ="freight" value = <?php
                         if (!empty($_POST['freight'])) {
                             echo $_POST['freight'];
                         }
