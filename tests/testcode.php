@@ -1,6 +1,6 @@
 <?php
 
-this is on local AND THIS IS ON REMOTE
+
 
 class Email
 {
